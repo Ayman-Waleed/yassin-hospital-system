@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة طبيب جديد | لوحة التحكم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0284c7;        /* الأزرق الحيوي للمستشفى */
+            --primary-dark: #0369a1;   /* الأزرق الداكن للحركات */
+            --bg: #f4f6f9;             /* الخلفية الرمادية الفخمة */
+            --white: #ffffff;
+            --text-main: #1e293b;      /* لون النصوص الأساسي */
+            --text-muted: #64748b;     /* لون النصوص الفرعي */
+            --border: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+            --radius: 14px;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* كارت الفورم الرئيسي */
+        .form-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 450px;
+            border-top: 6px solid var(--primary);
+        }
+
+        .form-card h2 {
+            text-align: center;
+            color: var(--text-main);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .form-card p {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* عناصر الإدخال */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        input[type="text"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            color: var(--text-main);
+            background-color: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"] {
+            padding: 8px 12px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        /* حقل التخصص للقراءة فقط بشكل منسق */
+        input[readonly] {
+            background-color: #f1f5f9;
+            color: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        /* زر الحفظ والإضافة */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
+            transition: all 0.2s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(2, 132, 199, 0.3);
+        }
+
+        /* رابط الرجوع للوحة التحكم */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-card">
+        <h2>إضافة طبيب جديد 👨‍⚕️</h2>
+        <p>قم بتعبئة بيانات الطبيب وتحديد القسم لربطه باللوحة الإدارية</p>
+
+        <form id="addDoctorForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>اسم الطبيب كاملاً:</label>
+                <input type="text" name="name" placeholder="مثال: د. رامي أحمد" required>
+            </div>
+
+            <div class="form-group">
+                <label for="clinicSelect">العيادة / القسم التابع له:</label>
+                <select id="clinicSelect" required>
+                    <option value="" disabled selected>-- اختر العيادة --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>التخصص الدراسي الفعلي (تلقائي):</label>
+                <input type="text" name="specialization" id="specialization" placeholder="سيتم تحديده تلقائياً بناءً على العيادة" readonly required>
+            </div>
+
+            <div class="form-group">
+                <label>الصورة الشخصية للطبيب:</label>
+                <input type="file" name="image" accept="image/*" required>
+            </div>
+
+            <button type="submit" class="btn-submit">➕ حفظ وإضافة الطبيب الآن</button>
+            <a href="dashboard.html" class="back-link">🔙 العودة إلى لوحة التحكم</a>
+        </form>
+    </div>
+
+    <script>
+        // 1. جلب قائمة العيادات لتعبئة السيلكت ديناميكياً
+        async function loadClinics() {
+            try {
+                const response = await fetch('http://localhost:5000/api/clinics');
+                const clinics = await response.json();
+                const clinicSelect = document.getElementById('clinicSelect');
+
+                clinics.forEach(clinic => {
+                    const option = document.createElement('option');
+                    option.value = clinic.id;
+                    option.textContent = clinic.name;
+                    clinicSelect.appendChild(option);
+                });
+            } catch (err) {
+                console.error("خطأ في جلب العيادات:", err);
+            }
+        }
+
+        // حركة ذكية: استخراج التخصص تلقائياً من اسم العيادة لتوفير الوقت على الأدمن
+        document.getElementById('clinicSelect').onchange = function() {
+            const selectedClinicName = this.options[this.selectedIndex].text;
+            const specInput = document.getElementById('specialization');
+            // إزالة كلمة "عيادة" إن وجدت ليصبح التخصص صافي وجاهز (مثال: عيادة الأسنان -> الأسنان)
+            specInput.value = selectedClinicName.replace("عيادة ", "").trim();
+        };
+
+        // 2. معالجة إرسال البيانات مع ملف الصورة الشخصية عبر FormData
+        document.getElementById('addDoctorForm').onsubmit = async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('name', document.getElementsByName('name')[0].value);
+            formData.append('specialization', document.getElementById('specialization').value);
+            formData.append('clinic_id', document.getElementById('clinicSelect').value);
+            formData.append('image', document.getElementsByName('image')[0].files[0]);
+
+            try {
+                const response = await fetch('http://localhost:5000/api/doctors/add', {
+                    method: 'POST',
+                    body: formData // إرسال ملف المالتي بارت مع الصورة
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert("✅ تم إضافة الطبيب بنجاح، وربطه بالقسم ورفع الصورة الشخصية!");
+                    e.target.reset();
+                    document.getElementById('specialization').value = '';
+                } else {
+                    alert("حدث خطأ أثناء الإضافة: " + result.error);
+                }
+            } catch (err) {
+                alert("خطأ في الاتصال بالسيرفر، يرجى إعادة المحاولة.");
+            }
+        };
+
+        window.onload = loadClinics;
+    </script>
+</body>
+
+</html>

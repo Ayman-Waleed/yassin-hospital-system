@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة عيادات المستشفى | لوحة التحكم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0284c7;        /* الأزرق الحيوي للمستشفى */
+            --primary-dark: #0369a1;   /* الأزرق الداكن للحركات */
+            --bg: #f4f6f9;             /* الخلفية الرمادية الفخمة */
+            --white: #ffffff;
+            --text-main: #1e293b;      /* لون النصوص الأساسي */
+            --text-muted: #64748b;     /* لون النصوص الفرعي */
+            --border: #e2e8f0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* هيدر الصفحة الفخم الموحد */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 20px 40px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* قسم إضافة عيادة جديدة */
+        .add-section {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            border-right: 5px solid var(--primary);
+        }
+
+        .add-section input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 15px;
+            color: var(--text-main);
+            background-color: #fafafa;
+            transition: all 0.3s;
+        }
+
+        .add-section input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background-color: var(--white);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* كارت جدول العيادات */
+        .section-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .section-card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--text-main);
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        /* تصميم الجدول المحدث */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: var(--text-muted);
+            padding: 14px;
+            font-weight: 600;
+            font-size: 14px;
+            border-bottom: 2px solid #edf2f7;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 15px;
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        /* الأزرار داخل الجدول */
+        .actions-btn {
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            margin-left: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+
+        .actions-btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-edit { background-color: #e0f2fe; color: #0369a1; }
+        .btn-danger { background-color: #fee2e2; color: #991b1b; }
+
+        /* الشارات الملونة للحالة */
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-active { background-color: #d1fae5; color: #065f46; }
+        .status-inactive { background-color: #f1f5f9; color: #475569; }
+
+        .back-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>إدارة الأقسام والعيادات الطبية 🏥</h1>
+        <a href="dashboard.html" class="back-link">🔙 لوحة التحكم الرئيسية</a>
+    </header>
+
+    <div class="container">
+
+        <div class="add-section">
+            <input type="text" id="clinicName" placeholder="اكتب اسم العيادة الجديدة هنا (مثال: عيادة العيون)..." required>
+            <button onclick="addClinic()" class="btn-primary">➕ إضافة القسم الآن</button>
+        </div>
+
+        <div class="section-card">
+            <h2>قائمة العيادات والأقسام الحالية بالفروع</h2>
+            <div class="table-responsive">
+                <table id="clinicsTable">
+                    <thead>
+                        <tr>
+                            <th>رقم العيادة</th>
+                            <th>اسم العيادة الطبية</th>
+                            <th>حالة العيادة</th>
+                            <th>العمليات الإدارية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. دالة جلب العيادات من مسار الـ MVC وعرضها في الجدول
+        async function loadClinics() {
+            try {
+                const response = await fetch('http://localhost:5000/api/clinics');
+                const clinics = await response.json();
+                const tbody = document.querySelector('#clinicsTable tbody');
+                tbody.innerHTML = '';
+
+                clinics.forEach(clinic => {
+                    // التحقق من حالة العيادة لوضع الشارة المناسبة (نشط / غير نشط)
+                    const isClinicActive = clinic.status === 'غير نشط' ? false : true;
+                    const badgeClass = isClinicActive ? 'status-active' : 'status-inactive';
+                    const badgeText = isClinicActive ? 'نشط ومتاح' : 'غير نشط مؤقتاً';
+
+                    const row = `
+                        <tr>
+                            <td>#${clinic.id}</td>
+                            <td style="font-weight: 600; color: var(--text-main);">${clinic.name}</td>
+                            <td><span class="status-badge ${badgeClass}">${badgeText}</span></td>
+                            <td>
+                                <a href="edit-clinic.html?id=${clinic.id}" class="actions-btn btn-edit">✏️ تعديل</a>
+                                <button onclick="deleteClinic(${clinic.id})" class="actions-btn btn-danger">🗑️ حذف</button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            } catch (err) {
+                console.error("خطأ في جلب العيادات:", err);
+            }
+        }
+
+        // 2. دالة إضافة عيادة جديدة عبر الـ API
+        async function addClinic() {
+            const nameInput = document.getElementById('clinicName');
+            const name = nameInput.value.trim();
+
+            if (!name) {
+                alert("يرجى كتابة اسم العيادة قبل الإرسال!");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/clinics/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    nameInput.value = ''; // تصفير الحقل بنجاح
+                    loadClinics(); // تحديث الجدول فوراً تلقائياً
+                }
+            } catch (err) {
+                alert("حدث خطأ أثناء إضافة العيادة");
+            }
+        }
+
+        // 3. دالة حذف عيادة نهائياً مع تنبيه المستخدم لعدم ضرب بيانات الأطباء
+        async function deleteClinic(id) {
+            if (confirm('تنبيه: عند حذف هذه العيادة، قد يتأثر الأطباء المرتبطون بها في النظام. هل أنت متأكد من الحذف؟')) {
+                try {
+                    const response = await fetch('http://localhost:5000/api/clinics/delete', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id })
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        loadClinics(); // إعادة تحميل جدول العيادات
+                    }
+                } catch (err) {
+                    alert("حدث خطأ أثناء الحذف");
+                }
+            }
+        }
+
+        // تشغيل الدالة تلقائياً بمجرد فتح الإداري للصفحة
+        window.onload = loadClinics;
+    </script>
+</body>
+
+</html>
