@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة المريض | مستشفى الياسين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #0d9488; --primary-dark: #115e59; --bg: #f0fdfa; --white: #ffffff; --text: #1f2937; }
+        body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #0f172a, #0d9488); height: 100vh; margin: 0; display: flex; justify-content: center; align-items: center; }
+        .card { background: var(--white); padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); width: 100%; max-width: 400px; text-align: center; }
+        h2 { margin-bottom: 10px; color: var(--text); }
+        p { color: #6b7280; font-size: 14px; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; text-align: right; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+        input { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; box-sizing: border-box; font-family: 'Cairo'; }
+        input:focus { outline: none; border-color: var(--primary); }
+        .btn { width: 100%; background: var(--primary); color: var(--white); border: none; padding: 12px; border-radius: 8px; font-family: 'Cairo'; font-weight: 700; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+        .btn:hover { background: var(--primary-dark); }
+        .toggle-link { color: var(--primary); cursor: pointer; font-weight: 600; margin-top: 15px; display: inline-block; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div style="font-size: 50px; margin-bottom: 10px;">🩺</div>
+        <h2 id="formTitle">تسجيل دخول المرضى</h2>
+        <p id="formDesc">أدخل رقم جوالك للدخول إلى حسابك ومتابعة مواعيدك</p>
+        
+        <form id="patientAuthForm">
+            <div class="form-group" id="nameGroup" style="display: none;">
+                <label>اسم المريض بالكامل</label>
+                <input type="text" id="patientName" placeholder="أدخل اسمك الرباعي">
+            </div>
+            <div class="form-group">
+                <label>رقم الجوال</label>
+                <input type="tel" id="patientPhone" placeholder="059xxxxxxx" required>
+            </div>
+            <button type="submit" class="btn" id="submitBtn">دخول سريع</button>
+            <span class="toggle-link" id="toggleAuth" onclick="toggleForm()">ليس لديك حساب؟ سجل معنا الآن</span>
+        </form>
+    </div>
+
+    <script>
+        let isLoginMode = true;
+
+        function toggleForm() {
+            isLoginMode = !isLoginMode;
+            const formTitle = document.getElementById('formTitle');
+            const formDesc = document.getElementById('formDesc');
+            const nameGroup = document.getElementById('nameGroup');
+            const submitBtn = document.getElementById('submitBtn');
+            const toggleAuth = document.getElementById('toggleAuth');
+
+            if (isLoginMode) {
+                formTitle.innerText = "تسجيل دخول المرضى";
+                formDesc.innerText = "أدخل رقم جوالك للدخول إلى حسابك ومتابعة مواعيدك";
+                nameGroup.style.display = "none";
+                document.getElementById('patientName').required = false;
+                submitBtn.innerText = "دخول سريع";
+                toggleAuth.innerText = "ليس لديك حساب؟ سجل معنا الآن";
+            } else {
+                formTitle.innerText = "إنشاء حساب مريض جديد";
+                formDesc.innerText = "سجل بياناتك لمرة واحدة لتتمكن من الحجز ومتابعة ملفك الطبي";
+                nameGroup.style.display = "block";
+                document.getElementById('patientName').required = true;
+                submitBtn.innerText = "إنشاء الحساب";
+                toggleAuth.innerText = "لديك حساب بالفعل؟ تسجيل الدخول";
+            }
+        }
+
+        document.getElementById('patientAuthForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const phone = document.getElementById('patientPhone').value.trim();
+            
+            if (isLoginMode) {
+                // محاكاة تسجيل الدخول: نبحث هل الجوال مسجل في المتصفح؟
+                let existingName = localStorage.getItem(`patient_name_${phone}`);
+                if (!existingName) {
+                    // لو أول مرة، نعتبر الرقم هو الاسم مؤقتاً أو نطلب منه التسجيل
+                    existingName = "مريض جديد";
+                    localStorage.setItem(`patient_name_${phone}`, existingName);
+                }
+                localStorage.setItem('currentPatientPhone', phone);
+                localStorage.setItem('currentPatientName', existingName);
+            } else {
+                // إنشاء حساب جديد وحفظه
+                const name = document.getElementById('patientName').value.trim();
+                localStorage.setItem(`patient_name_${phone}`, name);
+                localStorage.setItem('currentPatientPhone', phone);
+                localStorage.setItem('currentPatientName', name);
+            }
+
+            // التوجه للوحة تحكم المريض
+            window.location.href = 'patient-dashboard.html';
+        });
+    </script>
+</body>
+</html>

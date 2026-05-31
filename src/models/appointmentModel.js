@@ -15,7 +15,8 @@ const Appointment = {
         return await database.execute(sql, [patientName, doctorId, appointmentDate]);
     },
     updateStatus: async (id, status) => {
-        return await database.execute('UPDATE appointments SET status = ? WHERE id = ?', [status, id]);
+        const [result] = await database.execute('UPDATE appointments SET status = ? WHERE id = ?', [status, id]);
+        return result;
     },
     delete: async (id) => {
         return await database.execute('DELETE FROM appointments WHERE id = ?', [id]);

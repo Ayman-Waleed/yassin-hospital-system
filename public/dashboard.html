@@ -5,29 +5,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم الإدارية | مستشفى الياسين</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230284c7' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='60' font-weight='bold' fill='white' text-anchor='middle' dominant-baseline='middle'%3E🏥%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
+        /* تصميم شاشة الترحيب بكامل الشاشة */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e3a8a, #0d9488);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            opacity: 1;
+            transition: opacity 0.5s ease-out, visibility 0.5s;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* المحتوى الداخلي */
+        .splash-content {
+            text-align: center;
+            color: white;
+        }
+
+        /* أنيميشن اللوغو (تأثير النبض) */
+        .splash-logo {
+            font-size: 70px;
+            animation: pulse 1.5s infinite ease-in-out;
+            margin-bottom: 15px;
+        }
+
+        .splash-title {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .splash-subtitle {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        /* لودر التحميل الدائري */
+        .splash-loader {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            margin: 0 auto;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        /* الحركات (Animations) */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        /* كلاس مخصص لإخفاء الشاشة بنعومة */
+        .splash-fade-out {
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
         :root {
             --primary: #0284c7;
-            /* الأزرق الحيوي للمستشفى */
             --primary-dark: #0369a1;
-            /* الأزرق الداكن للحركات */
             --bg: #f4f6f9;
-            /* الخلفية الرمادية الفخمة المريحة */
             --white: #ffffff;
             --text-main: #1e293b;
-            /* لون النصوص الأساسي */
             --text-muted: #64748b;
-            /* لون النصوص الفرعي */
             --success: #10b981;
-            /* الأخضر للمقبول */
             --danger: #ef4444;
-            /* الأحمر للمرفوض */
             --warning: #f59e0b;
-            /* الأصفر للمعلق */
             --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
             --radius: 12px;
         }
@@ -41,7 +113,6 @@
             box-sizing: border-box;
         }
 
-        /* الهيدر العلوي الفخم */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: var(--white);
@@ -64,7 +135,6 @@
             padding: 0 20px;
         }
 
-        /* كروت الإحصائيات العلوية */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -115,7 +185,6 @@
             opacity: 0.8;
         }
 
-        /* الأقسام والجداول */
         .section-card {
             background: var(--white);
             padding: 30px;
@@ -160,7 +229,6 @@
             background-color: var(--primary-dark);
         }
 
-        /* تصميم الجداول الحديثة */
         .table-responsive {
             overflow-x: auto;
         }
@@ -200,7 +268,6 @@
             border: 2px solid #e2e8f0;
         }
 
-        /* أزرار التحكم داخل الجداول */
         .actions-btn {
             border: none;
             padding: 6px 12px;
@@ -232,7 +299,6 @@
             color: #475569;
         }
 
-        /* الشارات الملونة للحالات */
         .status-badge {
             padding: 4px 10px;
             border-radius: 50px;
@@ -245,13 +311,26 @@
 
 <body>
 
+    <div id="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">🏥</div>
+            <h1 class="splash-title">مستشفى الياسين الإفتراضي</h1>
+            <p class="splash-subtitle">رعاية طبية متميزة على مدار الساعة</p>
+            <div class="splash-loader"></div>
+        </div>
+    </div>
+
     <header>
         <h1>لوحة تحكم مستشفى الياسين 🏥</h1>
-        <div style="font-size: 14px; opacity: 0.9;">مرحباً بك مجدداً، المسؤول الإداري</div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="font-size: 14px; opacity: 0.9;">مرحباً بك مجدداً، المسؤول الإداري</div>
+            <button onclick="logoutAdmin()"
+                style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-family: 'Cairo'; font-weight: bold; cursor: pointer;">🚪
+                تسجيل الخروج</button>
+        </div>
     </header>
 
     <div class="container">
-
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-info">
@@ -293,8 +372,7 @@
                             <th>العمليات</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -315,16 +393,41 @@
                             <th>العمليات</th>
                         </tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
-
     </div>
 
     <script>
-        // دالة جلب الإحصائيات الحية - تم تصحيح المسار ليتوافق تماماً مع الـ MVC Backend
+
+        // جدار الحماية للأدمن + إدارة شاشة الترحيب
+        document.addEventListener("DOMContentLoaded", function () {
+            // 🔒 1. فحص هل قام الأدمن بتسجيل الدخول؟
+            if (localStorage.getItem('adminLoggedIn') !== 'true') {
+                // إذا لم يسجل دخول، يتم طرده فوراً إلى صفحة تسجيل الدخول
+                window.location.href = 'login.html';
+                return; // إيقاف تنفيذ أي كود آخر
+            }
+
+            // ✨ 2. إدارة شاشة الترحيب (Splash Screen)
+            const splash = document.getElementById("splash-screen");
+            if (!sessionStorage.getItem("splashShown")) {
+                setTimeout(() => {
+                    splash.classList.add("splash-fade-out");
+                    sessionStorage.setItem("splashShown", "true");
+                }, 2500);
+            } else {
+                splash.style.display = "none";
+            }
+        });
+
+        function logoutAdmin() {
+            localStorage.removeItem('adminLoggedIn');
+            window.location.href = 'login.html';
+        }
+
+        // دالة جلب الإحصائيات الحية
         async function loadDashboardStats() {
             try {
                 const response = await fetch('http://localhost:5000/api/dashboard/stats');
@@ -346,7 +449,7 @@
                 tbody.innerHTML = '';
 
                 doctors.forEach(doc => {
-                    const imgUrl = doc.image_url ? `http://localhost:5000${doc.image_url}` : 'https://via.placeholder.com/150';
+                    const imgUrl = doc.image_url ? `http://localhost:5000${doc.image_url}` : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="150" height="150"%3E%3Crect fill="%23e0e0e0" width="150" height="150"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="12" fill="%23999"%3ENo Image%3C/text%3E%3C/svg%3E';
                     const row = `
                         <tr id="doc-row-${doc.id}">
                             <td>${doc.id}</td>
@@ -386,10 +489,10 @@
             }
         }
 
-        // دالة جلب وعرض طلبات الحجوزات مع تنظيف صارم لحالة الأحرف
+        // دالة جلب وعرض طلبات الحجوزات
         async function loadAppointments() {
             try {
-                const response = await fetch('http://localhost:5000/api/appointments'); // أو api/appointments حسب مسارك المعتمد
+                const response = await fetch('http://localhost:5000/api/appointments');
                 const appointments = await response.json();
                 const tbody = document.querySelector('#appointmentsTable tbody');
                 tbody.innerHTML = '';
@@ -397,8 +500,6 @@
                 appointments.forEach(app => {
                     const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
                     const formattedDate = new Date(app.appointment_date).toLocaleString('ar-EG', dateOptions);
-                    
-                    // تحويل النص بالكامل إلى أحرف صغيرة وإزالة الفراغات لضمان المطابقة الكاملة (تغطي Confirmed و confirmed)
                     const currentStatus = app.status ? app.status.toString().trim().toLowerCase() : 'pending';
 
                     let badgeStyle = '';
@@ -412,13 +513,10 @@
                     } else if (currentStatus === 'confirmed' || currentStatus === 'مقبول') {
                         badgeStyle = 'background-color: #d1fae5; color: #059669;';
                         statusText = 'مؤكد';
-                        showButtons = false; // تختفي الأزرار فوراً عند القبول
                     } else if (currentStatus === 'rejected' || currentStatus === 'مرفوض') {
                         badgeStyle = 'background-color: #fee2e2; color: #dc2626;';
                         statusText = 'مرفوض';
-                        showButtons = false; // تختفي الأزرار فوراً عند الرفض
                     } else {
-                        // كخيار احتياطي لو كتبت أي كلمة أخرى بالداتابيز
                         badgeStyle = 'background-color: #f1f5f9; color: #475569;';
                         statusText = app.status;
                         showButtons = true;
@@ -447,7 +545,7 @@
             }
         }
 
-        // دالة إرسال طلب تحديث الحالة وتعديل المظهر فوراً الحية
+        // دالة تحديث الحالة
         async function updateStatus(id, status) {
             try {
                 const response = await fetch('http://localhost:5000/api/appointments/update-status', {
@@ -460,8 +558,8 @@
                     const result = await response.json();
                     if (result.success) {
                         alert("تم تحديث حالة الموعد بنجاح! 🎉");
-                        loadAppointments(); // إعادة تحميل الجدول ليعكس الحالة الجديدة مباشرة
-                        loadDashboardStats(); // تحديث أرقام الكروت الحية
+                        loadAppointments();
+                        loadDashboardStats();
                     } else {
                         alert("فشل في تحديث الحالة: " + result.error);
                     }
@@ -494,12 +592,10 @@
             }
         }
 
-        // تشغيل الدوال فور تحميل الصفحة
-        window.onload = () => {
-            loadDashboardStats();
-            loadDoctors();
-            loadAppointments();
-        };
+        // استدعاء جلب البيانات فوراً عند بدء تحميل الواجهة
+        loadDashboardStats();
+        loadDoctors();
+        loadAppointments();
     </script>
 </body>
 

@@ -34,7 +34,7 @@ exports.updateStatus = async (req, res) => {
         if (status === 'مرفوض' || status === 'rejected') status = 'Rejected';
 
         // الاستدعاء عبر الـ Model المربوط بالداتابيز لتغيير الحالة فوراً
-        const [result] = await Appointment.updateStatus(id, status);
+        const result = await Appointment.updateStatus(id, status);
 
         if (result.affectedRows > 0) {
             return res.json({ success: true, message: `تم تحديث حالة الحجز بنجاح` });

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة المريض الرقمية | مستشفى الياسين</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #115e59;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --text: #1e293b;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 18px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+            color: var(--text);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Cairo';
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-family: 'Cairo';
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #64748b;
+        }
+
+        .status {
+            padding: 3px 8px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .notice-board {
+            background: #fff7ed;
+            border-right: 4px solid #f97316;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1 style="margin:0; font-size:22px;">بوابة مريض مستشفى الياسين 🏥</h1>
+            <div id="welcomeMsg" style="font-size:14px; opacity:0.9; margin-top:5px;">مرحباً بك..</div>
+        </div>
+        <button onclick="logoutPatient()"
+            style="background:#ef4444; color:white; border:none; padding:8px 16px; border-radius:6px; font-family:'Cairo'; font-weight:bold; cursor:pointer;">🚪
+            خروج</button>
+    </header>
+
+    <div class="container">
+        <div>
+            <div class="card">
+                <h2>📢 لوحة الإعلانات الطبية</h2>
+                <div class="notice-board">📌 <b>تنويه:</b> عيادة الأطفال متواجدة هذا الأسبوع بفترة صباحية فقط من 8:00 ص
+                    حتى 1:00 ظ.</div>
+                <div class="notice-board" style="background:#f0fdf4; border-right-color:#22c55e;">📌 حملة التطعيم
+                    المجانية ضد الإنفلونزا الموسمية تبدأ السبت القادم بـقسم الطوارئ.</div>
+            </div>
+
+            <div class="card">
+                <h2>✍️ تقديم شكوى أو مقترح</h2>
+                <form id="complaintForm">
+                    <div class="form-group">
+                        <label>تفاصيل الشكوى/المقترح</label>
+                        <textarea id="complaintText" rows="3" placeholder="اكتب لنا أي ملاحظة لتحسين الخدمة..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="background:#475569;">إرسال الملاحظة</button>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <div class="card">
+                <h2>📅 حجز موعد طبي جديد</h2>
+                <form id="bookAppointmentForm">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                        <div class="form-group">
+                            <label>اختر الطبيب</label>
+                            <select id="doctorSelect" required>
+                                <option value="">جاري تحميل الأطباء...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointmentDate" style="cursor: pointer;"
+                                onclick="document.getElementById('appointmentDate').showPicker()">التاريخ والوقت
+                                المطلوبان</label>
+                            <input type="datetime-local" id="appointmentDate" required onclick="this.showPicker()">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">تأكيد طلب الحجز الحين</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>📜 سجل مواعيدك التاريخي وطبيبك</h2>
+                <div style="overflow-x:auto;">
+                    <table id="patientAppointmentsTable">
+                        <thead>
+                            <tr>
+                                <th>رقم الحجز</th>
+                                <th>اسم الطبيب</th>
+                                <th>التاريخ والوقت</th>
+                                <th>حالة الطلب</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="4" style="text-align:center; color:#64748b;">جاري جلب سجل مواعيدك...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const currentPhone = localStorage.getItem('currentPatientPhone');
+        const currentName = localStorage.getItem('currentPatientName');
+
+        // جدار حماية بسيط للمريض
+        if (!currentPhone) {
+            window.location.href = 'patient-login.html';
+        }
+
+        document.getElementById('welcomeMsg').innerText = `مرحباً بك يا غالي: ${currentName} (${currentPhone})`;
+
+        // 1. جلب الأطباء المتوفرين من السيرفر وعرضهم في القائمة المنسدلة
+        async function fetchDoctorsForSelect() {
+            try {
+                const response = await fetch('http://localhost:5000/api/doctors');
+                const doctors = await response.json();
+                const select = document.getElementById('doctorSelect');
+                select.innerHTML = '<option value="">-- اختر الطبيب المختص --</option>';
+
+                doctors.forEach(doc => {
+                    // نُخزن هنا: الـ id الخاص بالطبيب، والـ clinic_id التابع له، والاسم كـ data attribute
+                    select.innerHTML += `
+                <option value="${doc.id}" 
+                        data-clinic-id="${doc.clinic_id || 1}" 
+                        data-name="${doc.name}">
+                    ${doc.name} (${doc.specialization})
+                </option>`;
+                });
+            } catch (err) {
+                console.error("خطأ في جلب الأطباء:", err);
+                document.getElementById('doctorSelect').innerHTML = '<option value="">فشل تحميل الأطباء (تأكد من الـ Backend)</option>';
+            }
+        }
+
+        // 2. جلب الحجوزات الخاصة بهذا المريض فقط بناءً على اسمه
+        async function fetchMyAppointments() {
+            try {
+                const response = await fetch('http://localhost:5000/api/appointments');
+                const appointments = await response.json();
+                const tbody = document.querySelector('#patientAppointmentsTable tbody');
+                tbody.innerHTML = '';
+
+                // فلترة الحجوزات لتعرض فقط مواعيد المريض الحالي
+                const myApps = appointments.filter(app => app.patient_name === currentName);
+
+                if (myApps.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#64748b;">لا يوجد لديك حجوزات سابقة حتى الآن.</td></tr>';
+                    return;
+                }
+
+                myApps.forEach(app => {
+                    const formattedDate = new Date(app.appointment_date).toLocaleString('ar-EG');
+                    const status = (app.status || 'pending').toString().trim().toLowerCase();
+
+                    let badge = '';
+                    if (status === 'confirmed' || status === 'مقبول') badge = '<span class="status" style="background:#d1fae5; color:#065f46;">مؤكد 👍</span>';
+                    else if (status === 'rejected' || status === 'مرفوض') badge = '<span class="status" style="background:#fee2e2; color:#991b1b;">مرفوض 👎</span>';
+                    else badge = '<span class="status" style="background:#fef3c7; color:#d97706;">قيد الانتظار ⏳</span>';
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${app.id}</td>
+                            <td style="font-weight:600;">${app.doctor_name || 'غير محدد'}</td>
+                            <td dir="ltr">${formattedDate}</td>
+                            <td>${badge}</td>
+                        </tr>
+                    `;
+                });
+            } catch (err) {
+                console.error("خطأ في تحميل الموعيد:", err);
+            }
+        }
+
+        // 3. إرسال طلب حجز موعد جديد وحفظه في السيرفر
+        document.getElementById('bookAppointmentForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const doctorSelect = document.getElementById('doctorSelect');
+            const doctorId = doctorSelect.value; // رقم الطبيب الحقيقي من الداتابيز
+
+            // جلب البيانات الإضافية المخزنة داخل الـ option المختار ديناميكياً
+            const selectedOption = doctorSelect.options[doctorSelect.selectedIndex];
+            const doctorName = selectedOption ? selectedOption.getAttribute('data-name') : '';
+            const clinicId = selectedOption ? selectedOption.getAttribute('data-clinic-id') : null; // رقم العيادة الحقيقي
+
+            const date = document.getElementById('appointmentDate').value;
+
+            // جلب بيانات المريض الفعلي المسجل دخول حالياً بدون أي قيم افتراضية ثابتة
+            const pName = localStorage.getItem('currentPatientName');
+            const pPhone = localStorage.getItem('currentPatientPhone');
+
+            // التحقق من وجود طبيب وتاريخ
+            if (!doctorId || !date) {
+                alert("الرجاء تحديد الطبيب والتاريخ أولاً! 📅");
+                return;
+            }
+
+            // التحقق من أن بيانات المريض موجودة في الجلسة
+            if (!pName || !pPhone) {
+                alert("خطأ في الجلسة: الرجاء إعادة تسجيل الدخول أولاً.");
+                window.location.href = 'patient-login.html';
+                return;
+            }
+
+            // بناء كائن البيانات الصافي والمترابط بالكامل مع الداتابيز
+            const cleanData = {
+                patient_name: pName,
+                patient_phone: pPhone,
+                phone: pPhone,
+                doctor_name: doctorName,
+                doctor_id: parseInt(doctorId),        // ديناميكي عائداً للطبيب المختار
+                clinic_id: parseInt(clinicId),        // ديناميكي عائداً للعيادة المرتبطة بالطبيب
+                appointment_date: date,
+                status: 'pending'
+            };
+
+            console.log("جاري إرسال البيانات الديناميكية الكاملة:", cleanData);
+
+            try {
+                const response = await fetch('http://localhost:5000/api/appointments/book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(cleanData)
+                });
+
+                const result = await response.json().catch(() => ({}));
+
+                if (response.ok) {
+                    alert("تم إرسال طلب حجز الموعد بنجاح! انتظر قبول الإدارة 🎉");
+                    document.getElementById('bookAppointmentForm').reset();
+                    if (typeof fetchMyAppointments === "function") fetchMyAppointments();
+                } else {
+                    alert("⚠️ السيرفر رفض الحجز: " + (result.message || result.error || "تأكد من مطابقة جداول الداتابيز وإضافة الطبيب في لوحة الإدارة"));
+                }
+            } catch (err) {
+                alert("❌ تعذر الاتصال بالـ Backend بالكامل! تأكد أن السيرفر يعمل");
+            }
+        });
+
+        // الشكاوى
+        document.getElementById('complaintForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert("تم استلام شكواك/مقترحك بنجاح وسيدرسها مجلس إدارة مستشفى الياسين! شكراً لك.");
+            document.getElementById('complaintForm').reset();
+        });
+
+        function logoutPatient() {
+            localStorage.removeItem('currentPatientPhone');
+            localStorage.removeItem('currentPatientName');
+            window.location.href = 'patient-login.html';
+        }
+
+        // تشغيل البوابة فوراً
+        fetchDoctorsForSelect();
+        fetchMyAppointments();
+    </script>
+</body>
+
+</html>
