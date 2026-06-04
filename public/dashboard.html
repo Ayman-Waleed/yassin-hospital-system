@@ -399,6 +399,48 @@
         </div>
     </div>
 
+    <div id="editDoctorModal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+        <div
+            style="background:white; padding:30px; border-radius:12px; width:400px; box-shadow:0 5px 15px rgba(0,0,0,0.3); position:relative;">
+            <h3 style="margin-top:0; border-bottom:2px solid #f1f5f9; padding-bottom:10px;">✏️ تعديل بيانات الطبيب</h3>
+            <form id="editDoctorForm">
+                <input type="hidden" id="editDoctorId">
+                <input type="hidden" id="editDoctorOldImage">
+
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:bold;">اسم الطبيب</label>
+                    <input type="text" id="editDoctorName"
+                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;" required>
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:bold;">التخصص</label>
+                    <input type="text" id="editDoctorSpec"
+                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; background-color: #f1f5f9; cursor: not-allowed;"
+                        readonly>
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:bold;">العيادة</label>
+                    <select id="editDoctorClinic"
+                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;" required>
+                    </select>
+                </div>
+                <div style="margin-bottom:20px;">
+                    <label style="display:block; margin-bottom:5px; font-weight:bold;">تغيير الصورة (اختياري)</label>
+                    <input type="file" id="editDoctorImage" accept="image/*" style="width:100%;">
+                </div>
+
+                <div style="display:flex; gap:10px; justify-content:flex-end;">
+                    <button type="button" onclick="closeEditModal()"
+                        style="background:#64748b; color:white; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;">إلغاء</button>
+                    <button type="submit"
+                        style="background:#0d9488; color:white; border:none; padding:8px 16px; border-radius:6px; cursor:pointer; font-weight:bold;">حفظ
+                        التعديلات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
 
         // جدار الحماية للأدمن + إدارة شاشة الترحيب
@@ -458,6 +500,7 @@
                             <td>${doc.specialization}</td>
                             <td><span class="status-badge" style="background-color: #e0f2fe; color: #0369a1;">${doc.clinic_name || 'غير محدد'}</span></td>
                             <td>
+                                <button onclick="openEditModal(${doc.id}, '${doc.name}', '${doc.specialization}', ${doc.clinic_id}, '${doc.image_url}')" style="background:#f59e0b; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; margin-left:5px;">تعديل ✏️</button>
                                 <button onclick="deleteDoctor(${doc.id})" class="actions-btn btn-danger">🗑️ حذف</button>
                             </td>
                         </tr>
@@ -596,6 +639,100 @@
         loadDashboardStats();
         loadDoctors();
         loadAppointments();
+
+        // فتح نافذة التعديل وتعبئة البيانات الحالية ديناميكياً
+        async function openEditModal(id, name, spec, clinicId, imageUrl) {
+            document.getElementById('editDoctorId').value = id;
+            document.getElementById('editDoctorName').value = name;
+            document.getElementById('editDoctorSpec').value = spec;
+            document.getElementById('editDoctorOldImage').value = imageUrl;
+
+            const clinicSelect = document.getElementById('editDoctorClinic');
+            clinicSelect.innerHTML = '<option value="">-- جاري تحميل العيادات... --</option>';
+
+            try {
+                // 1. جلب العيادات من السيرفر لملء القائمة المنسدلة
+                const response = await fetch('http://localhost:5000/api/clinics');
+                const clinics = await response.json();
+
+                clinicSelect.innerHTML = '<option value="" disabled selected>-- اختر العيادة --</option>';
+
+                clinics.forEach(clinic => {
+                    // نضع اسم العيادة كـ data attribute لنقله للتخصص لاحقاً
+                    clinicSelect.innerHTML += `<option value="${clinic.id}" data-name="${clinic.name}">${clinic.name}</option>`;
+                });
+
+                // 2. تحديد العيادة الحالية للطبيب بدقة
+                clinicSelect.value = clinicId;
+
+                // 3. تفعيل ميزة التغيير التلقائي للتخصص بناءً على العيادة المختارة
+                clinicSelect.onchange = function () {
+                    const selectedOption = clinicSelect.options[clinicSelect.selectedIndex];
+                    if (selectedOption && selectedOption.value !== "") {
+                        // نأخذ اسم العيادة (مثل: الجراحة) ونضعه كـ تخصص تلقائي
+                        const clinicName = selectedOption.getAttribute('data-name');
+                        document.getElementById('editDoctorSpec').value = clinicName;
+                    } else {
+                        document.getElementById('editDoctorSpec').value = "";
+                    }
+                };
+
+            } catch (err) {
+                console.error("خطأ في جلب العيادات للتعديل:", err);
+                clinicSelect.innerHTML = '<option value="">فشل تحميل العيادات</option>';
+            }
+
+            // عرض النافذة المنبثقة
+            document.getElementById('editDoctorModal').style.display = 'flex';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editDoctorModal').style.display = 'none';
+            document.getElementById('editDoctorForm').reset();
+        }
+
+        // معالجة إرسال التعديلات للسيرفر
+        document.getElementById('editDoctorForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const id = document.getElementById('editDoctorId').value;
+            const name = document.getElementById('editDoctorName').value;
+            const spec = document.getElementById('editDoctorSpec').value;
+            const clinicId = document.getElementById('editDoctorClinic').value;
+            const imageFile = document.getElementById('editDoctorImage').files[0];
+            const oldImage = document.getElementById('editDoctorOldImage').value;
+
+            // بما أننا قد نرفع ملف (صورة)، نستخدم FormData وليس JSON عادي
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('specialization', spec);
+            formData.append('clinic_id', clinicId);
+
+            if (imageFile) {
+                formData.append('image', imageFile); // الصورة الجديدة
+            } else {
+                formData.append('image_url', oldImage); // الاحتفاظ بالقديمة
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/doctors/${id}`, {
+                    method: 'PUT',
+                    body: formData // يرسل تلقائياً بـ multipart/form-data
+                });
+
+                const result = await response.json();
+                if (response.ok && result.success) {
+                    alert(result.message);
+                    closeEditModal();
+                    location.reload(); // تحديث الجدول فوراً لرؤية التعديل الجديد
+                } else {
+                    alert("فشل التحديث: " + result.message);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("حدث خطأ أثناء الاتصال بالسيرفر لتحديث البيانات.");
+            }
+        });
     </script>
 </body>
 

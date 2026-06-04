@@ -16,5 +16,6 @@ router.get('/', doctorController.getDoctors);
 router.get('/by-clinic/:clinicId', doctorController.getDoctorsByClinic);
 router.post('/add', upload.single('image'), doctorController.addDoctor);
 router.post('/delete', doctorController.deleteDoctor);
+router.put('/:id', upload.single('image'), doctorController.updateDoctor);
 
 module.exports = router;
