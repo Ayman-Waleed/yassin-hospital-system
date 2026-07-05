@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مواعيد عمل العيادات - موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="Schedule.css"/>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+<!-- HERO مواعيد العيادات المطور -->
+<section class="schedule-hero">
+  <img class="hero-bg" src="pictures/الرئيسية 1.png" alt="خلفية">
+  <div class="schedule-hero-inner">
+
+    <!-- النص في المنتصف -->
+    <div class="schedule-hero-text">
+      <div class="hero-badge"></div>
+      <h1>مواعيد عمل العيادات الخارجية</h1>
+      <p>يمكنك من خلال هذه الصفحة الاطلاع على مواعيد عمل العيادات المختلفة ومواعيد تواجد الأطباء بدقة طوال أيام الأسبوع لتسهيل تنظيم زيارتك الطبية.</p>
+    </div>
+
+    <!-- الصورة المستطيلة على اليمين -->
+    <div class="schedule-hero-img">
+      <img src="Pictures/اشعار الحجز.png" alt="مواعيد العيادات">
+    </div>
+
+  </div>
+</section>
+
+<!-- وصف الصفحة -->
+<div class="schedule-intro">
+  <p>نوفر لكم في هذه الصفحة عرضاً منظّماً وموسعاً لمواعيد دوام العيادات الخارجية، حيث يمكنكم التعرف على أوقات عمل الأطباء واختيار الموعد الأنسب وفق جدولكم اليومي.</p>
+</div>
+
+<!-- جدول المواعيد بالإطار والتعبئة الاحترافية الجديدة -->
+<section class="schedule-table-section">
+  <table class="schedule-table">
+    <thead>
+      <tr>
+        <th><i class="fa-solid fa-hospital-user"></i> العيادة التخصصية</th>
+        <th><i class="fa-regular fa-calendar-days"></i> أيام الدوام</th>
+        <th><i class="fa-regular fa-clock"></i> التوقيت الرسمي</th>
+        <th><i class="fa-solid fa-user-doctor"></i> الطبيب المعالج</th>
+      </tr>
+    </thead>
+    <tbody id="scheduleTableBody">
+      <!-- أُضيف للربط مع الباك اند: الصفوف تتعبأ ديناميكياً من جدول doctor_schedules
+           (الصفوف الثابتة القديمة أُزيلت — انظر السكربت أسفل الصفحة) -->
+    </tbody>
+  </table>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+<script>
+// أُضيف للربط مع الباك اند: تعبئة جدول الدوام من قاعدة البيانات (doctor_schedules)
+document.addEventListener('DOMContentLoaded', async () => {
+  const tbody = document.getElementById('scheduleTableBody');
+  const dayNames = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+  // تحويل "08:00:00" لصيغة عرض 12 ساعة مثل "8:00 صباحاً"
+  function formatTime(t) {
+    let [h, m] = String(t).split(':').map(Number);
+    const suffix = h === 12 ? 'ظهراً' : (h > 12 ? 'مساءً' : 'صباحاً');
+    h = h % 12 || 12;
+    return `${h}:${String(m).padStart(2, '0')} ${suffix}`;
+  }
+
+  try {
+    const res = await fetch('/api/schedules');
+    const result = await res.json();
+    const rows = result.data || [];
+
+    // تجميع صفوف الدوام: لكل (طبيب + فترة) صف واحد تُجمع فيه الأيام
+    const grouped = {};
+    rows.forEach(r => {
+      const key = `${r.doctor_id}|${r.start_time}|${r.end_time}`;
+      if (!grouped[key]) {
+        grouped[key] = { clinic: r.clinic_name || '-', doctor: r.doctor_name,
+                         start: r.start_time, end: r.end_time, days: [] };
+      }
+      grouped[key].days.push(r.day_of_week);
+    });
+
+    tbody.innerHTML = Object.values(grouped).map(g => {
+      const days = g.days.sort((a, b) => a - b).map(i => dayNames[i]).join('، ');
+      // لونان متناوبان للشارة حسب الفترة: صباحية / مسائية (نفس كلاسات التصميم الأصلي)
+      const theme = parseInt(g.start) < 12 ? 'theme-sun-thu' : 'theme-sat-wed';
+      return `
+      <tr>
+        <td>
+          <div class="clinic-cell">
+            <img src="pictures/${g.clinic}.jpg" alt="${g.clinic}">
+            <span>${g.clinic}</span>
+          </div>
+        </td>
+        <td class="days-cell"><span class="day-badge ${theme}">${days}</span></td>
+        <td class="time-cell">${formatTime(g.start)} - ${formatTime(g.end)}</td>
+        <td class="doctor-cell"><i class="fa-solid fa-user-md"></i> ${g.doctor}</td>
+      </tr>`;
+    }).join('');
+  } catch (err) {
+    console.error('فشل تحميل جدول الدوام:', err);
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">تعذر تحميل جدول الدوام، تأكد من تشغيل السيرفر</td></tr>';
+  }
+});
+</script>
+
+</body>
+</html>

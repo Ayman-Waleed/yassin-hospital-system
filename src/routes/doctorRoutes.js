@@ -14,6 +14,8 @@ const upload = multer({ storage: storage });
 
 router.get('/', doctorController.getDoctors);
 router.get('/by-clinic/:clinicId', doctorController.getDoctorsByClinic);
+// ملاحظة: مسار by-clinic يجب أن يبقى قبل /:id حتى لا يلتقط الراوتر "by-clinic" كأنه id
+router.get('/:id', doctorController.getDoctorById);
 router.post('/add', upload.single('image'), doctorController.addDoctor);
 router.post('/delete', doctorController.deleteDoctor);
 router.put('/:id', upload.single('image'), doctorController.updateDoctor);

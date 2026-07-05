@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول - الياسين الطبي</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-page">
+    <div class="login-wrapper">
+        <!-- قسم الصورة -->
+        <div class="login-image">
+            <img src="pictar/22.jpg" alt="الياسين الطبي">
+        </div>
+        
+        <!-- قسم النموذج -->
+        <div class="login-form-side">
+            <form class="login-card" onsubmit="handleLogin(event)">
+                <img src="pictar/لوجو الموقغ.png" alt="Logo" class="login-logo">
+                <h2>اهلا وسهلا بكم</h2>
+                <p>قم بتسجيل الدخول لادارة النظام</p>
+                
+                <div class="input-group">
+                    <input type="text" id="username" required placeholder="اسم المستخدم">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" required placeholder="كلمة المرور">
+                </div>
+                <button type="submit" class="btn-login">تسجيل الدخول</button>
+                <p class="forgot-pass">في حالة نسيان كلمة المرور تواصل مع الدعم الفني</p>
+            </form>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

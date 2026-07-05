@@ -8,8 +8,14 @@ router.get('/', appointmentController.getAppointments);
 // مسار حجز موعد جديد من قبل المريض
 router.post('/book', appointmentController.bookAppointment);
 
-// مسار تحديث حالة الموعد (مقبول / مرفوض)
+// مسار جلب مواعيد مريض معيّن بهاتفه
+router.get('/patient/:phone', appointmentController.getPatientAppointments);
+
+// مسار تحديث حالة الموعد (انتظار / مؤكد / ملغى / تم الفحص)
 router.post('/update-status', appointmentController.updateStatus);
+
+// مسار تعديل موعد كامل من لوحة الإدارة
+router.post('/update', appointmentController.updateAppointment);
 
 // مسار حذف موعد نهائياً
 router.post('/delete', appointmentController.deleteAppointment);

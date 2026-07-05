@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأطباء - الياسين الطبي</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar" id="sidebar-nav"></nav>
+        <div class="main-content">
+            <header>
+                <h2>إدارة الطاقم الطبي</h2>
+                <div class="user-info">مرحباً، مدير النظام</div>
+            </header>
+            
+            <div class="table-container animate-fade-in">
+                <div class="table-header">
+                    <h3>قائمة الأطباء المعتمدين</h3>
+                    <button class="btn btn-add" onclick="openModal('add-doctor-modal')">+ إضافة طبيب</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>اسم الطبيب</th>
+                            <th>التخصص</th>
+                            <th>الهاتف</th>
+                            <th>العمليات</th>
+                        </tr>
+                    </thead>
+                    <!-- أُضيف للربط مع الباك اند: الصفوف تتعبأ من قاعدة البيانات -->
+                    <tbody id="doctors-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <footer>
+                <span class="footer-brand">الياسين الطبي © 2026</span>
+                <span class="footer-copy">All rights reserved. Designed for Al-Yaseen Medical system.</span>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal: Add Doctor -->
+    <div class="modal-overlay" id="add-doctor-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>إضافة طبيب جديد</h3>
+                <button class="modal-close" onclick="closeModal('add-doctor-modal')">&times;</button>
+            </div>
+            <form id="add-doctor-form" onsubmit="saveDoctor(event)">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label>اسم الطبيب</label>
+                        <input type="text" id="doc-name" required placeholder="مثال: د. محمد العلي">
+                    </div>
+                    <div class="input-group">
+                        <label>التخصص</label>
+                        <input type="text" id="doc-specialty" required placeholder="مثال: طب وجراحة القلب">
+                    </div>
+                    <div class="input-group">
+                        <label>رقم الهاتف</label>
+                        <input type="text" id="doc-phone" required placeholder="مثال: 059xxxxxxxx">
+                    </div>
+                    <!-- أُضيف للربط مع الباك اند: ربط الطبيب بعيادة حقيقية من القاعدة -->
+                    <div class="input-group">
+                        <label>العيادة</label>
+                        <select id="doc-clinic" required>
+                            <option value="" disabled selected>اختر العيادة</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-delete" onclick="closeModal('add-doctor-modal')">إلغاء</button>
+                    <button type="submit" class="btn btn-add">حفظ البيانات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

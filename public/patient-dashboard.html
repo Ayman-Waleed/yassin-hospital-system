@@ -155,22 +155,18 @@
         <div>
             <div class="card">
                 <h2>📢 لوحة الإعلانات الطبية</h2>
-                <div class="notice-board">📌 <b>تنويه:</b> عيادة الأطفال متواجدة هذا الأسبوع بفترة صباحية فقط من 8:00 ص
-                    حتى 1:00 ظ.</div>
-                <div class="notice-board" style="background:#f0fdf4; border-right-color:#22c55e;">📌 حملة التطعيم
-                    المجانية ضد الإنفلونزا الموسمية تبدأ السبت القادم بـقسم الطوارئ.</div>
+                <div id="announcementsBoard">جاري تحميل الإعلانات...</div>
             </div>
 
             <div class="card">
-                <h2>✍️ تقديم شكوى أو مقترح</h2>
+                <h2>✍️ الشكاوى والمقترحات والردود</h2>
                 <form id="complaintForm">
                     <div class="form-group">
-                        <label>تفاصيل الشكوى/المقترح</label>
-                        <textarea id="complaintText" rows="3" placeholder="اكتب لنا أي ملاحظة لتحسين الخدمة..."
-                            required></textarea>
+                        <textarea id="complaintText" rows="3" placeholder="اكتب لنا أي ملاحظة..." required></textarea>
                     </div>
-                    <button type="submit" class="btn" style="background:#475569;">إرسال الملاحظة</button>
+                    <button type="submit" class="btn">إرسال الملاحظة</button>
                 </form>
+                <div id="myComplaints" style="margin-top:20px;"></div>
             </div>
         </div>
 
@@ -361,12 +357,92 @@
             }
         });
 
-        // الشكاوى
-        document.getElementById('complaintForm').addEventListener('submit', function (e) {
+        // الشكاوى والمقترحات
+        document.getElementById('complaintForm').addEventListener('submit', async function (e) {
             e.preventDefault();
-            alert("تم استلام شكواك/مقترحك بنجاح وسيدرسها مجلس إدارة مستشفى الياسين! شكراً لك.");
-            document.getElementById('complaintForm').reset();
+
+            // 1. جلب بيانات المريض الحالية المخزنة في المتصفح عند تسجيل دخوله
+            const patientName = localStorage.getItem('currentPatientName') || 'مريض غير معروف';
+            const patientPhone = localStorage.getItem('currentPatientPhone') || 'بدون رقم';
+
+            // 2. جلب النص الذي كتبه المريض في حقل الشكوى
+            const complaintInput = document.getElementById('complaintText');
+
+            if (!complaintInput || !complaintInput.value.trim()) {
+                alert("⚠️ الرجاء كتابة نص الشكوى أو المقترح أولاً قبل الإرسال.");
+                return;
+            }
+
+            // 3. تجهيز البيانات لإرسالها في الطلب
+            const data = {
+                patient_name: patientName,
+                patient_phone: patientPhone,
+                complaint_text: complaintInput.value.trim()
+            };
+
+            try {
+                // 4. إرسال البيانات بالـ POST إلى مسار الـ MVC الجديد
+                const response = await fetch('http://localhost:5000/api/complaints/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // 5. نجاح العملية وتنبيه المريض وتفريغ الحقل
+                    alert("تم إرسال شكواك/مقترحك بنجاح وسيدرسها مجلس إدارة المستشفى! 🎉");
+                    document.getElementById('complaintForm').reset();
+                } else {
+                    alert("حدث خطأ أثناء إرسال الشكوى: " + (result.error || "فشل الطلب"));
+                }
+            } catch (err) {
+                console.error(err);
+                alert("❌ تعذر الاتصال بالـ Backend بالكامل! تأكد أن السيرفر يعمل.");
+            }
         });
+
+        // --- دالة جلب الإعلانات ---
+        async function loadAnnouncements() {
+            const res = await fetch('http://localhost:5000/api/announcements');
+            const data = await res.json();
+            const board = document.getElementById('announcementsBoard');
+            board.innerHTML = data.map(ann => `
+            <div class="notice-board">📌 <b>تنويه الإدارة:</b> ${ann.message}</div>
+        `).join('') || '<p>لا توجد إعلانات حالياً.</p>';
+        }
+
+        // --- دالة إرسال وجلب الشكاوى الخاصة بالمريض ---
+        document.getElementById('complaintForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = document.getElementById('complaintText').value;
+            await fetch('http://localhost:5000/api/complaints/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    patient_name: currentName,
+                    patient_phone: currentPhone,
+                    complaint_text: text
+                })
+            });
+            document.getElementById('complaintForm').reset();
+            loadMyComplaints();
+        });
+
+        async function loadMyComplaints() {
+            const res = await fetch(`http://localhost:5000/api/complaints/patient/${currentPhone}`);
+            const complaints = await res.json();
+            const div = document.getElementById('myComplaints');
+            console.log("عدد الشكاوى التي سيتم عرضها:", complaints.length);
+            console.log("الشكوى الأولى:", complaints[0]);
+            div.innerHTML = complaints.map(c => `
+            <div style="background:#f8fafc; padding:10px; border-radius:6px; margin-bottom:10px; border-right:3px solid #0d9488;">
+                <p style="margin:0 0 5px 0;"><b>أنت:</b> ${c.complaint_text}</p>
+                ${c.admin_reply ? `<p style="margin:0; color:#0284c7; font-size:14px;"><b>رد الإدارة:</b> ${c.admin_reply}</p>` : `<span style="font-size:12px; color:#f59e0b;">⏳ قيد المراجعة</span>`}
+            </div>
+        `).join('');
+        }
 
         function logoutPatient() {
             localStorage.removeItem('currentPatientPhone');
@@ -374,9 +450,11 @@
             window.location.href = 'patient-login.html';
         }
 
-        // تشغيل البوابة فوراً
+        // استدعاء الدوال عند فتح الصفحة
         fetchDoctorsForSelect();
         fetchMyAppointments();
+        loadAnnouncements();
+        loadMyComplaints();
     </script>
 </body>
 

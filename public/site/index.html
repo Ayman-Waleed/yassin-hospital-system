@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+<!-- قسم الهيرو الرئيسي -->
+<section class="yaseen-hero-wrapper">
+  <img class="yaseen-hero-bg" src="pictures/الرئيسية 1.png" alt="خلفية">
+  <div class="yaseen-hero-inner">
+    
+    <div class="yaseen-hero-text">
+      <div class="yaseen-hero-badge"></div>
+      <h1>احجز موعدك<br>الطبي بسهولة</h1>
+      <p>مركز طبي متخصص يقدم خدمات الرعاية الصحية بأعلى معايير الجودة والدقة، بإشراف نخبة من الأطباء المختصين وباستخدام أحدث الأجهزة الطبية لضمان أفضل تجربة علاجية للمرضى.</p>
+    </div>
+    
+    <div class="yaseen-doctor-container">
+      <img src="pictures/الدكتور.png" alt="طبيب" class="yaseen-doctor-img">
+      <a href="about.html" class="yaseen-btn-hero"><i class="fa fa-arrow-left"></i> من نحن</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- الكروت العلوية السريعة -->
+<div class="quick-links">
+  <a href="faq.html" class="quick-card">
+    <div class="qc-img">
+      <img src="pictures/الأسئلة الشائعة.jpg" alt="الأسئلة الشائعة">
+    </div>
+    <div class="qc-label"><i class="fa fa-circle-question"></i> الأسئلة الشائعة</div>
+  </a>
+  <a href="doctors.html" class="quick-card">
+    <div class="qc-img">
+      <img src="pictures/ايهاب احمد.jpg" alt="ابحث عن طبيبك">
+    </div>
+    <div class="qc-label"><i class="fa fa-user-doctor"></i> ابحث عن طبيبك</div>
+  </a>
+  <a href="clinics.html" class="quick-card">
+    <div class="qc-img">
+      <img src="pictures/عيادات.jpg" alt="تصفح العيادات">
+    </div>
+    <div class="qc-label"><i class="fa fa-hospital"></i> تصفح العيادات</div>
+  </a>
+  <a href="booking.html" class="quick-card">
+    <div class="qc-img">
+      <img src="pictures/دكتورة.png" alt="احجز موعدك">
+    </div>
+    <div class="qc-label"><i class="fa fa-calendar-check"></i> احجز موعدك</div>
+  </a>
+</div>
+
+<!-- قسم الإعلانات -->
+<section class="announcements-section">
+  <h2 class="section-title">الاعلانات</h2>
+  <div class="slider-wrapper">
+    <div class="slider-track" id="sliderTrack">
+      <div class="slide"><img src="pictures/اعلان 1.jpg" alt="إعلان 1"></div>
+      <div class="slide"><img src="pictures/اعلان2.jpg" alt="إعلان 2"></div>
+      <div class="slide"><img src="pictures/اعلان 3.jpg" alt="إعلان 3"></div>
+    </div>
+  </div>
+  <div class="slider-dots">
+    <div class="dot active" onclick="goToSlide(0)"></div>
+    <div class="dot" onclick="goToSlide(1)"></div>
+    <div class="dot" onclick="goToSlide(2)"></div>
+  </div>
+  <a href="announcements.html" class="btn-details"><i class="fa fa-arrow-left"></i> شاهد التفاصيل</a>
+</section>
+
+<!-- عنوان جدول المواعيد -->
+<div class="schedule-title-wrap" id="schedule">
+  <h2 class="section-title">مواعيد الدوام اليوم</h2>
+</div>
+
+<!-- قسم المواعيد المطور بصرياً بالكامل -->
+<section class="schedule-section">
+  <!-- العمود الأول -->
+  <div class="schedule-card">
+    <div class="schedule-header">
+      <i class="fa-regular fa-calendar-days"></i>جدول مواعيد اليوم
+    </div>
+    <div class="schedule-body">
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/احمد محمود.jpg" alt="د. أحمد محمود">
+          <div class="doctor-info">
+            <div class="name">أحمد محمود</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة العيون</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/مرتضى يونس.jpg" alt="د. مرتضى يونس">
+          <div class="doctor-info">
+            <div class="name">مرتضى يونس</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة العلاج الطبيعي</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/احمد جميل.jpg" alt="د. أحمد جميل">
+          <div class="doctor-info">
+            <div class="name">أحمد جميل</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة الأطفال</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/عرفات مرزوق.jpg" alt="د. عرفات مرزوق">
+          <div class="doctor-info">
+            <div class="name">عرفات مرزوق</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة المسالك البولية</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/ياسين محمد.jpg" alt="د. ياسين محمد">
+          <div class="doctor-info">
+            <div class="name">ياسين محمد</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة الأسنان</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/مرزوق الفرا.jpg" alt="د. مرزوق الفرا">
+          <div class="doctor-info">
+            <div class="name">مرزوق الفرا</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة العظام</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- العمود الثاني -->
+  <div class="schedule-card">
+    <div class="schedule-header">
+      <i class="fa-regular fa-calendar-days"></i> جدول مواعيد اليوم 
+    </div>
+    <div class="schedule-body">
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/محمد صقر.jpg" alt="د. محمد صقر">
+          <div class="doctor-info">
+            <div class="name">محمد صقر</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة القلب</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/ايهاب احمد.jpg" alt="د. إيهاب أحمد">
+          <div class="doctor-info">
+            <div class="name">إيهاب أحمد</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة الباطنة</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/احمد محمد.jpg" alt="د. أحمد محمد">
+          <div class="doctor-info">
+            <div class="name">أحمد محمد</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة الصدرية</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/نور مرتجى.jpg" alt="د. نور مرتجى">
+          <div class="doctor-info">
+            <div class="name">نور مرتجى</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة الجلدية</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/احمد مرتجى.jpg" alt="د. أحمد مرتجى">
+          <div class="doctor-info">
+            <div class="name">أحمد مرتجى</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة الأذن</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+      <div class="doctor-row">
+        <div class="doctor-profile">
+          <img src="pictures/يونس اشرف.jpg" alt="د. يونس أشرف">
+          <div class="doctor-info">
+            <div class="name">يونس أشرف</div>
+            <div class="clinic"><i class="fa-solid fa-stethoscope"></i> عيادة الغدد</div>
+          </div>
+        </div>
+        <span class="time-badge"><i class="fa-regular fa-clock"></i> 8:00 - 2:00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- قسم الإحصائيات الفخم الجديد بلون المَنت الطبي الهادئ وترتيب أفقي طائر -->
+<section class="stats-section">
+  <div class="stats-inner">
+    
+    <div class="stat-item">
+      <div class="stat-icon-wrap">
+        <i class="fa-solid fa-hospital-user"></i>
+      </div>
+      <div class="stat-content">
+        <span class="number">550</span>
+        <span class="label">مراجع يومياً</span>
+      </div>
+    </div>
+
+    <div class="stat-item">
+      <div class="stat-icon-wrap">
+        <i class="fa-solid fa-house-medical"></i>
+      </div>
+      <div class="stat-content">
+        <span class="number">12</span>
+        <span class="label">عيادة طبية</span>
+      </div>
+    </div>
+
+    <div class="stat-item">
+      <div class="stat-icon-wrap">
+        <i class="fa-solid fa-user-doctor"></i>
+      </div>
+      <div class="stat-content">
+        <span class="number">30</span>
+        <span class="label">طبيب مختص</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- الفوتر الكامل للموقع -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

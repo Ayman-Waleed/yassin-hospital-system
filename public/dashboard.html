@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* تصميم شاشة الترحيب بكامل الشاشة */
@@ -111,33 +112,43 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            display: flex;
+            direction: rtl;
         }
 
-        header {
+        /* تنسيق الهيدر المطور داخل المحتوى */
+        .main-header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: var(--white);
-            padding: 20px 40px;
+            padding: 20px 30px;
             box-shadow: var(--shadow);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-radius: var(--radius);
+            margin-bottom: 30px;
         }
 
-        header h1 {
+        .main-header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+        /* غلاف المحتوى الأيسر الرئيسي */
+        .main-content {
+            margin-right: 260px;
+            /* مسافة لحماية شريط القائمة الجانبية */
+            flex: 1;
+            padding: 30px;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
         }
@@ -191,6 +202,8 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             margin-bottom: 40px;
+            scroll-margin-top: 30px;
+            /* يعطي مساحة علوية مريحة عند النقر على روابط السايدبار */
         }
 
         .section-header {
@@ -230,6 +243,7 @@
         }
 
         .table-responsive {
+            width: 100%;
             overflow-x: auto;
         }
 
@@ -242,69 +256,73 @@
         th {
             background-color: #f8fafc;
             color: var(--text-muted);
-            padding: 16px;
+            padding: 14px;
             font-weight: 600;
             font-size: 14px;
-            border-bottom: 2px solid #edf2f7;
+            border-bottom: 2px solid #e2e8f0;
         }
 
         td {
-            padding: 16px;
-            border-bottom: 1px solid #f1f5f9;
+            padding: 16px 14px;
+            border-bottom: 1px solid #edf2f7;
             font-size: 15px;
-            color: var(--text-main);
-            vertical-align: middle;
+            color: #334155;
         }
 
-        tr:hover td {
+        tr:hover {
             background-color: #f8fafc;
         }
 
         .doctor-img {
-            width: 45px;
-            height: 45px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #e2e8f0;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
         }
 
         .actions-btn {
             border: none;
             padding: 6px 12px;
             border-radius: 6px;
-            cursor: pointer;
             font-family: 'Cairo', sans-serif;
             font-weight: 600;
+            cursor: pointer;
             font-size: 13px;
-            margin-left: 5px;
             transition: opacity 0.2s;
         }
 
         .actions-btn:hover {
-            opacity: 0.9;
+            opacity: 0.85;
         }
 
-        .btn-success {
-            background-color: #d1fae5;
-            color: #065f46;
+        /* تنسيق عناصر قائمة السايدبار الحيوية */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .btn-danger {
-            background-color: #fee2e2;
-            color: #991b1b;
-        }
-
-        .btn-secondary {
-            background-color: #f1f5f9;
-            color: #475569;
-        }
-
-        .status-badge {
-            padding: 4px 10px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            display: inline-block;
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            background-color: #1e293b;
+            color: #38bdf8;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -314,51 +332,110 @@
     <div id="splash-screen">
         <div class="splash-content">
             <div class="splash-logo">🏥</div>
-            <h1 class="splash-title">مستشفى الياسين الإفتراضي</h1>
-            <p class="splash-subtitle">رعاية طبية متميزة على مدار الساعة</p>
+            <div class="splash-title">مستشفى الياسين الإلكتروني</div>
+            <div class="splash-subtitle">نظام إدارة العيادات والمواعيد الطبية الحية</div>
             <div class="splash-loader"></div>
         </div>
     </div>
 
-    <header>
-        <h1>لوحة تحكم مستشفى الياسين 🏥</h1>
-        <div style="display: flex; align-items: center; gap: 20px;">
-            <div style="font-size: 14px; opacity: 0.9;">مرحباً بك مجدداً، المسؤول الإداري</div>
-            <button onclick="logoutAdmin()"
-                style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-family: 'Cairo'; font-weight: bold; cursor: pointer;">🚪
-                تسجيل الخروج</button>
-        </div>
-    </header>
+    <div
+        style="width: 260px; height: 100vh; background-color: #0f172a; color: white; position: fixed; top: 0; right: 0; display: flex; flex-direction: column; box-shadow: -2px 0 10px rgba(0,0,0,0.15); z-index: 1000;">
 
-    <div class="container">
+        <div style="padding: 24px; text-align: center; border-bottom: 1px solid #334155;">
+            <h3
+                style="margin: 0; color: #38bdf8; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fa-solid fa-hospital-user"></i> الأدمن المسؤول
+            </h3>
+            <span style="font-size: 12px; color: #94a3b8; letter-spacing: 0.5px; display: block; margin-top: 4px;">لوحة
+                الإدارة الشاملة</span>
+        </div>
+
+        <div style="flex: 1; padding: 25px 15px; display: flex; flex-direction: column; gap: 10px;">
+
+            <a href="dashboard.html" class="sidebar-link active"><i class="fa-solid fa-chart-line"></i> الرئيسية</a>
+            <a href="clinics.html" class="sidebar-link"><i class="fa-solid fa-house-medical-flag"></i> إدارة
+                العيادات</a>
+            <a href="doctors.html" class="sidebar-link"><i class="fa-solid fa-user-doctor"></i> إدارة الأطباء</a>
+            <a href="appointments.html" class="sidebar-link"><i class="fa-solid fa-calendar-check"></i> إدارة
+                الحجوزات</a>
+            <a href="complaints.html" class="sidebar-link"><i class="fa-solid fa-comments"></i> إدارة الشكاوى</a>
+            <a href="announcements.html" class="sidebar-link"><i class="fa-solid fa-bullhorn"></i> إدارة الإعلانات</a>
+
+            <hr style="border: 0; border-top: 1px solid #1e293b; margin: 15px 0; width: 100%;">
+
+            <a href="patient-dashboard.html" target="_blank" class="sidebar-link" style="color: #34d399;"
+                onmouseover="this.style.color='#6ee7b7'" onmouseout="this.style.color='#34d399'">
+                <i class="fa-solid fa-laptop-medical" style="width: 20px; font-size: 16px;"></i> بوابة المريض الرقمية 🌐
+            </a>
+        </div>
+
+        <div style="padding: 20px; border-top: 1px solid #334155; background-color: #0b0f19;">
+            <button onclick="logoutAdmin()"
+                style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #ef4444; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; font-family: 'Cairo', sans-serif; font-size: 14px; transition: 0.2s;"
+                onmouseover="this.style.backgroundColor='#dc2626'" onmouseout="this.style.backgroundColor='#ef4444'">
+                <i class="fa-solid fa-right-from-bracket"></i> تسجيل الخروج للأمان
+            </button>
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <div class="main-header">
+            <div>
+                <h1>لوحة المتابعة الحية لكافة الأقسام</h1>
+                <p style="margin: 5px 0 0 0; font-size: 14px; opacity: 0.85;">مرحباً بك، أدمن نظام مستشفى الياسين
+                    🩺</p>
+            </div>
+        </div>
+
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-info">
-                    <h3>إجمالي العيادات</h3>
-                    <div class="number" id="stat-clinics">0</div>
+                    <h3>إجمالي عيادات المستشفى</h3>
+                    <div id="clinicsCount" class="number">0</div>
                 </div>
-                <div class="stat-icon">🏥</div>
+                <div class="stat-icon" style="color: var(--primary);">🏥</div>
             </div>
             <div class="stat-card">
                 <div class="stat-info">
                     <h3>الأطباء المسجلين</h3>
-                    <div class="number" id="stat-doctors">0</div>
+                    <div id="doctorsCount" class="number">0</div>
                 </div>
-                <div class="stat-icon">👨‍⚕️</div>
+                <div class="stat-icon" style="color: var(--success);">👨‍⚕️</div>
             </div>
             <div class="stat-card">
                 <div class="stat-info">
-                    <h3>طلبات الحجز الحالية</h3>
-                    <div class="number" id="stat-appointments">0</div>
+                    <h3>طلبات المواعيد بالانتظار</h3>
+                    <div id="appointmentsCount" class="number">0</div>
                 </div>
-                <div class="stat-icon">📅</div>
+                <div class="stat-icon" style="color: var(--warning);">📅</div>
             </div>
         </div>
 
-        <div class="section-card">
+        <div id="clinics-section" class="section-card">
             <div class="section-header">
-                <h2>إدارة الأطباء المتواجدين</h2>
-                <a href="add-doctor.html" class="btn-primary">➕ إضافة طبيب جديد</a>
+                <h2>أقسام وعيادات المستشفى</h2>
+                <a href="clinics.html" class="btn-primary">⚙️ التحكم بالعيادات</a>
+            </div>
+            <div class="table-responsive">
+                <table id="clinicsTable">
+                    <thead>
+                        <tr>
+                            <th>رقم العيادة</th>
+                            <th>اسم العيادة الرسمية</th>
+                            <th>حالة القسم</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="doctors-section" class="section-card">
+            <div class="section-header">
+                <h2>الأطباء المتواجدين</h2>
+                <a href="doctors.html" class="btn-primary">⚙️ التحكم بالأطباء</a>
             </div>
             <div class="table-responsive">
                 <table id="doctorsTable">
@@ -368,18 +445,18 @@
                             <th>الصورة</th>
                             <th>اسم الطبيب</th>
                             <th>التخصص الدراسي</th>
-                            <th>العيادة التابع لها</th>
-                            <th>العمليات</th>
+                            <th>العيادة</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
 
-        <div class="section-card">
+        <div id="appointments-section" class="section-card">
             <div class="section-header">
-                <h2>جدول طلبات الحجوزات الحية</h2>
+                <h2>جدول طلبات الحجوزات الحية للمرضى</h2>
             </div>
             <div class="table-responsive">
                 <table id="appointmentsTable">
@@ -387,23 +464,25 @@
                         <tr>
                             <th>الرقم</th>
                             <th>اسم المريض</th>
-                            <th>اسم الطبيب</th>
-                            <th>التاريخ والوقت</th>
-                            <th>الحالة</th>
-                            <th>العمليات</th>
+                            <th>اسم الطبيب المطلوب</th>
+                            <th>التاريخ والوقت المحجوز</th>
+                            <th>حالة الطلب حالياً</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
+
     </div>
 
     <div id="editDoctorModal"
-        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
         <div
             style="background:white; padding:30px; border-radius:12px; width:400px; box-shadow:0 5px 15px rgba(0,0,0,0.3); position:relative;">
-            <h3 style="margin-top:0; border-bottom:2px solid #f1f5f9; padding-bottom:10px;">✏️ تعديل بيانات الطبيب</h3>
+            <h3 style="margin-top:0; border-bottom:2px solid #f1f5f9; padding-bottom:10px; font-family:'Cairo';">✏️
+                تعديل بيانات الطبيب</h3>
             <form id="editDoctorForm">
                 <input type="hidden" id="editDoctorId">
                 <input type="hidden" id="editDoctorOldImage">
@@ -411,30 +490,32 @@
                 <div style="margin-bottom:15px;">
                     <label style="display:block; margin-bottom:5px; font-weight:bold;">اسم الطبيب</label>
                     <input type="text" id="editDoctorName"
-                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;" required>
+                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-family:'Cairo';"
+                        required>
                 </div>
                 <div style="margin-bottom:15px;">
                     <label style="display:block; margin-bottom:5px; font-weight:bold;">التخصص</label>
                     <input type="text" id="editDoctorSpec"
-                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; background-color: #f1f5f9; cursor: not-allowed;"
+                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; background-color: #f1f5f9; cursor: not-allowed; font-family:'Cairo';"
                         readonly>
                 </div>
                 <div style="margin-bottom:15px;">
                     <label style="display:block; margin-bottom:5px; font-weight:bold;">العيادة</label>
                     <select id="editDoctorClinic"
-                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px;" required>
+                        style="width:100%; padding:8px; border:1px solid #cbd5e1; border-radius:6px; font-family:'Cairo';"
+                        required>
                     </select>
                 </div>
                 <div style="margin-bottom:20px;">
                     <label style="display:block; margin-bottom:5px; font-weight:bold;">تغيير الصورة (اختياري)</label>
-                    <input type="file" id="editDoctorImage" accept="image/*" style="width:100%;">
+                    <input type="file" id="editDoctorImage" accept="image/*" style="width:100%; font-family:'Cairo';">
                 </div>
 
                 <div style="display:flex; gap:10px; justify-content:flex-end;">
                     <button type="button" onclick="closeEditModal()"
-                        style="background:#64748b; color:white; border:none; padding:8px 16px; border-radius:6px; cursor:pointer;">إلغاء</button>
+                        style="background:#64748b; color:white; border:none; padding:8px 16px; border-radius:6px; cursor:pointer; font-family:'Cairo'; font-weight:bold;">إلغاء</button>
                     <button type="submit"
-                        style="background:#0d9488; color:white; border:none; padding:8px 16px; border-radius:6px; cursor:pointer; font-weight:bold;">حفظ
+                        style="background:#0284c7; color:white; border:none; padding:8px 16px; border-radius:6px; cursor:pointer; font-family:'Cairo'; font-weight:bold;">حفظ
                         التعديلات</button>
                 </div>
             </form>
@@ -442,48 +523,68 @@
     </div>
 
     <script>
-
-        // جدار الحماية للأدمن + إدارة شاشة الترحيب
-        document.addEventListener("DOMContentLoaded", function () {
-            // 🔒 1. فحص هل قام الأدمن بتسجيل الدخول؟
-            if (localStorage.getItem('adminLoggedIn') !== 'true') {
-                // إذا لم يسجل دخول، يتم طرده فوراً إلى صفحة تسجيل الدخول
-                window.location.href = 'login.html';
-                return; // إيقاف تنفيذ أي كود آخر
-            }
-
-            // ✨ 2. إدارة شاشة الترحيب (Splash Screen)
-            const splash = document.getElementById("splash-screen");
-            if (!sessionStorage.getItem("splashShown")) {
-                setTimeout(() => {
-                    splash.classList.add("splash-fade-out");
-                    sessionStorage.setItem("splashShown", "true");
-                }, 2500);
-            } else {
-                splash.style.display = "none";
-            }
-        });
-
-        function logoutAdmin() {
-            localStorage.removeItem('adminLoggedIn');
+        // جدار الحماية الأمني لمنع الدخول العشوائي دون تسجيل دخول الإدارة
+        if (localStorage.getItem('adminLoggedIn') !== 'true') {
             window.location.href = 'login.html';
         }
 
-        // دالة جلب الإحصائيات الحية
-        async function loadDashboardStats() {
-            try {
-                const response = await fetch('http://localhost:5000/api/dashboard/stats');
-                const stats = await response.json();
-                document.getElementById('stat-clinics').innerText = stats.clinics;
-                document.getElementById('stat-doctors').innerText = stats.doctors;
-                document.getElementById('stat-appointments').innerText = stats.appointments;
-            } catch (err) {
-                console.error("خطأ في تحميل الإحصائيات:", err);
+        // دالة تسجيل الخروج وتصفير الجلسة
+        function logoutAdmin() {
+            if (confirm("هل أنت متأكد من رغبتك في تسجيل الخروج وتأمين اللوحة؟ 🚪")) {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.href = 'login.html';
             }
         }
 
-        // دالة جلب وعرض الأطباء
-        async function loadDoctors() {
+        // إخفاء شاشة الترحيب (Splash Screen) بعد انتهاء التحميل الكامل
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const splash = document.getElementById('splash-screen');
+                if (splash) {
+                    splash.classList.add('splash-fade-out');
+                    setTimeout(() => splash.remove(), 500);
+                }
+            }, 1000); // تظهر لمدة ثانية بنقاء كامل
+        });
+
+        // 1. جلب وتعبئة أرقام الكروت الحية من السيرفر
+        async function loadDashboardStats() {
+            try {
+                const response = await fetch('http://localhost:5000/api/appointments/stats');
+                const stats = await response.json();
+                document.getElementById('clinicsCount').innerText = stats.clinics || 0;
+                document.getElementById('doctorsCount').innerText = stats.doctors || 0;
+                document.getElementById('appointmentsCount').innerText = stats.appointments || 0;
+            } catch (err) {
+                console.error("خطأ في تحميل أرقام الإحصائيات:", err);
+            }
+        }
+
+        // 2. جلب عيادات المستشفى وعرضها داخل الجدول المخصص لها
+        async function loadClinicsTable() {
+            try {
+                const response = await fetch('http://localhost:5000/api/clinics');
+                const clinics = await response.json();
+                const tbody = document.querySelector('#clinicsTable tbody');
+                tbody.innerHTML = '';
+
+                clinics.forEach(clinic => {
+                    const row = `
+                        <tr>
+                            <td style="font-weight:700;">#${clinic.id}</td>
+                            <td style="font-weight:600; color:var(--primary);">${clinic.name}</td>
+                            <td><span class="status-badge" style="background-color: #d1fae5; color: #065f46;">نشط بالكامل ✅</span></td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += row;
+                });
+            } catch (err) {
+                console.error("خطأ في تحميل جدول العيادات:", err);
+            }
+        }
+
+        // 3. جلب جميع الأطباء وبناء أسطر الجدول مع زر التعديل المطور وزر الحذف
+        async function loadDoctorsTable() {
             try {
                 const response = await fetch('http://localhost:5000/api/doctors');
                 const doctors = await response.json();
@@ -499,22 +600,18 @@
                             <td style="font-weight: 600;">${doc.name}</td>
                             <td>${doc.specialization}</td>
                             <td><span class="status-badge" style="background-color: #e0f2fe; color: #0369a1;">${doc.clinic_name || 'غير محدد'}</span></td>
-                            <td>
-                                <button onclick="openEditModal(${doc.id}, '${doc.name}', '${doc.specialization}', ${doc.clinic_id}, '${doc.image_url}')" style="background:#f59e0b; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; margin-left:5px;">تعديل ✏️</button>
-                                <button onclick="deleteDoctor(${doc.id})" class="actions-btn btn-danger">🗑️ حذف</button>
-                            </td>
                         </tr>
                     `;
                     tbody.innerHTML += row;
                 });
             } catch (err) {
-                console.error("خطأ في جلب الأطباء:", err);
+                console.error("خطأ في جلب بيانات الأطباء:", err);
             }
         }
 
-        // دالة حذف طبيب
+        // دالة حذف الطبيب
         async function deleteDoctor(id) {
-            if (confirm('هل أنت متأكد من حذف هذا الطبيب نهائياً؟')) {
+            if (confirm("هل أنت متأكد تماماً من حذف هذا الطبيب نهائياً من كادر المستشفى؟")) {
                 try {
                     const response = await fetch('http://localhost:5000/api/doctors/delete', {
                         method: 'POST',
@@ -523,16 +620,17 @@
                     });
                     const result = await response.json();
                     if (result.success) {
-                        document.getElementById(`doc-row-${id}`).remove();
+                        alert("تم حذف الطبيب بنجاح وتحديث النظام.");
+                        loadDoctorsTable();
                         loadDashboardStats();
                     }
                 } catch (err) {
-                    alert("حدث خطأ أثناء حذف الطبيب");
+                    alert("خطأ أثناء عملية الحذف.");
                 }
             }
         }
 
-        // دالة جلب وعرض طلبات الحجوزات
+        // 4. جلب طلبات المواعيد الحية والتحكم بحالتها
         async function loadAppointments() {
             try {
                 const response = await fetch('http://localhost:5000/api/appointments');
@@ -541,44 +639,27 @@
                 tbody.innerHTML = '';
 
                 appointments.forEach(app => {
-                    const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' };
-                    const formattedDate = new Date(app.appointment_date).toLocaleString('ar-EG', dateOptions);
-                    const currentStatus = app.status ? app.status.toString().trim().toLowerCase() : 'pending';
+                    let badgeStyle = "background:#fef3c7; color:#d97706;"; // pending
+                    let displayStatus = "قيد المراجعة ⏳";
 
-                    let badgeStyle = '';
-                    let statusText = '';
-                    let showButtons = false;
-
-                    if (currentStatus === 'pending' || currentStatus === 'معلق' || currentStatus === 'قيد الانتظار') {
-                        badgeStyle = 'background-color: #fef3c7; color: #d97706;';
-                        statusText = 'قيد الانتظار';
-                        showButtons = true;
-                    } else if (currentStatus === 'confirmed' || currentStatus === 'مقبول') {
-                        badgeStyle = 'background-color: #d1fae5; color: #059669;';
-                        statusText = 'مؤكد';
-                    } else if (currentStatus === 'rejected' || currentStatus === 'مرفوض') {
-                        badgeStyle = 'background-color: #fee2e2; color: #dc2626;';
-                        statusText = 'مرفوض';
-                    } else {
-                        badgeStyle = 'background-color: #f1f5f9; color: #475569;';
-                        statusText = app.status;
-                        showButtons = true;
+                    if (app.status === 'Confirmed') {
+                        badgeStyle = "background:#d1fae5; color:#065f46;";
+                        displayStatus = "مقبول ومثبت ✅";
+                    } else if (app.status === 'Rejected') {
+                        badgeStyle = "background:#fee2e2; color:#991b1b;";
+                        displayStatus = "مرفوض ❌";
                     }
 
+                    // تنسيق التاريخ والوقت
+                    const formattedDate = app.appointment_date ? app.appointment_date.replace('T', ' ').substring(0, 16) : 'غير محدد';
+
                     const row = `
-                        <tr id="app-row-${app.id}">
+                        <tr>
                             <td>${app.id}</td>
                             <td style="font-weight:600;">${app.patient_name}</td>
-                            <td>${app.doctor_name || 'غير محدد'}</td>
-                            <td dir="ltr">${formattedDate}</td>
-                            <td><span class="status-badge" style="${badgeStyle}">${statusText}</span></td>
-                            <td>
-                                ${showButtons ? `
-                                    <button onclick="updateStatus(${app.id}, 'مقبول')" class="actions-btn" style="cursor:pointer; background:#10b981; color:white; border:none; padding:6px 12px; margin-left:5px; border-radius:4px;">👍 قبول</button>
-                                    <button onclick="updateStatus(${app.id}, 'مرفوض')" class="actions-btn" style="cursor:pointer; background:#ef4444; color:white; border:none; padding:6px 12px; margin-left:5px; border-radius:4px;">👎 رفض</button>
-                                ` : ''}
-                                <button onclick="deleteAppointment(${app.id})" class="actions-btn" style="cursor:pointer; background:#64748b; color:white; border:none; padding:6px 12px; border-radius:4px;">🗑️ حذف</button>
-                            </td>
+                            <td>👨‍⚕️ ${app.doctor_name || 'غير محدد'}</td>
+                            <td style="direction:ltr; font-family:monospace; font-weight:bold;">${formattedDate}</td>
+                            <td><span class="status-badge" style="${badgeStyle}">${displayStatus}</span></td>
                         </tr>
                     `;
                     tbody.innerHTML += row;
@@ -588,7 +669,7 @@
             }
         }
 
-        // دالة تحديث الحالة
+        // دالة تحديث حالة الحجز
         async function updateStatus(id, status) {
             try {
                 const response = await fetch('http://localhost:5000/api/appointments/update-status', {
@@ -596,7 +677,6 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ id, status })
                 });
-
                 if (response.ok) {
                     const result = await response.json();
                     if (result.success) {
@@ -606,41 +686,33 @@
                     } else {
                         alert("فشل في تحديث الحالة: " + result.error);
                     }
-                } else {
-                    alert("خطأ في استجابة السيرفر: " + response.status);
                 }
             } catch (err) {
-                console.error("خطأ أثناء تحديث الحالة:", err);
-                alert("حدث خطأ في الاتصال بالسيرفر");
+                alert("خطأ في الاتصال بالسيرفر لتغيير حالة الحجز.");
             }
         }
 
-        // دالة حذف الحجز نهائياً
+        // دالة حذف حجز موعد
         async function deleteAppointment(id) {
-            if (confirm('هل أنت متأكد من حذف هذا الموعد؟')) {
+            if (confirm("هل تريد حذف هذا الموعد نهائياً من الأرشيف؟")) {
                 try {
                     const response = await fetch('http://localhost:5000/api/appointments/delete', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ id })
                     });
-                    const result = await response.json();
-                    if (result.success) {
-                        document.getElementById(`app-row-${id}`).remove();
+                    if (response.ok) {
+                        alert("تم حذف الموعد بنجاح 🗑️");
+                        loadAppointments();
                         loadDashboardStats();
                     }
                 } catch (err) {
-                    alert("حدث خطأ أثناء الحذف");
+                    alert("خطأ أثناء حذف الموعد.");
                 }
             }
         }
 
-        // استدعاء جلب البيانات فوراً عند بدء تحميل الواجهة
-        loadDashboardStats();
-        loadDoctors();
-        loadAppointments();
-
-        // فتح نافذة التعديل وتعبئة البيانات الحالية ديناميكياً
+        // ================= دوال الـ Modal الخاصة بتعديل الطبيب =================
         async function openEditModal(id, name, spec, clinicId, imageUrl) {
             document.getElementById('editDoctorId').value = id;
             document.getElementById('editDoctorName').value = name;
@@ -648,28 +720,22 @@
             document.getElementById('editDoctorOldImage').value = imageUrl;
 
             const clinicSelect = document.getElementById('editDoctorClinic');
-            clinicSelect.innerHTML = '<option value="">-- جاري تحميل العيادات... --</option>';
+            clinicSelect.innerHTML = '<option value="" disabled selected>-- جاري تحميل العيادات... --</option>';
 
             try {
-                // 1. جلب العيادات من السيرفر لملء القائمة المنسدلة
                 const response = await fetch('http://localhost:5000/api/clinics');
                 const clinics = await response.json();
 
-                clinicSelect.innerHTML = '<option value="" disabled selected>-- اختر العيادة --</option>';
-
+                clinicSelect.innerHTML = '<option value="" disabled>-- اختر العيادة --</option>';
                 clinics.forEach(clinic => {
-                    // نضع اسم العيادة كـ data attribute لنقله للتخصص لاحقاً
                     clinicSelect.innerHTML += `<option value="${clinic.id}" data-name="${clinic.name}">${clinic.name}</option>`;
                 });
 
-                // 2. تحديد العيادة الحالية للطبيب بدقة
                 clinicSelect.value = clinicId;
 
-                // 3. تفعيل ميزة التغيير التلقائي للتخصص بناءً على العيادة المختارة
                 clinicSelect.onchange = function () {
                     const selectedOption = clinicSelect.options[clinicSelect.selectedIndex];
                     if (selectedOption && selectedOption.value !== "") {
-                        // نأخذ اسم العيادة (مثل: الجراحة) ونضعه كـ تخصص تلقائي
                         const clinicName = selectedOption.getAttribute('data-name');
                         document.getElementById('editDoctorSpec').value = clinicName;
                     } else {
@@ -679,10 +745,9 @@
 
             } catch (err) {
                 console.error("خطأ في جلب العيادات للتعديل:", err);
-                clinicSelect.innerHTML = '<option value="">فشل تحميل العيادات</option>';
+                clinicSelect.innerHTML = '<option value="" disabled>فشل تحميل العيادات</option>';
             }
 
-            // عرض النافذة المنبثقة
             document.getElementById('editDoctorModal').style.display = 'flex';
         }
 
@@ -691,7 +756,6 @@
             document.getElementById('editDoctorForm').reset();
         }
 
-        // معالجة إرسال التعديلات للسيرفر
         document.getElementById('editDoctorForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -702,29 +766,28 @@
             const imageFile = document.getElementById('editDoctorImage').files[0];
             const oldImage = document.getElementById('editDoctorOldImage').value;
 
-            // بما أننا قد نرفع ملف (صورة)، نستخدم FormData وليس JSON عادي
             const formData = new FormData();
             formData.append('name', name);
             formData.append('specialization', spec);
             formData.append('clinic_id', clinicId);
 
             if (imageFile) {
-                formData.append('image', imageFile); // الصورة الجديدة
+                formData.append('image', imageFile);
             } else {
-                formData.append('image_url', oldImage); // الاحتفاظ بالقديمة
+                formData.append('image_url', oldImage);
             }
 
             try {
                 const response = await fetch(`http://localhost:5000/api/doctors/${id}`, {
                     method: 'PUT',
-                    body: formData // يرسل تلقائياً بـ multipart/form-data
+                    body: formData
                 });
 
                 const result = await response.json();
                 if (response.ok && result.success) {
                     alert(result.message);
                     closeEditModal();
-                    location.reload(); // تحديث الجدول فوراً لرؤية التعديل الجديد
+                    loadDoctorsTable(); // إعادة تحميل الكادر الطبي فوراً دون الحاجة لريفريش كامل الصفحة!
                 } else {
                     alert("فشل التحديث: " + result.message);
                 }
@@ -733,6 +796,14 @@
                 alert("حدث خطأ أثناء الاتصال بالسيرفر لتحديث البيانات.");
             }
         });
+
+        // تشغيل كل الدوال والاتصالات الحية فور تحميل الصفحة
+        window.onload = function () {
+            loadDashboardStats();
+            loadClinicsTable();
+            loadDoctorsTable();
+            loadAppointments();
+        };
     </script>
 </body>
 

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العيادات - الياسين الطبي</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar" id="sidebar-nav"></nav>
+        <div class="main-content">
+            <header>
+                <h2>إدارة العيادات والأقسام</h2>
+                <div class="user-info">مرحباً، مدير النظام</div>
+            </header>
+            
+            <div class="table-container animate-fade-in">
+                <div class="table-header">
+                    <h3>إدارة الأقسام والعيادات</h3>
+                    <button class="btn btn-add" onclick="openModal('add-clinic-modal')">+ إضافة عيادة</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>كود العيادة</th>
+                            <th>اسم العيادة</th>
+                            <th>الطابق</th>
+                            <th>رئيس القسم</th>
+                            <th>العمليات</th>
+                        </tr>
+                    </thead>
+                    <!-- أُضيف للربط مع الباك اند: الصفوف تتعبأ من قاعدة البيانات -->
+                    <tbody id="clinics-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <footer>
+                <span class="footer-brand">الياسين الطبي © 2026</span>
+                <span class="footer-copy">All rights reserved. Designed for Al-Yaseen Medical system.</span>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal: Add Clinic -->
+    <div class="modal-overlay" id="add-clinic-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>إضافة عيادة جديدة</h3>
+                <button class="modal-close" onclick="closeModal('add-clinic-modal')">&times;</button>
+            </div>
+            <form id="add-clinic-form" onsubmit="saveClinic(event)">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label>كود العيادة</label>
+                        <input type="text" id="clinic-code" required placeholder="مثال: CARD-03">
+                    </div>
+                    <div class="input-group">
+                        <label>اسم العيادة</label>
+                        <input type="text" id="clinic-name" required placeholder="مثال: عيادة الباطنية">
+                    </div>
+                    <div class="input-group">
+                        <label>الطابق</label>
+                        <input type="text" id="clinic-floor" required placeholder="مثال: الأول">
+                    </div>
+                    <div class="input-group">
+                        <label>رئيس القسم</label>
+                        <input type="text" id="clinic-head" required placeholder="مثال: د. مازن سليمان">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-delete" onclick="closeModal('add-clinic-modal')">إلغاء</button>
+                    <button type="submit" class="btn btn-add">حفظ البيانات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

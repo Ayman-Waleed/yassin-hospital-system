@@ -1,0 +1,282 @@
+/* ===== CLINICS HERO (نفس تصميم about) ===== */
+.clinics-hero {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+  background: #6a8fc8;
+  display: flex;
+  align-items: center;
+}
+
+.clinics-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.clinics-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  min-height: 280px;
+}
+
+/* النص في المنتصف */
+.clinics-hero-text {
+  flex: 1;
+  text-align: center;
+}
+
+.clinics-hero-text h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.clinics-hero-text p {
+  color: rgba(255,255,255,0.95);
+  font-size: 0.9rem;
+  line-height: 2;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* الصورة الدائرية على اليمين */
+.clinics-hero-img {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  order: -1;
+}
+
+.circle-img-wrap {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.6);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+}
+
+.circle-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* زر "تصفح العيادات" - لون فاتح */
+.btn-circle-label {
+  background: rgba(255,255,255,0.85);
+  color: var(--primary);
+  padding: 9px 22px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+
+.btn-circle-label:hover {
+  background: #fff;
+  color: var(--primary-dark);
+}
+
+/* ===== بوكس المواعيد - تصميم الصورة الثالثة ===== */
+.schedule-banner {
+  padding: 2rem 2rem 1.8rem;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  background: transparent;
+}
+
+.schedule-banner-inner {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* عنوان "تصفح مواعيد دوام العيادات" كبوكس/زر كبير أزرق */
+.schedule-banner h2 {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--white);
+  background: #4a6fa5;
+  padding: 0.9rem 2.5rem;
+  border-radius: 35px;
+  display: inline-block;
+  margin: 0;
+  box-shadow: 0 4px 18px rgba(74,111,165,0.25);
+}
+
+/* زر "انقر هنا" - أصغر تحت العنوان */
+.btn-schedule {
+  display: inline-block;
+  background: #fff;
+  color: #4a6fa5;
+  border: 2.5px solid #7ab0d4;
+  padding: 8px 42px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 2px 10px rgba(74,111,165,0.15);
+}
+
+.btn-schedule:hover {
+  background: #7ab0d4;
+  color: #fff;
+}
+
+/* ===== شبكة العيادات ===== */
+.clinics-grid-section {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+}
+
+.clinics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.clinic-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(100,160,200,0.12);
+  border: 1px solid #d5e8f5;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.clinic-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(100,160,200,0.22);
+}
+
+.clinic-img {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.clinic-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.clinic-card:hover .clinic-img img {
+  transform: scale(1.06);
+}
+
+.clinic-info {
+  padding: 1rem 1.2rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.clinic-name {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: #1e3a52;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.clinic-name i {
+  color: #5a8eb0;
+  font-size: 0.9rem;
+}
+
+.btn-book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #7ab0d4;
+  color: #fff;
+  padding: 8px 0;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s;
+  width: 100%;
+  border: 2px solid #7ab0d4;
+}
+
+.btn-book:hover {
+  background: #fff;
+  color: #7ab0d4;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .clinics-grid { grid-template-columns: repeat(2, 1fr); }
+  .clinics-hero-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+  .clinics-hero-img { order: 0; }
+  .clinics-hero-text h1 { font-size: 2rem; }
+}
+
+@media (max-width: 600px) {
+  .clinics-grid { grid-template-columns: 1fr; }
+  .clinics-hero-text h1 { font-size: 1.6rem; }
+  .schedule-banner h2 { font-size: 1.2rem; padding: 0.8rem 1.5rem; }
+}
+
+
+.clinics-hero .hero-bg { display: none !important; }
+
+/* ===== WAVY BOTTOM ===== */
+.clinics-hero {
+  padding-bottom: 55px !important;
+  clip-path: none !important;
+  overflow: visible !important;
+}
+.clinics-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 55' preserveAspectRatio='none'%3E%3Cpath d='M0,20 C240,55 480,0 720,28 C960,55 1200,5 1440,22 L1440,55 L0,55 Z' fill='%23f5f8ff'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: 100% 100%;
+  z-index: 10;
+  pointer-events: none;
+}

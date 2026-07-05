@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>حجز تذكرة - موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="booking.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+<!-- HERO حجز تذكرة -->
+<section class="booking-hero">
+  <img class="hero-bg" src="pictures/الرئيسية 1.png" alt="خلفية">
+  <div class="booking-hero-inner">
+
+    <!-- النص في المنتصف -->
+    <div class="booking-hero-text">
+      <div class="hero-badge"></div>
+      <h1>حجز تذكرة</h1>
+      <p>احجز موعدك بسهولة من خلال إدخال بياناتك أدناه<br>سيتم تأكيد الحجز فور الإرسال</p>
+    </div>
+
+    <!-- صورة الدكتورة الدائرية على اليمين -->
+    <div class="booking-hero-img">
+      <div class="circle-img-wrap">
+        <img src="Pictures/تجمع من نحن.jpg" alt="احجز موعدك">
+      </div>
+      <a href="#booking-form" class="btn-circle-label">
+        <i class="fa fa-calendar-check"></i> احجز موعدك
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- فورم الحجز -->
+<section class="booking-section" id="booking-form">
+  <div class="booking-card">
+
+    <!-- صورة إشعار الحجز على اليسار -->
+    <div class="booking-img-side">
+      <img src="pictures/اشعار الحجز.png" alt="حجز موعد">
+    </div>
+
+    <!-- حقول الفورم على اليمين -->
+    <div class="booking-form-side">
+
+      <div class="booking-input-wrap">
+        <i class="fa fa-user"></i>
+        <input type="text" class="booking-input" id="patientName" placeholder="اسم المريض">
+      </div>
+
+      <div class="booking-input-wrap">
+        <i class="fa fa-id-card"></i>
+        <input type="text" class="booking-input" id="patientId" placeholder="رقم الهوية">
+      </div>
+
+      <div class="booking-input-wrap">
+        <i class="fa fa-hospital"></i>
+        <!-- أُضيف للربط مع الباك اند: القائمة تتعبأ من قاعدة البيانات بدل الأسماء الثابتة -->
+        <select class="booking-input" id="clinicSelect" onchange="loadDoctors()">
+          <option value="" disabled selected>العيادة</option>
+        </select>
+      </div>
+
+      <!-- أُضيف للربط مع الباك اند: اختيار الطبيب والتاريخ والوقت المتاح من جداول الدوام -->
+      <div class="booking-input-wrap">
+        <i class="fa fa-user-doctor"></i>
+        <select class="booking-input" id="doctorSelect" onchange="loadSlots()">
+          <option value="" disabled selected>الطبيب</option>
+        </select>
+      </div>
+
+      <div class="booking-input-wrap">
+        <i class="fa fa-calendar"></i>
+        <input type="date" class="booking-input" id="dateSelect" onchange="loadSlots()">
+      </div>
+
+      <div class="booking-input-wrap">
+        <i class="fa fa-clock"></i>
+        <select class="booking-input" id="timeSelect">
+          <option value="" disabled selected>الوقت المتاح</option>
+        </select>
+      </div>
+
+      <div class="booking-input-wrap textarea-wrap">
+        <i class="fa fa-notes-medical"></i>
+        <textarea class="booking-input" id="caseDesc" placeholder="وصف الحالة"></textarea>
+      </div>
+
+      <div class="booking-btns">
+        <button class="btn-book-submit" onclick="submitBooking()">حجز</button>
+        <button class="btn-book-cancel" onclick="cancelBooking()">الغاء الامر</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- إشعار تأكيد الحجز -->
+<section class="booking-confirmation" id="confirmationSection">
+  <div class="confirmation-card">
+
+    <div class="confirmation-title">تم تأكيد الحجز بنجاح</div>
+
+    <div class="confirmation-body">
+
+      <!-- معلومات على اليمين -->
+      <div class="confirmation-info">
+        <div class="conf-row">
+          <span id="conf-name">—</span>
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="conf-row">
+          <span id="conf-id">—</span>
+          <i class="fa fa-id-card"></i>
+        </div>
+        <div class="conf-row">
+          <span id="conf-clinic">—</span>
+          <i class="fa fa-hospital"></i>
+        </div>
+        <div class="conf-row">
+          <span id="conf-date">—</span>
+          <i class="fa fa-calendar"></i>
+        </div>
+        <div class="conf-row">
+          <span id="conf-time">1:00-1:10pm</span>
+          <i class="fa fa-clock"></i>
+        </div>
+        <div class="conf-row conf-note">
+          <span>الرجاء اصطحاب البطاقة عند زيارة العيادة</span>
+          <i class="fa fa-triangle-exclamation" style="color:#c0392b"></i>
+        </div>
+      </div>
+
+      <!-- QR + رقم التذكرة على اليسار -->
+      <div class="confirmation-qr">
+        <div class="ticket-number" id="ticketNumber">#255</div>
+        <div id="qrcode"></div>
+      </div>
+
+    </div>
+
+    <!-- زر تنزيل PDF -->
+    <button class="btn-download-pdf" onclick="downloadPDF()">
+      <i class="fa fa-download"></i> تنزيل pdf
+    </button>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+<script>
+// ===== سكربت الحجز — أُعيد ربطه بالكامل مع الباك اند (API) =====
+
+// أسماء أيام الأسبوع بالعربي
+const arabicDays = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const arabicMonths = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+
+// تنسيق تاريخ الحجز المختار بالعربي لبطاقة التأكيد
+function formatArabicDate(dateStr) {
+  const d = new Date(dateStr + 'T00:00:00');
+  return `${arabicDays[d.getDay()]} ${d.getDate()} ${arabicMonths[d.getMonth()]}`;
+}
+
+// 1) عند فتح الصفحة: تعبئة قائمة العيادات من قاعدة البيانات
+document.addEventListener('DOMContentLoaded', async () => {
+  // منع اختيار تاريخ في الماضي
+  document.getElementById('dateSelect').min = new Date().toISOString().split('T')[0];
+
+  try {
+    const res = await fetch('/api/clinics');
+    const clinics = await res.json();
+    const select = document.getElementById('clinicSelect');
+    clinics.forEach(c => {
+      // القيمة = رقم العيادة في القاعدة، والنص = اسمها
+      select.innerHTML += `<option value="${c.id}">${c.name}</option>`;
+    });
+  } catch (err) {
+    console.error('فشل تحميل قائمة العيادات:', err);
+    alert('تعذر تحميل قائمة العيادات، تأكد من تشغيل السيرفر');
+  }
+});
+
+// 2) عند اختيار العيادة: جلب أطبائها فقط
+async function loadDoctors() {
+  const clinicId = document.getElementById('clinicSelect').value;
+  const doctorSelect = document.getElementById('doctorSelect');
+  doctorSelect.innerHTML = '<option value="" disabled selected>الطبيب</option>';
+  resetTimeSelect('الوقت المتاح');
+  if (!clinicId) return;
+
+  try {
+    const res = await fetch(`/api/doctors/by-clinic/${clinicId}`);
+    const doctors = await res.json();
+    if (doctors.length === 0) {
+      doctorSelect.innerHTML = '<option value="" disabled selected>لا يوجد أطباء في هذه العيادة حالياً</option>';
+      return;
+    }
+    doctors.forEach(d => {
+      doctorSelect.innerHTML += `<option value="${d.id}">${d.name}</option>`;
+    });
+  } catch (err) {
+    console.error('فشل تحميل أطباء العيادة:', err);
+    doctorSelect.innerHTML = '<option value="" disabled selected>تعذر تحميل الأطباء</option>';
+  }
+}
+
+// 3) عند اختيار الطبيب والتاريخ: جلب الأوقات المتاحة من جدول الدوام
+//    (السيرفر يستبعد الأوقات المحجوزة مسبقاً تلقائياً)
+async function loadSlots() {
+  const doctorId = document.getElementById('doctorSelect').value;
+  const date = document.getElementById('dateSelect').value;
+  if (!doctorId || !date) return;
+
+  resetTimeSelect('جاري تحميل الأوقات...');
+  try {
+    const res = await fetch(`/api/schedules/available/${doctorId}?date=${date}`);
+    const result = await res.json();
+
+    const timeSelect = document.getElementById('timeSelect');
+    if (!result.success || !result.data || result.data.slots.length === 0) {
+      // رسالة السيرفر توضح السبب (لا دوام في هذا اليوم / لا أوقات شاغرة)
+      resetTimeSelect(result.message || 'لا توجد أوقات متاحة في هذا اليوم');
+      return;
+    }
+    resetTimeSelect('الوقت المتاح');
+    result.data.slots.forEach(t => {
+      timeSelect.innerHTML += `<option value="${t}">${t}</option>`;
+    });
+  } catch (err) {
+    console.error('فشل تحميل الأوقات المتاحة:', err);
+    resetTimeSelect('تعذر تحميل الأوقات، حاول مجدداً');
+  }
+}
+
+function resetTimeSelect(placeholder) {
+  document.getElementById('timeSelect').innerHTML =
+    `<option value="" disabled selected>${placeholder}</option>`;
+}
+
+// 4) إرسال الحجز للسيرفر — التحقق النهائي من الوقت يتم على السيرفر نفسه
+async function submitBooking() {
+  const name     = document.getElementById('patientName').value.trim();
+  const id       = document.getElementById('patientId').value.trim();
+  const clinicEl = document.getElementById('clinicSelect');
+  const doctorId = document.getElementById('doctorSelect').value;
+  const date     = document.getElementById('dateSelect').value;
+  const time     = document.getElementById('timeSelect').value;
+  const desc     = document.getElementById('caseDesc').value.trim();
+
+  if (!name || !id || !clinicEl.value || !doctorId || !date || !time) {
+    alert('الرجاء تعبئة جميع الحقول المطلوبة واختيار وقت متاح');
+    return;
+  }
+
+  // المرحلة 1: إرسال الحجز — أخطاء الشبكة فقط هي "خطأ اتصال"
+  let result;
+  try {
+    const res = await fetch('/api/appointments/book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        patient_name: name,
+        national_id: id,
+        case_description: desc,
+        doctor_id: doctorId,
+        appointment_date: `${date} ${time}`
+      })
+    });
+    result = await res.json();
+  } catch (err) {
+    console.error('فشل الاتصال بالسيرفر أثناء الحجز:', err);
+    alert('خطأ في الاتصال بالسيرفر، حاول مرة أخرى');
+    return;
+  }
+
+  // المرحلة 2: السيرفر رفض الحجز — نعرض رسالته الحقيقية ونحدّث الأوقات
+  if (!result.success) {
+    console.warn('رفض السيرفر الحجز:', result.message);
+    alert(result.message || 'تعذر إتمام الحجز');
+    loadSlots(); // الوقت ربما حُجز للتو من مريض آخر
+    return;
+  }
+
+  // المرحلة 3: الحجز تم في القاعدة — أي خطأ عرض هنا يجب ألا يظهر كفشل حجز
+  const ticket = result.data.ticket_number;
+  try {
+    const clinicName = clinicEl.options[clinicEl.selectedIndex].text;
+
+    document.getElementById('conf-name').textContent   = name;
+    document.getElementById('conf-id').textContent     = id;
+    document.getElementById('conf-clinic').textContent = clinicName;
+    document.getElementById('conf-date').textContent   = formatArabicDate(date);
+    document.getElementById('conf-time').textContent   = time;
+    document.getElementById('ticketNumber').textContent = '#' + ticket;
+
+    // توليد QR في try مستقل: مكتبة qrcodejs ترمي استثناء "code length overflow"
+    // مع النصوص العربية الطويلة (مستوى التصحيح الافتراضي H) — فشلها لا يفسد البطاقة
+    try {
+      document.getElementById('qrcode').innerHTML = '';
+      new QRCode(document.getElementById('qrcode'), {
+        text: `Ticket #${ticket} | ${id} | ${date} ${time}`, // نص مختصر لضمان سعة الـ QR
+        width: 110,
+        height: 110,
+        colorDark: '#1a1a1a',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.L
+      });
+    } catch (qrErr) {
+      console.error('تعذر توليد رمز QR (الحجز ناجح):', qrErr);
+    }
+
+    // إظهار قسم التأكيد
+    const conf = document.getElementById('confirmationSection');
+    conf.classList.add('show');
+    conf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (err) {
+    // الحجز مسجل في القاعدة — نخبر المستخدم بالنجاح ورقم تذكرته مهما حدث
+    console.error('الحجز تم بنجاح لكن فشل عرض بطاقة التأكيد:', err);
+    alert(`تم تأكيد الحجز بنجاح! رقم تذكرتك: #${ticket}`);
+  }
+}
+
+function cancelBooking() {
+  document.getElementById('patientName').value  = '';
+  document.getElementById('patientId').value    = '';
+  document.getElementById('clinicSelect').value = '';
+  document.getElementById('doctorSelect').innerHTML = '<option value="" disabled selected>الطبيب</option>';
+  document.getElementById('dateSelect').value   = '';
+  resetTimeSelect('الوقت المتاح');
+  document.getElementById('caseDesc').value     = '';
+  document.getElementById('confirmationSection').classList.remove('show');
+}
+
+function downloadPDF() {
+  window.print();
+}
+</script>
+
+</body>
+</html>

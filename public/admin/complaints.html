@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الشكاوى - الياسين الطبي</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar" id="sidebar-nav"></nav>
+        <div class="main-content">
+            <header>
+                <h2>مركز الشكاوى والمقترحات</h2>
+                <div class="user-info">مرحباً، مدير النظام</div>
+            </header>
+            
+            <div class="table-container animate-fade-in">
+                <div class="table-header"><h3>صندوق الوارد (الشكاوى)</h3></div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المرسل</th>
+                            <th>الموضوع</th>
+                            <th>التاريخ</th>
+                            <th>الحالة</th>
+                            <th>الإجراءات</th>
+                        </tr>
+                    </thead>
+                    <!-- أُضيف للربط مع الباك اند: الصفوف تتعبأ من قاعدة البيانات -->
+                    <tbody id="complaints-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <footer>
+                <span class="footer-brand">الياسين الطبي © 2026</span>
+                <span class="footer-copy">All rights reserved. Designed for Al-Yaseen Medical system.</span>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal: View & Reply Complaint -->
+    <div class="modal-overlay" id="complaint-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>تفاصيل الشكوى / المقترح</h3>
+                <button class="modal-close" onclick="closeModal('complaint-modal')">&times;</button>
+            </div>
+            <form id="complaint-form" onsubmit="submitComplaintReply(event)">
+                <div class="modal-body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>المرسل</label>
+                            <input type="text" id="comp-sender" readonly style="background: #f8fafc; font-weight: bold; color: var(--primary-blue);">
+                        </div>
+                        <div class="input-group" style="margin-bottom: 0;">
+                            <label>تاريخ الإرسال</label>
+                            <input type="text" id="comp-date" readonly style="background: #f8fafc;">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>الموضوع</label>
+                        <input type="text" id="comp-subject" readonly style="background: #f8fafc;">
+                    </div>
+                    <div class="input-group">
+                        <label>نص الشكوى / الرسالة</label>
+                        <textarea id="comp-message" readonly rows="3" style="background: #f8fafc; resize: none; line-height: 1.5;"></textarea>
+                    </div>
+                    <div class="input-group" id="reply-container" style="margin-bottom: 0;">
+                        <label>كتابة الرد الإداري</label>
+                        <textarea id="comp-reply" rows="2" placeholder="اكتب الرد الرسمي هنا لإرساله للمستخدم..." required style="line-height: 1.5; resize: none;"></textarea>
+                    </div>
+                    <div class="input-group" id="existing-reply-container" style="display: none; margin-bottom: 0;">
+                        <label>الرد الإداري المرسل سابقاً</label>
+                        <textarea id="existing-reply" readonly rows="2" style="background: #f0fdf4; border-color: #bbf7d0; color: #15803d; resize: none; line-height: 1.5;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-delete" onclick="closeModal('complaint-modal')">إغلاق</button>
+                    <button type="submit" class="btn btn-add" id="btn-send-reply">إرسال الرد</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

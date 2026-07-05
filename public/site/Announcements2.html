@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الإعلانات - موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="announcements.css"/>
+<style>
+/* ===== POPUP ===== */
+.ann-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20,40,80,0.55);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(3px);
+}
+.ann-popup-overlay.active { display: flex; }
+
+.ann-popup {
+  background: #fff;
+  border-radius: 20px;
+  max-width: 580px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.25);
+  animation: popupIn 0.3s ease;
+  direction: rtl;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes popupIn {
+  from { transform: scale(0.88); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.ann-popup-close {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.ann-popup-close:hover { background: rgba(0,0,0,0.7); }
+
+.ann-popup-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+.ann-popup-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ann-popup-body {
+  padding: 1.5rem 1.8rem 1.8rem;
+}
+.ann-popup-date {
+  font-size: 0.78rem;
+  color: #8899aa;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.ann-popup-body h2 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #1a3550;
+  margin-bottom: 0.8rem;
+}
+.ann-popup-body p {
+  font-size: 0.88rem;
+  color: #3a4a5a;
+  line-height: 1.9;
+  margin-bottom: 1.3rem;
+}
+.ann-popup-btn-close {
+  background: #4a7fc0;
+  color: #fff;
+  border: none;
+  padding: 10px 40px;
+  border-radius: 25px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.ann-popup-btn-close:hover { background: #3a6aaa; }
+</style>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+<!-- HERO الإعلانات -->
+<section class="ann-hero">
+  <img class="hero-bg" src="pictures/الرئيسية 1.png" alt="خلفية">
+  <div class="ann-hero-inner">
+    <div class="ann-hero-text">
+      <div class="hero-badge"></div>
+      <h1>مستجدات العيادات الخارجية</h1>
+      <p>تابع اخر المستجدات والتحديثات والخدمات</p>
+    </div>
+    <div class="ann-hero-img">
+      <img src="pictures/المستشفى.jpg" alt="المستشفى">
+    </div>
+  </div>
+</section>
+
+<!-- بانر تصفح الإرشادات -->
+<div class="ann-banner">
+  <div class="ann-banner-inner">
+    <h2>تصفح الارشادات الطبية الازمة</h2>
+    <a href="guidelines.html" class="btn-ann-click">انقر هنا</a>
+  </div>
+</div>
+
+<!-- قائمة الإعلانات -->
+<section class="ann-list-section">
+    <div class="ann-container">
+
+    <div class="ann-card">
+      <div class="ann-card-img">
+        <img src="pictures/تمديد ساعات العمل.jpg" alt="تمديد ساعات العمل">
+      </div>
+      <div class="ann-card-body">
+        <span class="ann-badge">جديد</span>
+        <h3>تمديد ساعات العمل</h3>
+        <p>تم تمديد ساعات العمل في بعض العيادات الخارجية لتلبية احتياجات المرضى</p>
+        <div class="ann-card-footer">
+          <span class="ann-date">30/5/2026</span>
+          <button class="btn-ann-details" onclick="openPopup('ann5')" ><i class="fa fa-play"></i> شاهد التفاصيل</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ann-card">
+      <div class="ann-card-img">
+        <img src="pictures/حملات طبية توعوية.jpg" alt="حملات طبية توعوية">
+      </div>
+      <div class="ann-card-body">
+        <span class="ann-badge">جديد</span>
+        <h3>حملات طبية توعوية</h3>
+        <p>ينظم المركز حملات توعوية دورية للتثقيف الصحي حول الأمراض المزمنة وطرق الوقاية منها</p>
+        <div class="ann-card-footer">
+          <span class="ann-date">12/5/2026</span>
+          <button class="btn-ann-details" onclick="openPopup('ann6')" ><i class="fa fa-play"></i> شاهد التفاصيل</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ann-card">
+      <div class="ann-card-img">
+        <img src="pictures/إضافة خدمات طبية جديدة.jpg" alt="إضافة خدمات طبية جديدة">
+      </div>
+      <div class="ann-card-body">
+        <span class="ann-badge">جديد</span>
+        <h3>إضافة خدمات طبية جديدة</h3>
+        <p>تم إضافة مجموعة من خدمات طبية حديثة مثل فحوصات الشاملة، وخدمات المتابعة الدورية</p>
+        <div class="ann-card-footer">
+          <span class="ann-date">15/5/2026</span>
+          <button class="btn-ann-details" onclick="openPopup('ann7')" ><i class="fa fa-play"></i> شاهد التفاصيل</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ann-card">
+      <div class="ann-card-img">
+        <img src="pictures/إطلاق خدمة المتابعة بعد الزيارة.jpg" alt="إطلاق خدمة المتابعة بعد الزيارة">
+      </div>
+      <div class="ann-card-body">
+        <span class="ann-badge">جديد</span>
+        <h3>إطلاق خدمة المتابعة بعد الزيارة</h3>
+        <p>يمكن للمرضى الآن الاستفادة من خدمة المتابعة بعد الكشف للاطمئنان على حالتهم الصحية</p>
+        <div class="ann-card-footer">
+          <span class="ann-date">22/5/2026</span>
+          <button class="btn-ann-details" onclick="openPopup('ann8')" ><i class="fa fa-play"></i> شاهد التفاصيل</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ترقيم الصفحات -->
+<div class="pagination">
+  <a href="announcements.html" class="page-btn">1</a>
+  <a href="announcements2.html" class="page-btn active">2</a>
+  <a href="announcements.html" class="page-btn arrow"><i class="fa fa-chevron-left"></i></a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+
+<!-- Popup Overlay -->
+<div id="annPopupOverlay" class="ann-popup-overlay" onclick="closePopup()">
+  <div class="ann-popup" onclick="event.stopPropagation()">
+    <button class="ann-popup-close" onclick="closePopup()"><i class="fa fa-xmark"></i></button>
+    <div class="ann-popup-img-wrap">
+      <img id="popupImg" src="" alt="">
+      <span class="ann-badge" style="position:absolute;top:14px;right:14px;">جديد</span>
+    </div>
+    <div class="ann-popup-body">
+      <div class="ann-popup-date" id="popupDate"></div>
+      <h2 id="popupTitle"></h2>
+      <p id="popupFull"></p>
+      <button class="ann-popup-btn-close" onclick="closePopup()">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+const annData = {
+  'ann5': {
+    title: 'تمديد ساعات العمل',
+    img: 'pictures/تمديد ساعات العمل.jpg',
+    date: '30/5/2026',
+    full: `استجابةً لطلبات المرضى وحرصاً على توفير خدمة صحية متكاملة، تم تمديد ساعات عمل عدد من العيادات التخصصية لتشمل الفترة المسائية من الساعة 4 مساءً حتى 8 مساءً. تشمل العيادات المستفيدة: عيادة الباطنة، العيون، الأطفال، والطوارئ. يُرجى مراجعة جدول المواعيد للاطلاع على تفاصيل كل عيادة.`
+  },
+  'ann6': {
+    title: 'حملات طبية توعوية',
+    img: 'pictures/حملات طبية توعوية.jpg',
+    date: '12/5/2026',
+    full: `يطلق المركز سلسلة من الحملات التوعوية الصحية الشهرية التي تتناول أبرز الأمراض المزمنة كالسكري وضغط الدم وأمراض القلب. تشمل الحملات: محاضرات توعوية مجانية، فحوصات مبكرة مجانية، توزيع مطبوعات طبية مفيدة، وجلسات إرشادية مع أطباء متخصصين. الجميع مدعوون للمشاركة والاستفادة.`
+  },
+  'ann7': {
+    title: 'إضافة خدمات طبية جديدة',
+    img: 'pictures/إضافة خدمات طبية جديدة.jpg',
+    date: '15/5/2026',
+    full: `في إطار تطوير منظومة الخدمات الطبية، تم إطلاق حزمة من الخدمات الجديدة تشمل: فحص الجسم الشامل (Check-up)، برامج المتابعة الدورية للمرضى المزمنين، خدمة الاستشارة الطبية عن بُعد، وبرامج إعادة التأهيل الوظيفي. تهدف هذه الخدمات إلى تقديم رعاية صحية متكاملة ووقائية لجميع المراجعين.`
+  },
+  'ann8': {
+    title: 'إطلاق خدمة المتابعة بعد الزيارة',
+    img: 'pictures/إطلاق خدمة المتابعة بعد الزيارة.jpg',
+    date: '22/5/2026',
+    full: `أطلق المركز خدمة المتابعة الطبية ما بعد الزيارة، التي تتيح للمرضى التواصل مع طبيبهم المعالج خلال 48 ساعة من الكشف لطرح أي استفسارات أو الإبلاغ عن تغييرات في الحالة الصحية. تعمل الخدمة عبر الهاتف والواتساب وتطبيق المركز، وتهدف إلى ضمان استمرارية الرعاية الصحية وتعزيز الثقة بين المريض والطاقم الطبي.`
+  },
+};
+
+function openPopup(id) {
+  const d = annData[id];
+  if (!d) return;
+  document.getElementById('popupImg').src   = d.img;
+  document.getElementById('popupImg').alt   = d.title;
+  document.getElementById('popupTitle').textContent = d.title;
+  document.getElementById('popupFull').textContent  = d.full;
+  document.getElementById('popupDate').textContent  = d.date;
+  document.getElementById('annPopupOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePopup() {
+  document.getElementById('annPopupOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closePopup(); });
+</script>
+
+</body>
+</html>

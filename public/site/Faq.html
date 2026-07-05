@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الأسئلة الشائعة - موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="faq.css"/>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+<!-- HERO الأسئلة الشائعة المطور والفخم -->
+<section class="faq-hero">
+  <div class="faq-hero-inner">
+
+    <!-- النص والأبعاد الكبيرة المتناسقة -->
+    <div class="faq-hero-text">
+      <div class="hero-badge"></div>
+      <h1>الأسئلة الشائعة للزائرين</h1>
+      <p>نقدم لكم مجموعة من الأسئلة الأكثر شيوعاً لمساعدة المرضى والمراجعين في معرفة كافة إجراءات زيارة العيادات الخارجية وتسهيل رحلتكم العلاجية.</p>
+    </div>
+
+    <!-- صورة الدكتور الدائرية العائمة الزجاجية -->
+    <div class="faq-hero-img">
+      <div class="circle-img-wrap">
+        <img src="pictures/الدكتور.png" alt="الأسئلة الشائعة">
+      </div>
+      <a href="#faq-list" class="btn-circle-label">
+        <i class="fa fa-circle-question"></i> تصفح الأسئلة الشائعة
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- قائمة الأسئلة الزجاجية الفخمة -->
+<section class="faq-section" id="faq-list">
+
+  <!-- س1: كيف يمكنني حجز موعد للعيادات؟ -->
+  <div class="faq-item open">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span>كيف يمكنني حجز موعد للعيادات؟</span>
+      <div class="faq-icon"><i class="fa fa-chevron-down"></i></div>
+    </div>
+    <div class="faq-answer">
+      <p>تصفح موقعنا الإلكتروني وستتمكن من تعبئة بياناتك وحجز الموعد المناسب بكل سهولة، وسيتم تأكيد الحجز فور الإرسال مباشرة من قبل النظام.</p>
+      <div class="faq-btns">
+        <a href="booking.html" class="faq-btn"><i class="fa fa-calendar-check"></i> احجز الآن</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- س2: كيف يمكنني معرفة مواعيد الدوام؟ -->
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span>كيف يمكنني معرفة مواعيد الدوام؟</span>
+      <div class="faq-icon"><i class="fa fa-chevron-down"></i></div>
+    </div>
+    <div class="faq-answer">
+      <p>من خلال تصفح الموقع، ستتمكن من معرفة مواعيد الأطباء وأسمائهم واختصاصاتهم بشكل كامل، دقيق ومنظم لتختار ما يناسبك.</p>
+      <div class="faq-btns">
+        <a href="schedule.html" class="faq-btn secondary"><i class="fa fa-clock"></i> تصفح الأدوار</a>
+        <a href="doctors.html" class="faq-btn"><i class="fa fa-user-doctor"></i> تصفح الأطباء</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- س3: ما هي الإرشادات الطبية اللازمة قبل الزيارة؟ -->
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span>ما هي الإرشادات الطبية اللازمة قبل الزيارة؟</span>
+      <div class="faq-icon"><i class="fa fa-chevron-down"></i></div>
+    </div>
+    <div class="faq-answer">
+      <p>يُنصح بإحضار بطاقة هويتك الشخصية، وأي تقارير طبية أو فحوصات سابقة ذات صلة بحالتك الصحية، والحضور قبل موعدك بـ 10 دقائق على الأقل لاستكمال إجراءات الاستقبال المبدئية.</p>
+      <div class="faq-btns">
+        <a href="guidelines.html" class="faq-btn"><i class="fa fa-kit-medical"></i> تصفح الإرشادات</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- س4: ما هي آلية التواصل مع إدارة العيادات؟ -->
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span>ما هي آلية التواصل مع إدارة العيادات؟</span>
+      <div class="faq-icon"><i class="fa fa-chevron-down"></i></div>
+    </div>
+    <div class="faq-answer">
+      <p>يمكنك التواصل مع إدارة عيادات الياسين عبر الهاتف على الرقم 0599-268-605، أو عبر البريد الإلكتروني info@alyaseen-medical.com، أو بتشريفنا بزيارة مكتب الاستقبال مباشرة خلال ساعات العمل الرسمية.</p>
+      <div class="faq-btns">
+        <a href="complaints.html" class="faq-btn secondary"><i class="fa fa-comment-dots"></i> تقديم استفسار</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- س5: كيف أعرف إذا تم الانتهاء من أعمال الترميم؟ -->
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span>أريد معرفة هل تم الانتهاء من أعمال الترميم؟</span>
+      <div class="faq-icon"><i class="fa fa-chevron-down"></i></div>
+    </div>
+    <div class="faq-answer">
+      <p>يمكنك متابعة آخر الأخبار والإعلانات الهامة الخاصة بأعمال الصيانة، التطوير والترميم من خلال صفحة الإعلانات، حيث نقوم بتحديثها بشكل دوري ومستمر لإبقائكم على اطلاع بكل المستجدات.</p>
+      <div class="faq-btns">
+        <a href="announcements.html" class="faq-btn"><i class="fa fa-bullhorn"></i> الإعلانات</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- س6: ما هي الفحوصات المطلوبة قبل زيارة الطبيب؟ -->
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span>ما هي الفحوصات المطلوبة قبل زيارة الطبيب؟</span>
+      <div class="faq-icon"><i class="fa fa-chevron-down"></i></div>
+    </div>
+    <div class="faq-answer">
+      <p>تختلف الفحوصات المطلوبة حسب التخصص الطبي. يُنصح بمراجعة الطبيب المختص أولاً ليقوم بتحديد الفحوصات الدقيقة المناسبة لحالتك. يمكنك استعراض التخصصات عبر صفحة الأطباء.</p>
+      <div class="faq-btns">
+        <a href="doctors.html" class="faq-btn"><i class="fa fa-user-doctor"></i> تصفح الأطباء</a>
+        <a href="booking.html" class="faq-btn secondary"><i class="fa fa-calendar-check"></i> احجز موعد</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- س7: كيف يمكنني تقديم شكوى بشأن حدث معي؟ -->
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span>كيف يمكنني تقديم شكوى بشأن حدث معي؟</span>
+      <div class="faq-icon"><i class="fa fa-chevron-down"></i></div>
+    </div>
+    <div class="faq-answer">
+      <p>نحن نأخذ ملاحظات وشكاوى مرضانا بجدية تامة لضمان جودة الخدمة. يمكنك تقديم شكواك أو اقتراحك بكل سرية من خلال صفحة الشكاوى والتواصل، وستقوم الإدارة المختصة بدراستها والرد عليك سريعاً.</p>
+      <div class="faq-btns">
+        <a href="complaints.html" class="faq-btn"><i class="fa fa-flag"></i> تقديم شكوى</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- س8: هل يمكنني إلغاء أو تعديل موعدي المحجوز؟ -->
+  <div class="faq-item">
+    <div class="faq-question" onclick="toggleFaq(this)">
+      <span>هل يمكنني إلغاء أو تعديل موعدي المحجوز؟</span>
+      <div class="faq-icon"><i class="fa fa-chevron-down"></i></div>
+    </div>
+    <div class="faq-answer">
+      <p>نعم بكل تأكيد، يمكنك إلغاء أو تعديل موعدك بالتواصل مع قسم الاستقبال قبل 24 ساعة على الأقل من موعد الزيارة المحدد، أو من خلال طلب إعادة جدولة عبر صفحة حجز التذكرة.</p>
+      <div class="faq-btns">
+        <a href="booking.html" class="faq-btn"><i class="fa fa-rotate-left"></i> حجز جديد</a>
+        <a href="complaints.html" class="faq-btn secondary"><i class="fa fa-phone"></i> تواصل معنا</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+<script>
+function toggleFaq(questionEl) {
+  const item = questionEl.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+
+  // إغلاق سلس لجميع الأسئلة الأخرى المفتوحة لتوفير واجهة مريحة
+  document.querySelectorAll('.faq-item.open').forEach(el => {
+    el.classList.remove('open');
+  });
+
+  // فتح السؤال الحالي إذا كان مغلقاً
+  if (!isOpen) {
+    item.classList.add('open');
+  }
+}
+</script>
+
+</body>
+</html>

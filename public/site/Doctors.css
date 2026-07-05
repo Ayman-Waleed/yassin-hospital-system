@@ -1,0 +1,542 @@
+/* ===== DOCTORS HERO ===== */
+.doctors-hero {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+  background: #6a8fc8;
+  display: flex;
+  align-items: center;
+}
+
+.doctors-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.doctors-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  min-height: 280px;
+}
+
+.doctors-hero-text {
+  flex: 1;
+  text-align: center;
+}
+
+.doctors-hero-text h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.doctors-hero-text p {
+  color: rgba(255,255,255,0.95);
+  font-size: 0.9rem;
+  line-height: 2;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.doctors-hero-img {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  order: -1;
+}
+
+.circle-img-wrap {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.6);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+}
+
+.circle-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.btn-circle-label {
+  background: rgba(255,255,255,0.85);
+  color: var(--primary);
+  padding: 9px 22px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+
+.btn-circle-label:hover {
+  background: #fff;
+}
+
+/* ===== شريط البحث ===== */
+.doctors-search-bar {
+  max-width: 860px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.search-wrap {
+  background: #e8f2fa;
+  border-radius: 40px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 2px 12px rgba(100,160,200,0.10);
+}
+
+.search-wrap input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.93rem;
+  color: #3a4a5a;
+  outline: none;
+  text-align: right;
+  direction: rtl;
+}
+
+.search-wrap input::placeholder {
+  color: #b0c8d8;
+}
+
+.search-icon {
+  color: #5a8eb0;
+  font-size: 1.15rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.search-divider {
+  width: 1px;
+  height: 22px;
+  background: #c0d8ea;
+  flex-shrink: 0;
+}
+
+.filter-label {
+  font-size: 0.87rem;
+  font-weight: 700;
+  color: #5a8eb0;
+  white-space: nowrap;
+}
+
+/* ===== شبكة الأطباء ===== */
+.doctors-grid-section {
+  max-width: 860px;
+  margin: 0 auto 1.5rem;
+  padding: 0 2rem;
+}
+
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+}
+
+/* ===== كارد الطبيب ===== */
+.doctor-card {
+  background: #f0f6fc;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 2px 12px rgba(100,160,200,0.10);
+  padding: 1rem 1rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.doctor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(100,160,200,0.18);
+}
+
+.doctor-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  direction: rtl;
+}
+
+/* صورة الطبيب — مستطيل مستدير بإطار أزرق */
+.doctor-photo {
+  width: 90px;
+  height: 105px;
+  border-radius: 18px;
+  object-fit: cover;
+  object-position: top center;
+  flex-shrink: 0;
+  border: 3px solid #a8cce8;
+  background: #d8eaf5;
+  box-shadow: 0 2px 8px rgba(100,160,200,0.15);
+}
+
+.doctor-details {
+  flex: 1;
+  text-align: right;
+  padding-top: 0.1rem;
+}
+
+.doctor-details h3 {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #1a3550;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.doctor-details .specialty {
+  font-size: 0.80rem;
+  color: #4a7a9a;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.doctor-details .experience {
+  font-size: 0.77rem;
+  color: #6b7a8d;
+  margin-bottom: 0.4rem;
+}
+
+.schedule-label {
+  font-size: 0.80rem;
+  font-weight: 700;
+  color: #1a3550;
+  margin-bottom: 0.25rem;
+}
+
+.schedule-days {
+  display: inline-block;
+  background: #d8eaf5;
+  color: #2a5b80;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 12px;
+}
+/* الحاوية الكبرى لشبكة الأطباء لتتوسع وتملأ العرض */
+.doctors-grid-section {
+  width: 100%;
+  max-width: 1350px; /* جعل أقصى عرض مسموح به كبير جداً ليملأ الصفحة */
+  margin: 40px auto; 
+  padding: 0 25px;   
+  box-sizing: border-box;
+}
+
+/* توزيع الأطباء في 3 أعمدة مرنة */
+.doctors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); 
+  gap: 30px; /* زيادة المسافة بين الكروت لتعطي شكلاً احترافياً */
+  width: 100%;
+}
+
+/* جعل الكارت نفسه مرن ويملأ مساحة العمود المخصصة له */
+.doctor-card {
+  width: 100%; 
+  max-width: none; /* إلغاء أي ليميت قديم كان يصغر الكارت */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* تأثير حركي خفيف عند التحويم بالماوس فوق كارت الطبيب */
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* للتجاوب التام مع الشاشات المتوسطة والصغيرة */
+@media (max-width: 1024px) {
+  .doctors-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* عمودين للشاشات المتوسطة والتابلت */
+    gap: 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  .doctors-grid {
+    grid-template-columns: 1fr; /* عمود واحد للهواتف */
+    gap: 20px;
+  }
+}
+/* ===== زر احجز موعد - أزرق داكن ===== */
+.btn-book-doc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #5a8ab8;
+  color: #fff;
+  padding: 9px 0;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+.btn-book-doc:hover {
+  background: #3a6a98;
+  color: #fff;
+}
+
+/* ===== ترقيم الصفحات ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 1rem 0 3rem;
+}
+
+.page-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.page-btn.active {
+  background: #4a6fa5;
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(74,111,165,0.3);
+}
+
+.page-btn:not(.active):not(.arrow) {
+  background: #d8e8f5;
+  color: #4a6fa5;
+}
+
+.page-btn:not(.active):not(.arrow):hover {
+  background: #b8d0e8;
+}
+
+.page-btn.arrow {
+  background: #4a6fa5;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+  .doctors-grid { grid-template-columns: 1fr; }
+  .doctors-hero-inner { flex-direction: column; padding: 2rem 1.5rem; }
+  .doctors-hero-img { order: 0; }
+  .doctors-hero-text h1 { font-size: 2rem; }
+}
+
+
+.doctors-hero .hero-bg { display: none !important; }
+
+/* ===== WAVY BOTTOM ===== */
+.doctors-hero {
+  padding-bottom: 55px !important;
+  clip-path: none !important;
+  overflow: visible !important;
+}
+.doctors-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 55' preserveAspectRatio='none'%3E%3Cpath d='M0,20 C240,55 480,0 720,28 C960,55 1200,5 1440,22 L1440,55 L0,55 Z' fill='%23f5f8ff'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: 100% 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+/* ==========================================================================
+   ===== قائمة الإعلانات المحدثة (تكبير المربع الرئيسي والنصوص) =====
+   ========================================================================== */
+
+.ann-list-section {
+  max-width: 1050px; /* تم تكبير العرض الإجمالي للمنطقة من 820px إلى 1050px */
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+}
+
+/* الكونتينر الخارجي المربع الرئيسي */
+.ann-container {
+  background: #edf4fb;
+  border-radius: 28px; /* زيادة دائرية الحواف لتتناسب مع الحجم الكبير */
+  border: 2px solid #c8dff0;
+  padding: 2rem; /* زيادة المسافات الداخلية (الـ Padding) ليصبح المربع راهي */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* زيادة المسافة الفاصلة بين الكروت */
+}
+
+/* كارد الإعلان المفرد */
+.ann-card {
+  background: #fff;
+  border-radius: 20px;
+  border: 1.5px solid #d8eaf5;
+  padding: 1.5rem; /* زيادة مساحة الكارد الداخلية لراحة العين */
+  display: flex;
+  gap: 1.8rem; /* زيادة الفراغ بين الصورة والنصوص */
+  align-items: center; /* توسيط العناصر عمودياً ليصبح التصميم متناسقاً */
+  direction: rtl;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.ann-card:hover {
+  box-shadow: 0 6px 22px rgba(100,160,200,0.2);
+  transform: translateY(-2px); /* حركة تفاعلية لطيفة عند تمرير الماوس */
+}
+
+/* تكبير صورة الإعلان لتتناسب مع الحجم الجديد */
+.ann-card-img {
+  flex: 0 0 140px; /* تكبير عرض الصورة من 100px إلى 140px */
+  height: 110px;   /* تكبير ارتفاع الصورة من 85px إلى 110px */
+  border-radius: 14px;
+  overflow: hidden;
+  order: 1;
+}
+
+.ann-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* محتوى الكارد النصي */
+.ann-card-body {
+  flex: 1;
+  order: 2;
+}
+
+/* شارة جديد */
+.ann-badge {
+  display: inline-block;
+  background: #3bb8a8;
+  color: #fff;
+  font-size: 0.8rem; /* تكبير بسيط للخط */
+  font-weight: 700;
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 0.5rem;
+}
+
+/* تكبير نصوص الإعلانات */
+.ann-card-body h3 {
+  font-size: 1.25rem; /* تكبير العنوان الرئيسي للإعلان من 1.05rem */
+  font-weight: 900;
+  color: #1a3550;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.ann-card-body p {
+  font-size: 0.92rem; /* تكبير نص وصف الإعلان من 0.81rem */
+  color: #4a6070;
+  line-height: 1.8;
+  margin-bottom: 0.8rem;
+}
+
+/* تاريخ + زر التفاصيل */
+.ann-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: rtl;
+  margin-top: 0.5rem;
+}
+
+.ann-date {
+  font-size: 0.85rem; /* تكبير خط التاريخ */
+  color: #8899aa;
+  font-weight: 600;
+}
+
+.btn-ann-details {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #5a8eb0;
+  color: #fff;
+  padding: 8px 22px; /* تكبير حجم زر تفاصيل الإعلان */
+  border-radius: 20px;
+  font-size: 0.88rem; /* تكبير خط الزر */
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s;
+  font-family: 'Cairo', sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-ann-details:hover {
+  background: #3a6e90;
+}
+
+/* التجاوب السلس مع الشاشات الصغيرة (الجوال) */
+@media (max-width: 700px) {
+  .ann-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.2rem;
+  }
+  .ann-card-img {
+    flex: 0 0 180px;
+    width: 100%;
+    height: 150px;
+    order: 0;
+  }
+}

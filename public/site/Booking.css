@@ -1,0 +1,392 @@
+/* ===== BOOKING HERO ===== */
+.booking-hero {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden;
+  background: #6a8fc8;
+  display: flex;
+  align-items: center;
+}
+
+.booking-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.booking-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  min-height: 230px;
+}
+
+.booking-hero-text {
+  flex: 1;
+  text-align: center;
+}
+
+.booking-hero-text h1 {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.booking-hero-text p {
+  color: rgba(255,255,255,0.95);
+  font-size: 0.95rem;
+  line-height: 1.9;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* الصورة الدائرية على اليمين */
+.booking-hero-img {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  order: -1;
+}
+
+.circle-img-wrap {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.6);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.15);
+}
+
+.circle-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.btn-circle-label {
+  background: rgba(255,255,255,0.85);
+  color: var(--primary);
+  padding: 9px 22px;
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+}
+
+.btn-circle-label:hover {
+  background: #fff;
+}
+
+/* ===== قسم الحجز الرئيسي ===== */
+.booking-section {
+  max-width: 860px;
+  margin: 2.5rem auto;
+  padding: 0 2rem;
+}
+
+/* الكارد الرئيسي */
+.booking-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(100,160,200,0.14);
+  border: 1px solid #d8eaf5;
+  overflow: hidden;
+  display: flex;
+  gap: 0;
+}
+
+/* الصورة الجانبية */
+.booking-img-side {
+  flex: 0 0 260px;
+  overflow: hidden;
+}
+
+.booking-img-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* حقول الفورم */
+.booking-form-side {
+  flex: 1;
+  padding: 1.8rem 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  direction: rtl;
+}
+
+.booking-input {
+  width: 100%;
+  background: #f0f6fc;
+  border: 1.5px solid #d0e6f5;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.88rem;
+  color: #2a4a6a;
+  outline: none;
+  text-align: right;
+  transition: border 0.2s;
+  appearance: none;
+}
+
+.booking-input::placeholder {
+  color: #aabbc8;
+}
+
+.booking-input:focus {
+  border-color: #7ab0d4;
+  background: #fff;
+}
+
+.booking-input-wrap {
+  position: relative;
+}
+
+.booking-input-wrap i {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aabbc8;
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+.booking-input-wrap.textarea-wrap i {
+  top: 14px;
+  transform: none;
+}
+
+textarea.booking-input {
+  resize: none;
+  height: 70px;
+}
+
+/* أزرار الفورم */
+.booking-btns {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+  margin-top: 0.3rem;
+  direction: rtl;
+}
+
+.btn-book-submit {
+  background: #4a7fc0;
+  color: #fff;
+  border: none;
+  padding: 10px 36px;
+  border-radius: 22px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-book-submit:hover {
+  background: #3a6aaa;
+}
+
+.btn-book-cancel {
+  background: #6a9ec8;
+  color: #fff;
+  border: none;
+  padding: 10px 36px;
+  border-radius: 22px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.btn-book-cancel:hover {
+  background: #5a8eb8;
+}
+
+/* ===== إشعار تأكيد الحجز ===== */
+.booking-confirmation {
+  max-width: 860px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  display: none;
+}
+
+.booking-confirmation.show {
+  display: block;
+}
+
+.confirmation-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(100,160,200,0.14);
+  border: 1px solid #d8eaf5;
+  padding: 2rem 2.5rem;
+  direction: rtl;
+}
+
+.confirmation-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #3a7fc0;
+  margin-bottom: 1.5rem;
+}
+
+.confirmation-body {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* معلومات المريض يمين */
+.confirmation-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.conf-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a3550;
+  direction: rtl;
+}
+
+.conf-row i {
+  color: #5a8eb0;
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.conf-note {
+  font-size: 0.88rem;
+  color: #c0392b;
+  font-weight: 700;
+  margin-top: 0.3rem;
+}
+
+/* QR + رقم التذكرة يسار */
+.confirmation-qr {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ticket-number {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #3a7fc0;
+  direction: ltr;
+}
+
+.qr-box {
+  width: 110px;
+  height: 110px;
+  background: #1a1a1a;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* QR pattern بـ CSS */
+.qr-box canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* زر تنزيل PDF */
+.btn-download-pdf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #4a7fc0;
+  color: #fff;
+  border: none;
+  padding: 11px 50px;
+  border-radius: 25px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 1.5rem auto 0;
+  display: block;
+  transition: all 0.25s;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.btn-download-pdf:hover {
+  background: #3a6aaa;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+  .booking-card { flex-direction: column; }
+  .booking-img-side { flex: 0 0 200px; height: 200px; }
+  .booking-hero-inner { flex-direction: column; padding: 2rem 1.5rem; }
+  .booking-hero-img { order: 0; }
+  .booking-hero-text h1 { font-size: 1.9rem; }
+  .confirmation-body { flex-direction: column; }
+}
+
+
+.booking-hero .hero-bg { display: none !important; }
+
+/* ===== WAVY BOTTOM ===== */
+.booking-hero {
+  padding-bottom: 55px !important;
+  clip-path: none !important;
+  overflow: visible !important;
+}
+.booking-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 55' preserveAspectRatio='none'%3E%3Cpath d='M0,20 C240,55 480,0 720,28 C960,55 1200,5 1440,22 L1440,55 L0,55 Z' fill='%23f5f8ff'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: 100% 100%;
+  z-index: 10;
+  pointer-events: none;
+}

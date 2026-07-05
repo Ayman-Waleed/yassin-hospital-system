@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستخدمين - الياسين الطبي</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar" id="sidebar-nav"></nav>
+        <div class="main-content">
+            <header>
+                <h2>إدارة صلاحيات المستخدمين</h2>
+                <div class="user-info">مرحباً، مدير النظام</div>
+            </header>
+            
+            <div class="table-container animate-fade-in">
+                <div class="table-header">
+                    <h3>إدارة مستخدمي النظام</h3>
+                    <button class="btn btn-add" onclick="openModal('add-user-modal')">+ إضافة مستخدم</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>اسم المستخدم</th>
+                            <th>الصلاحية</th>
+                            <th>آخر دخول</th>
+                            <th>الحالة</th>
+                            <th>العمليات</th>
+                        </tr>
+                    </thead>
+                    <!-- أُضيف للربط مع الباك اند: الصفوف تتعبأ من قاعدة البيانات -->
+                    <tbody id="users-table-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <footer>
+                <span class="footer-brand">الياسين الطبي © 2026</span>
+                <span class="footer-copy">All rights reserved. Designed for Al-Yaseen Medical system.</span>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal: Add User -->
+    <div class="modal-overlay" id="add-user-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>إضافة مستخدم جديد</h3>
+                <button class="modal-close" onclick="closeModal('add-user-modal')">&times;</button>
+            </div>
+            <form id="add-user-form" onsubmit="saveUser(event)">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label>اسم المستخدم</label>
+                        <input type="text" id="usr-name" required placeholder="مثال: reception_2">
+                    </div>
+                    <div class="input-group">
+                        <label>الصلاحية</label>
+                        <select id="usr-role" required>
+                            <option value="موظف استقبال">موظف استقبال</option>
+                            <option value="مدير نظام">مدير نظام</option>
+                            <option value="طبيب">طبيب</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>كلمة المرور</label>
+                        <input type="password" id="usr-password" required placeholder="••••••••">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-delete" onclick="closeModal('add-user-modal')">إلغاء</button>
+                    <button type="submit" class="btn btn-add">حفظ البيانات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

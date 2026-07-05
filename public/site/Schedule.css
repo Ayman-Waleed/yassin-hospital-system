@@ -1,0 +1,302 @@
+/* ===== SCHEDULE HERO ===== */
+.schedule-hero {
+  position: relative;
+  min-height: 260px;
+  overflow: visible !important;
+  background: linear-gradient(135deg, #7ab0d4 0%, #5a8eb0 100%);
+  display: flex;
+  align-items: center;
+  padding-bottom: 55px !important;
+}
+
+.schedule-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.25;
+}
+
+.schedule-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.schedule-hero-text {
+  flex: 1;
+  text-align: right;
+}
+
+.hero-badge {
+  width: 60px;
+  height: 5px;
+  background: #f5a623;
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+
+.schedule-hero-text h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.schedule-hero-text p {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  max-width: 680px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.schedule-hero-img {
+  flex: 0 0 auto;
+}
+
+.schedule-hero-img img {
+  width: 240px;
+  height: 165px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 4px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.18);
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.schedule-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 55' preserveAspectRatio='none'%3E%3Cpath d='M0,20 C240,55 480,0 720,28 C960,55 1200,5 1440,22 L1440,55 L0,55 Z' fill='%23ffffff'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: 100% 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ===== وصف الصفحة ===== */
+.schedule-intro {
+  max-width: 1200px;
+  margin: 3rem auto 2rem;
+  padding: 0 2rem;
+  text-align: right;
+}
+
+.schedule-intro p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a6070;
+  position: relative;
+  padding-right: 15px;
+  border-right: 4px solid #7ab0d4;
+}
+
+/* ===== قسم الجدول - التعديل الفخم الفائق للإطارات والتعبئة ===== */
+.schedule-table-section {
+  max-width: 1200px;
+  margin: 0 auto 6rem;
+  padding: 0 2rem;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: separate; /* مهم جداً لتفعيل انحناء زوايا الخلايا */
+  border-spacing: 0;
+  border-radius: 20px; /* زيادة الانحناء للمظهر الزجاجي العصري */
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(122, 176, 212, 0.15); /* ظل ناعم ممتد بلون الهوية الطبية */
+  border: 1px solid rgba(122, 176, 212, 0.35); /* إطار ناعم يحيط بالجدول بالكامل */
+}
+
+/* رأس الجدول الفخم */
+.schedule-table thead tr {
+  background: linear-gradient(90deg, #5a8eb0 0%, #7ab0d4 100%);
+}
+
+.schedule-table thead th {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 20px 24px; /* تعبئة أكبر ومريحة للعين */
+  text-align: right;
+  font-family: 'Cairo', sans-serif;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.schedule-table thead th:nth-child(2),
+.schedule-table thead th:nth-child(3) {
+  text-align: center;
+}
+
+/* الخلايا وتعبئتها اللطيفة */
+.schedule-table tbody td {
+  padding: 18px 24px; /* مساحة داخلية متناسقة وواسعة */
+  font-size: 1rem;
+  font-family: 'Cairo', sans-serif;
+  vertical-align: middle;
+  border-bottom: 1px solid #e2eff7; /* فاصل أفقي خفيف وناعم */
+  transition: all 0.2s ease;
+}
+
+/* التناوب الاحترافي في تعبئة الصفوف لمنع التشتت */
+.schedule-table tbody tr:nth-child(odd) td {
+  background: #ffffff; /* صف أبيض ناصع */
+}
+
+.schedule-table tbody tr:nth-child(even) td {
+  background: #f4f9fc; /* صف أزرق ثلجي طبي خفيف وناعم جداً */
+}
+
+/* الفاصل الأخير يتم إلغاؤه لمنع التشوه */
+.schedule-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* تأثير الـ Hover الزجاجي الاحترافي */
+.schedule-table tbody tr {
+  position: relative;
+}
+
+.schedule-table tbody tr:hover td {
+  background: #e6f3fc !important; /* خلفية هوفر ناعمة تبرز الصف */
+  color: #1a3247;
+  transform: translateY(0);
+}
+
+/* إضافة خط إضاءة بلوري أيمن عند الوقوف على الصف */
+.schedule-table tbody tr td:first-child {
+  border-right: 4px solid transparent;
+}
+.schedule-table tbody tr:hover td:first-child {
+  border-right: 4px solid #f5a623; /* يضيء بالبرتقالي ليعطي طابع الاستجابة الفخمة */
+}
+
+/* العيادة داخل الجدول */
+.clinic-cell {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  direction: rtl;
+}
+
+.clinic-cell img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+  box-shadow: 0 4px 15px rgba(122, 176, 212, 0.3);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.schedule-table tbody tr:hover .clinic-cell img {
+  transform: scale(1.1) rotate(4deg);
+}
+
+.clinic-cell span {
+  font-weight: 700;
+  color: #1e2a38;
+  font-size: 1.05rem;
+}
+
+/* شارات أيام الدوام */
+.days-cell {
+  text-align: center !important;
+}
+
+.day-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.day-badge.theme-sun-thu {
+  background: #e6f4ea;
+  color: #137333;
+}
+
+.day-badge.theme-sat-wed {
+  background: #feefe3;
+  color: #b06000;
+}
+
+/* توقيت المواعيد */
+.time-cell {
+  color: #4a80a4;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center !important;
+  direction: ltr;
+  unicode-bidi: plaintext;
+  letter-spacing: 0.5px;
+}
+
+/* الطبيب المعالج */
+.doctor-cell {
+  color: #2c5270;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.doctor-cell i {
+  color: #7ab0d4;
+  margin-left: 8px;
+  font-size: 1.1rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .schedule-hero-inner { gap: 1.5rem; }
+  .schedule-hero-text h1 { font-size: 2.2rem; }
+  .schedule-hero-img img { width: 180px; height: 130px; }
+}
+
+@media (max-width: 768px) {
+  .schedule-hero-inner { flex-direction: column; text-align: center; padding: 2rem 1rem; }
+  .schedule-hero-text { text-align: center; }
+  .hero-badge { margin: 0 auto 12px; }
+  .schedule-hero-img { order: -1; }
+  .schedule-hero-img img { width: 100%; max-width: 280px; height: 150px; }
+  
+  .schedule-intro { text-align: center; margin-top: 1.5rem; }
+  .schedule-intro p { border-right: none; padding-right: 0; }
+  
+  .schedule-table-section { overflow-x: auto; padding: 0 1rem; }
+  .schedule-table thead th,
+  .schedule-table tbody td { padding: 14px 16px; font-size: 0.9rem; }
+}
+/* الصورة المستطيلة مع إزاحتها لأسفل قليلاً */
+.schedule-hero-img {
+  flex: 0 0 auto;
+  margin-top: 30px; /* هذه القيمة تقوم بدفع الصورة بالكامل إلى الأسفل قليلاً */
+}
+
+.schedule-hero-img img {
+  width: 240px;
+  height: 165px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 4px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 8px 26px rgba(0,0,0,0.18);
+  display: block;
+  transition: transform 0.3s ease;
+}

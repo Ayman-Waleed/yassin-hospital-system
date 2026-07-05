@@ -1,0 +1,499 @@
+/* ===== ANNOUNCEMENTS HERO ===== */
+.ann-hero {
+  position: relative;
+  min-height: 200px;
+  overflow: hidden;
+  background: #6a8fc8;
+  display: flex;
+  align-items: center;
+  
+  padding-bottom: 2.5rem;
+}
+
+.ann-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.ann-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 200px;
+  direction: rtl;
+}
+
+/* النص على اليمين */
+.ann-hero-text {
+  flex: 1;
+  text-align: right;
+}
+
+.ann-hero-text h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.ann-hero-text p {
+  color: rgba(255,255,255,0.92);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+/* الصورة المستطيلة على اليسار */
+.ann-hero-img {
+  flex: 0 0 auto;
+}
+
+.ann-hero-img img {
+  width: 180px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 3px solid rgba(255,255,255,0.5);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  display: block;
+}
+
+/* ===== بانر تصفح الإرشادات ===== */
+.ann-banner {
+  padding: 1.8rem 2rem 1.5rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ann-banner-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.ann-banner h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--white);
+  background: #4a6fa5;
+  padding: 0.85rem 2.5rem;
+  border-radius: 35px;
+  display: inline-block;
+  margin: 0;
+  box-shadow: 0 4px 18px rgba(74,111,165,0.25);
+}
+
+.ann-banner .btn-ann-click {
+  display: inline-block;
+  background: #fff;
+  color: #4a6fa5;
+  border: 2.5px solid #7ab0d4;
+  padding: 7px 40px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  font-family: 'Cairo', sans-serif;
+}
+
+.ann-banner .btn-ann-click:hover {
+  background: #7ab0d4;
+  color: #fff;
+}
+
+/* ===== قائمة الإعلانات ===== */
+.ann-list-section {
+  max-width: 820px;
+  margin: 0 auto 2rem;
+  padding: 0 2rem;
+}
+
+/* الكونتينر الخارجي بإطار دائري */
+.ann-container {
+  background: #edf4fb;
+  border-radius: 24px;
+  border: 2px solid #c8dff0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* كارد الإعلان */
+.ann-card {
+  background: #fff;
+  border-radius: 18px;
+  border: 1.5px solid #d8eaf5;
+  padding: 1rem 1.2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  direction: rtl;
+  position: relative;
+  transition: box-shadow 0.25s;
+}
+
+.ann-card:hover {
+  box-shadow: 0 4px 18px rgba(100,160,200,0.15);
+}
+
+/* صورة الإعلان */
+.ann-card-img {
+  flex: 0 0 100px;
+  height: 85px;
+  border-radius: 12px;
+  overflow: hidden;
+  order: 1;
+}
+
+.ann-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* محتوى الكارد */
+.ann-card-body {
+  flex: 1;
+  order: 2;
+}
+
+/* شارة جديد */
+.ann-badge {
+  display: inline-block;
+  background: #3bb8a8;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 14px;
+  border-radius: 20px;
+  margin-bottom: 0.4rem;
+}
+
+.ann-card-body h3 {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #1a3550;
+  margin-bottom: 0.35rem;
+  line-height: 1.4;
+}
+
+.ann-card-body p {
+  font-size: 0.81rem;
+  color: #4a6070;
+  line-height: 1.75;
+  margin-bottom: 0.6rem;
+}
+
+/* تاريخ + زر */
+.ann-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: rtl;
+}
+
+.ann-date {
+  font-size: 0.78rem;
+  color: #8899aa;
+  font-weight: 600;
+}
+
+.btn-ann-details {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #5a8eb0;
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s;
+  font-family: 'Cairo', sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-ann-details:hover {
+  background: #3a6e90;
+}
+
+/* ===== ترقيم الصفحات ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 1.2rem 0 3rem;
+}
+
+.page-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.page-btn.active {
+  background: #4a6fa5;
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(74,111,165,0.3);
+}
+
+.page-btn:not(.active):not(.arrow) {
+  background: #d8e8f5;
+  color: #4a6fa5;
+}
+
+.page-btn:not(.active):not(.arrow):hover {
+  background: #b8d0e8;
+}
+
+.page-btn.arrow {
+  background: #4a6fa5;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+  .ann-hero-inner { flex-direction: column; }
+  .ann-hero-text { text-align: center; }
+  .ann-hero-img img { width: 100%; height: 140px; }
+  .ann-hero-text h1 { font-size: 1.7rem; }
+  .ann-card { flex-direction: column; }
+  .ann-card-img { flex: 0 0 160px; width: 100%; height: 140px; order: 0; }
+}
+
+
+.ann-hero .hero-bg { display: none !important; }
+
+/* ===== WAVY BOTTOM ===== */
+.ann-hero {
+  padding-bottom: 55px !important;
+  clip-path: none !important;
+  overflow: visible !important;
+}
+.ann-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 55' preserveAspectRatio='none'%3E%3Cpath d='M0,20 C240,55 480,0 720,28 C960,55 1200,5 1440,22 L1440,55 L0,55 Z' fill='%23f5f8ff'/%3E%3C/svg%3E") no-repeat bottom;
+  background-size: 100% 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+/* ==========================================================================
+   ===== التحديث النهائي: تكبير المربع الرئيسي والكروت لملء الشاشة =====
+   ========================================================================== */
+
+.ann-list-section {
+  width: 90%;            /* جعل القسم يأخذ 90% من عرض الشاشة بالكامل */
+  max-width: 1400px;     /* زيادة الحد الأقصى للعرض إلى حجم ضخم */
+  margin: 0 auto 4rem;
+  padding: 0 1rem;
+}
+
+/* الكونتينر الخارجي (المربع الرئيسي الأزرق الفاتح) */
+.ann-container {
+  background: #edf4fb;
+  border-radius: 32px;    /* حواف دائرية أكبر متناسقة مع الحجم الجديد */
+  border: 2px solid #c8dff0;
+  padding: 3rem 2.5rem;   /* زيادة المساحة الداخلية بشكل كبير لمنع تكدس الكروت */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;              /* زيادة المسافة الفاصلة بين الكروت */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* كارد الإعلان المفرد */
+.ann-card {
+  background: #fff;
+  border-radius: 24px;
+  border: 1.5px solid #d8eaf5;
+  padding: 2.5rem;        /* تكبير المساحة الداخلية للكارد ليعطي مظهراً فخماً وواسعاً */
+  display: flex;
+  gap: 3rem;              /* مسافة كبيرة ومريحة بين الصورة والنصوص */
+  align-items: center;    /* محاذاة العناصر في المنتصف عمودياً */
+  direction: rtl;
+  position: relative;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.ann-card:hover {
+  box-shadow: 0 10px 30px rgba(100,160,200,0.25);
+  transform: translateY(-4px);
+}
+
+/* تكبير صورة الإعلان بشكل ملحوظ */
+.ann-card-img {
+  flex: 0 0 240px;       /* زيادة عرض الصورة إلى 240px بدلاً من الحجم الصغير */
+  height: 160px;         /* زيادة ارتفاع الصورة إلى 160px */
+  border-radius: 18px;
+  overflow: hidden;
+  order: 1;              /* الحفاظ على ترتيب العناصر للـ RTL */
+}
+
+.ann-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* محتوى الكارد النصي */
+.ann-card-body {
+  flex: 1;
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* شارة "جديد" */
+.ann-badge {
+  align-self: flex-start;
+  background: #3bb8a8;
+  color: #fff;
+  font-size: 0.95rem;     /* تكبير خط الشارة */
+  font-weight: 700;
+  padding: 6px 20px;     /* تكبير حجم الشارة */
+  border-radius: 20px;
+  margin-bottom: 0.5rem;
+}
+
+/* تكبير عناوين ونصوص الإعلانات بشكل ضخم ومناسب */
+.ann-card-body h3 {
+  font-size: 1.6rem;      /* تكبير العنوان الرئيسي ليصبح واضحاً جداً وجاذباً للعين */
+  font-weight: 800;
+  color: #1a3550;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.ann-card-body p {
+  font-size: 1.1rem;      /* تكبير نص الوصف ليكون مريحاً جداً في القراءة */
+  color: #4a6070;
+  line-height: 1.8;
+  margin: 0 0 1rem 0;
+}
+
+/* الجزء السفلي (التاريخ + الزر) */
+.ann-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+/* تكبير الخط للتاريخ */
+.ann-date {
+  font-size: 1rem;
+  color: #8899aa;
+  font-weight: 600;
+}
+
+/* تكبير زر "شاهد التفاصيل" */
+.btn-ann-details {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #5a8eb0;
+  color: #fff;
+  padding: 12px 30px;     /* زيادة حجم الزر ليصبح عريضاً وواضحاً */
+  border-radius: 25px;
+  font-size: 1.05rem;     /* تكبير خط الزر */
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s;
+  font-family: 'Cairo', sans-serif;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-ann-details:hover {
+  background: #3a6e90;
+}
+
+/* دعم شاشات الجوال والأجهزة الصغيرة */
+@media (max-width: 768px) {
+  .ann-list-section {
+    width: 95%;
+    padding: 0;
+  }
+  .ann-container {
+    padding: 1.5rem 1rem;
+  }
+  .ann-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  .ann-card-img {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 180px;
+    order: 0;
+  }
+  .ann-card-footer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .btn-ann-details {
+    width: 100%;
+    justify-content: center;
+  }
+}
+/* ضبط الخط والحجم الأساسي لكل الموقع */
+body {
+    font-family: 'Cairo', sans-serif; /* نوع الخط الموحد */
+    font-size: 16px;                 /* الحجم الأساسي للنصوص */
+    color: #333;                     /* لون النص */
+    direction: rtl;                  /* اتجاه الكتابة */
+}
+
+/* توحيد أحجام العناوين */
+h1, h2, h3, h4 {
+    font-family: 'Cairo', sans-serif;
+    color: #1a3550; /* اللون الأزرق المعتمد */
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }

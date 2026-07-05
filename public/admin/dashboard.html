@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | الياسين الطبي</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar" id="sidebar-nav"></nav>
+        
+        <main class="main-content">
+            <header>
+                <h2>لوحة التحكم الشاملة</h2>
+                <div class="user-info">مرحباً، مدير النظام</div>
+            </header>
+
+            <div class="stats-grid">
+                <a href="doctors.html" class="stat-card">
+                    <i class="fas fa-user-md"></i>
+                    <h3>إجمالي الأطباء</h3>
+                    <p id="stat-doctors">24</p>
+                </a>
+                <a href="clinics.html" class="stat-card">
+                    <i class="fas fa-hospital"></i>
+                    <h3>العيادات النشطة</h3>
+                    <p id="stat-clinics">12</p>
+                </a>
+                <a href="appointments.html" class="stat-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>مواعيد اليوم</h3>
+                    <p id="stat-appointments">58</p>
+                </a>
+                <a href="complaints.html" class="stat-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>شكاوى جديدة</h3>
+                    <p id="stat-complaints">5</p>
+                </a>
+            </div>
+
+            <div class="table-container">
+                <div class="table-header">
+                    <h3>آخر المواعيد المحجوزة</h3>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المريض</th>
+                            <th>الطبيب</th>
+                            <th>العيادة</th>
+                            <th>التوقيت</th>
+                            <th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <!-- أُضيف للربط مع الباك اند: الصفوف تتعبأ من قاعدة البيانات -->
+                    <tbody id="latest-appointments-body">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <footer class="dashboard-footer">
+                <div class="footer-content">
+                    <span class="footer-brand">الياسين الطبي © 2026</span>
+                    <span class="footer-copy">جميع الحقوق محفوظة. نظام إدارة متكامل.</span>
+                </div>
+            </footer>
+    <!-- أُصلح خلل: كان script.js مضمّناً مرتين مع وسوم إغلاق مكررة،
+         ما يجعل كل مستمعي الأحداث يعملون مرتين (تأكيد الحذف يظهر مرتين مثلاً) -->
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -9,6 +9,19 @@ exports.getDoctors = async (req, res) => {
     }
 };
 
+// جلب طبيب واحد بمعرّفه (لصفحة البروفايل)
+exports.getDoctorById = async (req, res) => {
+    try {
+        const doctor = await Doctor.getById(req.params.id);
+        if (!doctor) {
+            return res.status(404).json({ success: false, message: 'الطبيب غير موجود' });
+        }
+        res.json(doctor);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
 exports.getDoctorsByClinic = async (req, res) => {
     try {
         const doctors = await Doctor.getByClinicId(req.params.clinicId);
@@ -20,56 +33,45 @@ exports.getDoctorsByClinic = async (req, res) => {
 
 exports.addDoctor = async (req, res) => {
     try {
-        const { name, specialization, clinic_id } = req.body;
+        const { name, specialization, phone, clinic_id } = req.body;
+        if (!name || !specialization) {
+            return res.status(400).json({ success: false, message: 'اسم الطبيب والتخصص مطلوبان' });
+        }
         const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
-        await Doctor.create(name, specialization, clinic_id, imageUrl);
-        res.json({ success: true });
+        await Doctor.create(name, specialization, phone || null, clinic_id || null, imageUrl);
+        res.json({ success: true, message: 'تمت إضافة الطبيب بنجاح' });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ success: false, message: 'خطأ أثناء إضافة الطبيب' });
     }
 };
 
 exports.deleteDoctor = async (req, res) => {
     try {
         await Doctor.delete(req.body.id);
-        res.json({ success: true });
+        res.json({ success: true, message: 'تم حذف الطبيب' });
     } catch (err) {
-        res.status(500).json({ error: err.message });
+        res.status(500).json({ success: false, message: 'خطأ أثناء حذف الطبيب' });
     }
 };
 
-// دالة تعديل بيانات الطبيب
+// تعديل بيانات الطبيب (يدعم رفع صورة جديدة اختيارياً عبر multer)
 exports.updateDoctor = async (req, res) => {
     const { id } = req.params;
+    const { name, specialization, phone, clinic_id } = req.body;
+    let image_url = req.body.image_url || null;
 
-    // الأدوية والنصوص تأتي هنا بأمان بعد تفكيك multer لها
-    const { name, specialization, clinic_id } = req.body;
-    let image_url = req.body.image_url;
-
-    // إذا رفع المستخدم صورة جديدة نحدث المسار
+    // إذا رُفعت صورة جديدة نحدّث المسار
     if (req.file) {
         image_url = `/uploads/${req.file.filename}`;
     }
 
     try {
-        // نستخدم هنا اسم المتغير 'database' كما هو مستدعى بملف server.js
-        const query = `
-            UPDATE doctors 
-            SET name = ?, specialization = ?, clinic_id = ?, image_url = ? 
-            WHERE id = ?
-        `;
-
-        // استدعاء ملف الاتصال المباشر بقاعدة البيانات
-        const database = require('../config/database');
-        const [result] = await database.execute(query, [name, specialization, clinic_id, image_url, id]);
-
+        const result = await Doctor.update(id, name, specialization, phone || null, clinic_id || null, image_url);
         if (result.affectedRows === 0) {
-            return res.status(404).json({ success: false, message: "الطبيب غير موجود!" });
+            return res.status(404).json({ success: false, message: 'الطبيب غير موجود!' });
         }
-
-        res.json({ success: true, message: "تم تحديث بيانات الطبيب بنجاح! ✏️" });
+        res.json({ success: true, message: 'تم تحديث بيانات الطبيب بنجاح' });
     } catch (err) {
-        console.error("خطأ التحديث في السيرفر:", err);
-        res.status(500).json({ success: false, message: "خطأ داخلي في السيرفر", error: err.message });
+        res.status(500).json({ success: false, message: 'خطأ داخلي في السيرفر أثناء التحديث' });
     }
 };

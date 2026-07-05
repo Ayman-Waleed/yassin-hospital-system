@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الأطباء - موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="doctors.css"/>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+<section class="doctors-hero">
+  <img class="hero-bg" src="pictures/الرئيسية 1.png" alt="خلفية">
+  <div class="doctors-hero-inner">
+    <div class="doctors-hero-text">
+      <div class="hero-badge"></div>
+      <h1>اطبائنا</h1>
+      <p>يضم هذا القسم قائمة بالأطباء العاملين في العيادات الخارجية، ممن يتمتعون بالكفاءة العلمية والخبرة المهنية في مختلف التخصصات الطبية</p>
+    </div>
+    <div class="doctors-hero-img">
+      <div class="circle-img-wrap">
+        <img src="Pictures/احمد مرتجى.jpg" alt="الأطباء">
+      </div>
+      <a href="#doctors-grid" class="btn-circle-label">
+        <i class="fa fa-user-doctor"></i> ابحث عن طبيبك
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="doctors-search-bar" id="doctors-grid">
+  <div class="search-wrap">
+    <i class="fa fa-magnifying-glass search-icon"></i>
+    <input type="text" placeholder="ابحث عن الطبيب" id="searchInput" oninput="filterDoctors()">
+    <div class="search-divider"></div>
+    <span class="filter-label">جميع التخصصات</span>
+  </div>
+</div>
+
+<section class="doctors-grid-section">
+  <div class="doctors-grid" id="doctorsGrid">
+    <!-- أُضيف للربط مع الباك اند: بطاقات الأطباء تتعبأ ديناميكياً من قاعدة البيانات
+         (البطاقات الثابتة القديمة أُزيلت — انظر سكربت loadDoctorsGrid أسفل الصفحة) -->
+  </div>
+</section>
+
+<div class="pagination">
+  <a href="Doctors.html" class="page-btn active">1</a>
+  <!-- أُزيلت روابط Doctors2/Doctors3 الثابتة: كل الأطباء يُعرضون ديناميكياً في هذه الصفحة -->
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+<script>
+// أُضيف للربط مع الباك اند: تعبئة بطاقات الأطباء من قاعدة البيانات
+const dayNames = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+document.addEventListener('DOMContentLoaded', loadDoctorsGrid);
+
+async function loadDoctorsGrid() {
+  const grid = document.getElementById('doctorsGrid');
+  try {
+    // نجلب الأطباء وجداول الدوام معاً لعرض أيام العمل الحقيقية على البطاقة
+    const [docRes, schRes] = await Promise.all([
+      fetch('/api/doctors'),
+      fetch('/api/schedules')
+    ]);
+    const doctors = await docRes.json();
+    const schedules = (await schRes.json()).data || [];
+
+    // تجميع أيام دوام كل طبيب: { doctor_id: Set(أرقام الأيام) }
+    const daysByDoctor = {};
+    schedules.forEach(s => {
+      (daysByDoctor[s.doctor_id] = daysByDoctor[s.doctor_id] || new Set()).add(s.day_of_week);
+    });
+
+    grid.innerHTML = doctors.map(d => {
+      const days = [...(daysByDoctor[d.id] || [])].sort((a, b) => a - b)
+        .map(i => dayNames[i]).join(' - ') || 'حسب الحجز';
+      // الصورة من القاعدة إن وُجدت، وإلا نتوقع ملفاً باسم الطبيب في مجلد الصور
+      const img = d.image_url || `pictures/${d.name.replace('د. ', '')}.jpg`;
+      return `
+      <div class="doctor-card">
+        <div class="doctor-card-top">
+          <img class="doctor-photo" src="${img}" alt="${d.name}">
+          <div class="doctor-details">
+            <h3>${d.name}</h3>
+            <div class="specialty">${d.specialization}</div>
+            <div class="experience">${d.clinic_name || ''}</div>
+            <div class="schedule-label">مواعيد العمل</div>
+            <span class="schedule-days">${days}</span>
+          </div>
+        </div>
+        <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+      </div>`;
+    }).join('');
+  } catch (err) {
+    console.error('فشل تحميل قائمة الأطباء:', err);
+    grid.innerHTML = '<p style="text-align:center; width:100%;">تعذر تحميل قائمة الأطباء، تأكد من تشغيل السيرفر</p>';
+  }
+}
+
+function filterDoctors() {
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  document.querySelectorAll('.doctor-card').forEach(card => {
+    const name = card.querySelector('h3').textContent.toLowerCase();
+    const spec = card.querySelector('.specialty').textContent.toLowerCase();
+    card.style.display = (name.includes(query) || spec.includes(query)) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

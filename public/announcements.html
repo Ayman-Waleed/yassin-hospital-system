@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>إدارة الإعلانات | لوحة التحكم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: 'Cairo';
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cairo';
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-primary {
+            background: #10b981;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            padding: 6px 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 style="margin:0; font-size:22px;">إدارة الإعلانات 📢</h1>
+        <a href="dashboard.html" style="color:white; text-decoration:none; font-weight:bold;">🔙 العودة للرئيسية</a>
+    </header>
+
+    <div class="container">
+        <div class="card" style="display: flex; gap: 10px;">
+            <input type="text" id="announcementText" placeholder="اكتب الإعلان الجديد هنا ليعرض للمرضى..." required>
+            <button onclick="addAnnouncement()" class="btn btn-primary">➕ نشر الإعلان</button>
+        </div>
+
+        <div class="card">
+            <h2 style="margin-top:0; font-size:18px;">الإعلانات الحالية</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>رقم</th>
+                        <th>نص الإعلان</th>
+                        <th>التاريخ</th>
+                        <th>إجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="announcementsTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        async function loadAnnouncements() {
+            const res = await fetch('http://localhost:5000/api/announcements');
+            const data = await res.json();
+            const tbody = document.getElementById('announcementsTable');
+            tbody.innerHTML = data.map(ann => `
+                <tr>
+                    <td>${ann.id}</td>
+                    <td style="font-weight:bold;">${ann.message}</td>
+                    <td dir="ltr">${new Date(ann.created_at).toLocaleString('ar-EG')}</td>
+                    <td><button onclick="deleteAnnouncement(${ann.id})" class="btn btn-danger">🗑️ حذف</button></td>
+                </tr>
+            `).join('');
+        }
+
+        async function addAnnouncement() {
+            const text = document.getElementById('announcementText').value.trim();
+            if (!text) return alert('الرجاء كتابة الإعلان أولاً');
+
+            await fetch('http://localhost:5000/api/announcements/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text })
+            });
+            document.getElementById('announcementText').value = '';
+            loadAnnouncements();
+        }
+
+        async function deleteAnnouncement(id) {
+            if (confirm('هل أنت متأكد من حذف هذا الإعلان؟')) {
+                await fetch('http://localhost:5000/api/announcements/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id })
+                });
+                loadAnnouncements();
+            }
+        }
+
+        window.onload = loadAnnouncements;
+    </script>
+</body>
+
+</html>

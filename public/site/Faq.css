@@ -1,0 +1,324 @@
+/* ===== إعدادات عامة وتنسيقات الجودة المريحة للعين ===== */
+body {
+  background-color: #f7fafc;
+  font-family: 'Cairo', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== FAQ HERO (المطور بالفخامة الزجاجية وتدرجات الياسين الطبية) ===== */
+.faq-hero {
+  position: relative;
+  min-height: 260px;
+  background: linear-gradient(135deg, #7ab0d4 0%, #5a8eb0 100%);
+  display: flex;
+  align-items: center;
+  overflow: visible !important;
+  padding-bottom: 55px !important;
+  clip-path: none !important;
+}
+
+.faq-hero .hero-bg {
+  display: none !important; /* إلغاء الخلفية المصمتة القديمة لجمالية الهوية */
+}
+
+.faq-hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3.5rem;
+  min-height: 200px;
+  direction: rtl;
+}
+
+.faq-hero-text {
+  flex: 1;
+  text-align: right; /* موازاة النص لليمين ليتناسق تماماً مع المظهر الرسمي */
+}
+
+.hero-badge {
+  width: 60px;
+  height: 5px;
+  background: #f5a623;
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+
+.faq-hero-text h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.faq-hero-text p {
+  color: rgba(255,255,255,0.95);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  max-width: 700px;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* صورة الطبيب الدائرية المفتوحة الزجاجية */
+.faq-hero-img {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  order: -1; /* الحفاظ على مكان الصورة الفاخر على الجانب الآخر */
+}
+
+.circle-img-wrap {
+  width: 185px;
+  height: 185px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.45);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+}
+
+.faq-hero-inner:hover .circle-img-wrap {
+  transform: scale(1.03);
+}
+
+.circle-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.btn-circle-label {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.btn-circle-label:hover {
+  background: #ffffff;
+  color: #5a8eb0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,255,255,0.25);
+}
+
+/* تموج أسفل الهيدر الاحترافي والموحد */
+.faq-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 55px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 55' preserveAspectRatio='none'%3E%3Cpath d='M0,20 C240,55 480,0 720,28 C960,55 1200,5 1440,22 L1440,55 L0,55 Z' fill='%23f7fafc'%3E%3C/path%3E%3C/svg%3E") no-repeat bottom;
+  background-size: 100% 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ===== قسم الأسئلة - تم تكبيره وتوسيع أبعاده ليمين وشمال ===== */
+.faq-section {
+  max-width: 1050px; /* تم رفع العرض هنا ليمتد لليمين واليسار بشكل فخم ومتناسق */
+  margin: 4rem auto 5rem;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* مسافة مريحة بين عناصر الأسئلة */
+}
+
+/* ===== عنصر السؤال بتأثير الزجاج البلوري الفاخر (Glassmorphism) ===== */
+.faq-item {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(122, 176, 212, 0.35);
+  box-shadow: 0 8px 25px rgba(100,160,200,0.06);
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.faq-item:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(122, 176, 212, 0.7);
+  box-shadow: 0 12px 30px rgba(90,142,176,0.14);
+}
+
+.faq-item.open {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(90, 142, 176, 0.8);
+  box-shadow: 0 14px 35px rgba(90,142,176,0.18);
+}
+
+/* رأس السؤال المحسن والمكبر خفيفاً */
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.35rem 2rem; /* زيادة الحشو الجانبي ليتناسب مع المساحة العريضة */
+  cursor: pointer;
+  direction: rtl;
+  gap: 1.2rem;
+  user-select: none;
+}
+
+.faq-question span {
+  font-size: 1.15rem; /* خط واضح وفخم وكبير */
+  font-weight: 700;
+  color: #1e3a52;
+  flex: 1;
+  text-align: right;
+  transition: color 0.3s;
+}
+
+.faq-item.open .faq-question span {
+  color: #5a8eb0; /* تمييز لون السؤال المفتوح */
+}
+
+/* دائرة الأيقونة والتأثير التفاعلي */
+.faq-question .faq-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(232, 242, 250, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  color: #5a8eb0;
+  font-size: 0.9rem;
+  border: 1px solid rgba(122, 176, 212, 0.3);
+}
+
+.faq-item.open .faq-question .faq-icon {
+  background: #5a8eb0;
+  color: #ffffff;
+  transform: rotate(180deg);
+  border-color: #5a8eb0;
+}
+
+/* محتوى الجواب الانسيابي المحسن العريض */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+  padding: 0 2rem;
+  direction: rtl;
+}
+
+.faq-item.open .faq-answer {
+  max-height: 400px; 
+  padding: 0 2rem 1.6rem;
+  border-top: 1px dashed rgba(122, 176, 212, 0.25);
+  margin-top: 0.2rem;
+  padding-top: 1.2rem;
+}
+
+.faq-answer p {
+  font-size: 1.02rem; /* حجم مريح ومتناسق للجواب */
+  color: #3a4a5a;
+  line-height: 1.95;
+  margin-bottom: 1.2rem;
+}
+
+/* أزرار الإجراءات داخل الجواب */
+.faq-btns {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  direction: rtl;
+}
+
+.faq-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #5a8eb0 0%, #4a7fc0 100%);
+  color: #ffffff;
+  padding: 10px 26px;
+  border-radius: 25px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-family: 'Cairo', sans-serif;
+  box-shadow: 0 4px 12px rgba(74, 127, 192, 0.2);
+}
+
+.faq-btn:hover {
+  background: linear-gradient(135deg, #4a7fc0 0%, #3a6aaa 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(74, 127, 192, 0.35);
+}
+
+.faq-btn.secondary {
+  background: linear-gradient(135deg, #7ab0d4 0%, #6a9ec8 100%);
+  box-shadow: 0 4px 12px rgba(122, 176, 212, 0.25);
+}
+
+.faq-btn.secondary:hover {
+  background: linear-gradient(135deg, #6a9ec8 0%, #5a8b8 100%);
+  box-shadow: 0 6px 16px rgba(122, 176, 212, 0.4);
+}
+
+/* ===== RESPONSIVE MEDIA QUERIES (التوافق التام مع الشاشات المتنوعة) ===== */
+@media (max-width: 768px) {
+  .faq-hero-inner {
+    flex-direction: column;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    gap: 2rem;
+  }
+  .faq-hero-text {
+    text-align: center;
+  }
+  .hero-badge {
+    margin: 0 auto 12px;
+  }
+  .faq-hero-img {
+    order: 0;
+  }
+  .faq-hero-text h1 {
+    font-size: 2.2rem;
+  }
+  .circle-img-wrap {
+    width: 150px;
+    height: 150px;
+  }
+  .faq-section {
+    margin: 2.5rem auto 3.5rem;
+    padding: 0 1.25rem;
+  }
+  .faq-question {
+    padding: 1.1rem 1.4rem;
+  }
+  .faq-question span {
+    font-size: 1.05rem;
+  }
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>العيادات - موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="clinics.css"/>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+
+
+<!-- HERO العيادات (نفس تصميم about بدون صورة الدكتور) -->
+<section class="clinics-hero">
+  <img class="hero-bg" src="pictures/الرئيسية 1.png" alt="خلفية">
+
+  <div class="clinics-hero-inner">
+
+    <!-- النص في المنتصف -->
+    <div class="clinics-hero-text">
+      <div class="hero-badge"></div>
+      <h1>العيادات الخارجية</h1>
+      <p>تقدّم العيادات الخارجية مجموعة متكاملة من الخدمات الطبية المتخصصة لتشخيص الحالات الصحية ومتابعتها دون الحاجة للإقامة في المستشفى، بهدف توفير رعاية سريعة وآمنة تلبي احتياجات المرضى بكفاءة وجودة عالية.</p>
+    </div>
+
+    <!-- الصورة الدائرية على اليمين -->
+    <div class="clinics-hero-img">
+      <div class="circle-img-wrap">
+        <img src="pictures/عيادات.jpg" alt="تصفح العيادات">
+      </div>
+      <a href="#clinics-grid" class="btn-circle-label">
+        <i class="fa fa-hospital"></i> تصفح العيادات
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- بوكس مواعيد - تصميم جديد -->
+<div class="schedule-banner">
+  <div class="schedule-banner-inner">
+    <h2>تصفح مواعيد دوام العيادات</h2>
+    <a href="schedule.html" class="btn-schedule">انقر هنا</a>
+  </div>
+</div>
+
+<!-- شبكة العيادات -->
+<section class="clinics-grid-section" id="clinics-grid">
+  <div class="clinics-grid" id="clinicsGrid">
+    <!-- أُضيف للربط مع الباك اند: بطاقات العيادات تتعبأ ديناميكياً من قاعدة البيانات
+         (البطاقات الثابتة القديمة أُزيلت — انظر السكربت أسفل الصفحة) -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+<script>
+// أُضيف للربط مع الباك اند: تعبئة بطاقات العيادات من قاعدة البيانات
+document.addEventListener('DOMContentLoaded', async () => {
+  const grid = document.getElementById('clinicsGrid');
+  try {
+    const res = await fetch('/api/clinics');
+    const clinics = await res.json();
+
+    grid.innerHTML = clinics.map(c => `
+      <div class="clinic-card">
+        <div class="clinic-img"><img src="pictures/${c.name}.jpg" alt="${c.name}"></div>
+        <div class="clinic-info">
+          <div class="clinic-name"><i class="fa fa-hospital-user"></i> ${c.name}</div>
+          <a href="booking.html" class="btn-book"><i class="fa fa-calendar-check"></i> احجز موعدك</a>
+        </div>
+      </div>`).join('');
+  } catch (err) {
+    console.error('فشل تحميل العيادات:', err);
+    grid.innerHTML = '<p style="text-align:center; width:100%;">تعذر تحميل قائمة العيادات، تأكد من تشغيل السيرفر</p>';
+  }
+});
+</script>
+
+</body>
+</html>

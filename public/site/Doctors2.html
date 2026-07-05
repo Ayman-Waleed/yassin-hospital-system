@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>الأطباء - موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="doctors.css"/>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+<section class="doctors-hero">
+  <img class="hero-bg" src="pictures/الرئيسية 1.png" alt="خلفية">
+  <div class="doctors-hero-inner">
+    <div class="doctors-hero-text">
+      <div class="hero-badge"></div>
+      <h1>اطبائنا</h1>
+      <p>يضم هذا القسم قائمة بالأطباء العاملين في العيادات الخارجية، ممن يتمتعون بالكفاءة العلمية والخبرة المهنية في مختلف التخصصات الطبية</p>
+    </div>
+    <div class="doctors-hero-img">
+      <div class="circle-img-wrap">
+        <img src="Pictures/احمد محمد.jpg" alt="الأطباء">
+      </div>
+      <a href="#doctors-grid" class="btn-circle-label">
+        <i class="fa fa-user-doctor"></i> ابحث عن طبيبك
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="doctors-search-bar" id="doctors-grid">
+  <div class="search-wrap">
+    <i class="fa fa-magnifying-glass search-icon"></i>
+    <input type="text" placeholder="ابحث عن الطبيب" id="searchInput" oninput="filterDoctors()">
+    <div class="search-divider"></div>
+    <span class="filter-label">جميع التخصصات</span>
+  </div>
+</div>
+
+<section class="doctors-grid-section">
+  <div class="doctors-grid" id="doctorsGrid">
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/مرتضى يونس.jpg" alt="د. مرتضى يونس">
+        <div class="doctor-details">
+          <h3>د. مرتضى يونس</h3>
+          <div class="specialty">اخصائي طبيعي</div>
+          <div class="experience">6 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - التلاتاء</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/عرفات مرزوق.jpg" alt="د. عرفات مرزوق">
+        <div class="doctor-details">
+          <h3>د. عرفات مرزوق</h3>
+          <div class="specialty">اخصائي مسالك</div>
+          <div class="experience">9 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - الخميس</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/ادهم عرفات.jpg" alt="د. ادهم عرفات">
+        <div class="doctor-details">
+          <h3>د. ادهم عرفات</h3>
+          <div class="specialty">اخصائي انف</div>
+          <div class="experience">10 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - الخميس</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/احمد محمود.jpg" alt="د. أحمد محمود">
+        <div class="doctor-details">
+          <h3>د. أحمد محمود</h3>
+          <div class="specialty">اخصائي عيون</div>
+          <div class="experience">6 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - الاربعاء</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/مرزوق الفرا.jpg" alt="د. مرزوق الفرا">
+        <div class="doctor-details">
+          <h3>د. مرزوق الفرا</h3>
+          <div class="specialty">اخصائي عظام</div>
+          <div class="experience">7 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - التلاتاء</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/نور الدغمة.jpg" alt="د. نور الدغمة">
+        <div class="doctor-details">
+          <h3>د. نور الدغمة</h3>
+          <div class="specialty">اخصائي حنجرة</div>
+          <div class="experience">9 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - الاربعاء</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/احمد جميل.jpg" alt="د. أحمد جميل">
+        <div class="doctor-details">
+          <h3>د. أحمد جميل</h3>
+          <div class="specialty">اخصائي اطفال</div>
+          <div class="experience">9 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - الاربعاء</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/عليان نور.jpg" alt="د. عليان نور">
+        <div class="doctor-details">
+          <h3>د. عليان نور</h3>
+          <div class="specialty">اخصائي تجميل</div>
+          <div class="experience">8 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - التلاتاء</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+    <div class="doctor-card">
+      <div class="doctor-card-top">
+        <img class="doctor-photo" src="pictures/ادهم يونس.jpg" alt="د. ادهم يونس">
+        <div class="doctor-details">
+          <h3>د. ادهم يونس</h3>
+          <div class="specialty">اخصائي جلدية</div>
+          <div class="experience">5 سنوات من الخدمة</div>
+          <div class="schedule-label">مواعيد العمل</div>
+          <span class="schedule-days">الاحد - الاربعاء</span>
+        </div>
+      </div>
+      <a href="booking.html" class="btn-book-doc">احجز موعد</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="pagination">
+  <a href="Doctors.html" class="page-btn">1</a>
+  <a href="Doctors2.html" class="page-btn active">2</a>
+  <a href="Doctors.html" class="page-btn arrow"><i class="fa fa-chevron-left"></i></a>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+<script>
+function filterDoctors() {
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  document.querySelectorAll('.doctor-card').forEach(card => {
+    const name = card.querySelector('h3').textContent.toLowerCase();
+    const spec = card.querySelector('.specialty').textContent.toLowerCase();
+    card.style.display = (name.includes(query) || spec.includes(query)) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

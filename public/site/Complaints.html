@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>التواصل والشكاوى - موقع الياسين الطبي</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="complaints.css"/>
+</head>
+<body>
+<script src="navbar.js"></script>
+
+<!-- HERO التواصل والشكاوى الفخم المطور -->
+<section class="complaints-hero">
+  <div class="complaints-hero-inner">
+
+    <div class="complaints-hero-text">
+      <div class="hero-badge"></div>
+      <h1>التواصل والشكاوى</h1>
+      <p>نحن هنا لنستمع إليكم بكل اهتمام، شاركونا استفساراتكم، مقترحاتكم، أو شكواكم لضمان تقديم خدمات طبية تليق بكم.</p>
+    </div>
+
+    <div class="complaints-hero-icon">
+      <i class="fa fa-envelope-open-text"></i>
+    </div>
+
+  </div>
+</section>
+
+<!-- المحتوى الرئيسي المتناسق والأنيق -->
+<section class="complaints-section">
+
+  <!-- العمود الأيمن: نموذج الشكوى الفخم والشفاف -->
+  <div class="complaint-form-card">
+    <h2>نموذج تقديم رسالة / شكوى</h2>
+    <div class="card-line"></div>
+
+    <div class="form-field">
+      <label><i class="fa fa-user"></i> الاسم كاملاً</label>
+      <input type="text" id="fullName" placeholder="أدخل اسمك رباعياً">
+    </div>
+
+    <div class="form-field">
+      <label><i class="fa fa-phone"></i> رقم الجوال</label>
+      <input type="tel" id="phone" placeholder="مثال: 059XXXXXXXX">
+    </div>
+
+    <div class="form-field">
+      <label><i class="fa fa-comment-dots"></i> نوع الرسالة</label>
+      <div class="select-wrapper">
+        <select id="msgType">
+          <option value="" disabled selected>اختر نوع الرسالة</option>
+          <option value="شكوى">تقديم شكوى رسمية</option>
+          <option value="استفسار">استفسار عام</option>
+          <option value="اقتراح">اقتراح لتطوير الخدمات</option>
+          <option value="تواصل عام">تواصل عام</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label><i class="fa fa-file-lines"></i> تفاصيل الرسالة / الشكوى</label>
+      <textarea id="msgText" placeholder="اكتب نص رسالتك بالتفصيل هنا..."></textarea>
+    </div>
+
+    <button class="btn-send" onclick="sendComplaint()">
+      إرسال الرسالة الآن <i class="fa fa-paper-plane"></i>
+    </button>
+  </div>
+
+  <!-- العمود الأيسر: بطاقة التواصل + الخريطة -->
+  <div class="complaints-sidebar">
+
+    <!-- بطاقة التواصل الزجاجية -->
+    <div class="contact-card">
+      <div class="contact-card-title">
+        <i class="fa fa-circle-exclamation"></i> قنوات التواصل السريع
+      </div>
+
+      <div class="contact-info-list">
+        <div class="contact-info-row">
+          <i class="fa fa-phone"></i>
+          <span>0595729604</span>
+        </div>
+        <div class="contact-info-row">
+          <i class="fab fa-whatsapp"></i>
+          <span>‎+972-595729604</span>
+        </div>
+        <div class="contact-info-row">
+          <i class="far fa-envelope"></i>
+          <span>alyasen@gmail.com</span>
+        </div>
+      </div>
+
+      <div class="contact-icons">
+        <a href="mailto:alyasen@gmail.com" class="contact-icon-btn ci-mail" title="البريد الإلكتروني">
+          <i class="far fa-envelope"></i>
+        </a>
+        <a href="https://wa.me/972595729604" class="contact-icon-btn ci-wa" target="_blank" title="واتساب">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:0595729604" class="contact-icon-btn ci-phone" title="اتصال هاتفي">
+          <i class="fa fa-phone"></i>
+        </a>
+      </div>
+
+      <div class="contact-note">نحن متواجدون دوماً لتقديم الدعم الفوري وسماع ملاحظاتكم.</div>
+    </div>
+
+    <!-- الخريطة الزجاجية الاحترافية -->
+    <div class="map-card">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3390.8!2d34.4667!3d31.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMwJzAwLjAiTiAzNMKwMjgnMDAuMCJF!5e0!3m2!1sar!2s!4v1620000000000!5m2!1sar!2s"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      <div class="map-label">
+        <i class="fa fa-location-dot"></i>
+        الموقع الجغرافي للعيادات الطبية
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- أُضيف للربط مع الباك اند: بطاقة متابعة الرسائل وردود الإدارة
+     (بنفس ستايل بطاقات الصفحة complaint-form-card) -->
+<section class="complaints-section" style="grid-template-columns: 1fr; margin-top: 0;">
+  <div class="complaint-form-card">
+    <h2>متابعة رسائلك وردود الإدارة</h2>
+    <div class="card-line"></div>
+
+    <div class="form-field">
+      <label><i class="fa fa-phone"></i> رقم الجوال الذي أرسلت به رسالتك</label>
+      <input type="tel" id="trackPhone" placeholder="مثال: 059XXXXXXXX">
+    </div>
+
+    <button class="btn-send" onclick="trackComplaints()">
+      عرض رسائلي <i class="fa fa-magnifying-glass"></i>
+    </button>
+
+    <div id="trackResults" style="margin-top: 1.5rem;"></div>
+  </div>
+</section>
+
+<!-- بانر الرسالة الترحيبية التفاعلي -->
+<div class="complaints-banner">
+  <div class="complaints-banner-inner">
+    <div class="banner-icon-wrap">
+      <i class="far fa-comments"></i>
+    </div>
+    <p>صوتكم مسموع ورضاكم هو غايتنا الأولى. نرحب بجميع الاستفسارات والشكاوى، ونعمل بجد وشغف على متابعتها ودراستها بكل أمانة لضمان جودة وتطور خدماتنا الصحية المستمر.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-row">
+        <img src="pictures/لوجو الموقع.png" alt="لوجو">
+        <span>موقع الياسين</span>
+      </div>
+      <p>منصة طبية متكاملة تقدم خدمات الرعاية الصحية بأعلى جودة، مع نخبة من الأطباء المختصين في مختلف التخصصات الطبية لضمان أفضل تجربة علاجية.</p>
+      <div class="footer-social">
+        <a href="#" class="s-fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="s-msg"><i class="fab fa-facebook-messenger"></i></a>
+        <a href="#" class="s-mail"><i class="far fa-envelope"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>خدمات المرضى</h4>
+      <ul>
+        <li><a href="index.html"><i class="fa fa-chevron-left"></i>الرئيسية</a></li>
+        <li><a href="clinics.html"><i class="fa fa-chevron-left"></i>العيادات</a></li>
+        <li><a href="doctors.html"><i class="fa fa-chevron-left"></i>الأطباء</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز موعد</a></li>
+        <li><a href="faq.html"><i class="fa fa-chevron-left"></i>الاستفسارات</a></li>
+        <li><a href="https://www.moh.gov.ps"><i class="fa fa-chevron-left"></i>وزارة الصحة</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>روابط مهمة</h4>
+      <ul>
+        <li><a href="about.html"><i class="fa fa-chevron-left"></i>من نحن</a></li>
+        <li><a href="announcements.html"><i class="fa fa-chevron-left"></i>الإعلانات</a></li>
+        <li><a href="booking.html"><i class="fa fa-chevron-left"></i>حجز تذكرة</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>الشكاوى</a></li>
+        <li><a href="complaints.html"><i class="fa fa-chevron-left"></i>تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>معلومات التواصل</h4>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-location-dot"></i></div>
+        <div class="ct"><strong>العنوان</strong>غزة - فلسطين</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="fa fa-phone"></i></div>
+        <div class="ct"><strong>الهاتف</strong>0599-268-605</div>
+      </div>
+      <div class="contact-row">
+        <div class="ci"><i class="far fa-envelope"></i></div>
+        <div class="ct"><strong>البريد</strong>info@alyaseen-medical.com</div>
+      </div>
+      <div class="hours-box">
+        <strong><i class="fa fa-clock"></i> ساعات العمل</strong>
+        السبت - الخميس<br>8:00 صباحاً – 4:00 مساءً
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">جميع حقوق النشر والحفظ محفوظة &copy; 2026م</div>
+</footer>
+
+<script>
+// أُضيف للربط مع الباك اند: متابعة رسائل المريض وردود الإدارة عليها بهاتفه
+async function trackComplaints() {
+  const phone = document.getElementById('trackPhone').value.trim();
+  const box = document.getElementById('trackResults');
+  if (!phone) {
+    alert('الرجاء إدخال رقم الجوال أولاً');
+    return;
+  }
+  try {
+    const res = await fetch('/api/complaints/patient/' + encodeURIComponent(phone));
+    const list = await res.json();
+    if (!Array.isArray(list) || list.length === 0) {
+      box.innerHTML = '<p style="color:#6b7a8d; font-weight:700;">لا توجد رسائل مسجلة بهذا الرقم.</p>';
+      return;
+    }
+    // بطاقة لكل رسالة: النص + رد الإدارة إن وُجد (بنفس ألوان الموقع)
+    box.innerHTML = list.map(c => `
+      <div style="border:1px solid rgba(122,176,212,0.4); border-radius:14px; padding:1.2rem 1.4rem; margin-bottom:1rem; background:rgba(255,255,255,0.7); text-align:right;">
+        <div style="font-weight:900; color:#1e3a52; margin-bottom:0.4rem;">
+          <i class="fa fa-tag" style="color:#5a8eb0;"></i> ${c.subject || 'رسالة'}
+          <span style="font-weight:700; font-size:0.85rem; color:${c.status === 'replied' ? '#2e8b57' : '#b8860b'}; margin-inline-start:10px;">
+            ${c.status === 'replied' ? '✓ تم الرد' : '⏳ قيد المراجعة'}
+          </span>
+        </div>
+        <p style="color:#3a4a5a; margin:0 0 0.6rem; line-height:1.7;">${c.complaint_text}</p>
+        ${c.admin_reply ? `
+        <div style="background:rgba(59,184,168,0.12); border-right:4px solid #3bb8a8; border-radius:8px; padding:0.8rem 1rem;">
+          <strong style="color:#1e3a52;"><i class="fa fa-reply" style="color:#3bb8a8;"></i> رد الإدارة:</strong>
+          <p style="color:#3a4a5a; margin:0.4rem 0 0; line-height:1.7;">${c.admin_reply}</p>
+        </div>` : ''}
+      </div>`).join('');
+  } catch (err) {
+    console.error('فشل جلب رسائل المريض:', err);
+    box.innerHTML = '<p style="color:#b91c1c; font-weight:700;">تعذر الاتصال بالسيرفر — تأكد أنك تفتح الموقع من localhost:5000</p>';
+  }
+}
+
+// أُضيف للربط مع الباك اند: الرسالة تُحفظ فعلياً في قاعدة البيانات وتظهر للإدارة
+async function sendComplaint() {
+  const name  = document.getElementById('fullName').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const type  = document.getElementById('msgType').value;
+  const text  = document.getElementById('msgText').value.trim();
+
+  if (!name || !phone || !type || !text) {
+    alert('الرجاء تعبئة جميع الحقول قبل الإرسال لتتم معالجة طلبك بنجاح.');
+    return;
+  }
+
+  // إرسال الرسالة للسيرفر قبل عرض التأكيد
+  try {
+    const res = await fetch('/api/complaints/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        patient_name: name,
+        patient_phone: phone,
+        subject: type,
+        complaint_text: text
+      })
+    });
+    const result = await res.json();
+    if (!result.success) {
+      console.warn('رفض السيرفر الرسالة:', result.message);
+      alert(result.message || 'تعذر إرسال الرسالة، حاول مرة أخرى');
+      return;
+    }
+  } catch (err) {
+    console.error('فشل الاتصال بالسيرفر أثناء إرسال الرسالة:', err);
+    alert('خطأ في الاتصال بالسيرفر، حاول مرة أخرى');
+    return;
+  }
+
+  // تأثير حركي خلاب عند إرسال الشكوى بنجاح
+  document.querySelector('.complaint-form-card').innerHTML = `
+    <div style="text-align:center; padding:3rem 1.5rem; direction: rtl;">
+      <div style="width: 80px; height: 80px; background: rgba(59, 184, 168, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+        <i class="fa fa-circle-check" style="font-size:3.5rem; color:#3bb8a8;"></i>
+      </div>
+      <h2 style="color:#1e3a52; margin-bottom:1rem; font-weight:900;">تم إرسال رسالتك بنجاح</h2>
+      <p style="color:#3a4a5a; font-size:1.05rem; line-height:1.8;">شكراً لك <strong>${name}</strong>، تم استلام تصنيف (<strong>${type}</strong>) بنجاح.</p>
+      <p style="color:#6b7a8d; font-size:0.9rem; margin-top:0.5rem;">سيقوم القسم الإداري المختص بمراجعتها والتواصل معك قريباً على الرقم: <span style="direction:ltr; display:inline-block; font-weight:700; color:#5a8eb0;">${phone}</span></p>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
