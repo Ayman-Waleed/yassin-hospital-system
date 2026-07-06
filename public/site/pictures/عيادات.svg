@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#1e2a38"/><stop offset="0.6" stop-color="#1e3a52"/><stop offset="1" stop-color="#5a8eb0"/>
+</linearGradient></defs>
+<rect width="800" height="500" fill="url(#bg)"/>
+<g transform="translate(400,230)" opacity="0.95"><path d="M-40,40 V-20 h24 v-16 h32 v16 h24 V40 Z" fill="#1e3a52"/><path d="M-8,-24 h16 M0,-32 v16" fill="#ffffff"/><path d="M-8,-24 h16 M0,-32 v16" fill="none" stroke="#3bb8a8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="-28" y="-6" width="12" height="12" fill="#ffffff"/><rect x="16" y="-6" width="12" height="12" fill="#ffffff"/><rect x="-28" y="14" width="12" height="12" fill="#ffffff"/><rect x="16" y="14" width="12" height="12" fill="#ffffff"/><rect x="-8" y="12" width="16" height="28" fill="#ffffff"/></g>
+<text x="400" y="445" text-anchor="middle" fill="#ffffff" font-size="34" font-weight="700" font-family="'Cairo','Segoe UI',sans-serif" direction="rtl">العيادات الخارجية</text>
+</svg>

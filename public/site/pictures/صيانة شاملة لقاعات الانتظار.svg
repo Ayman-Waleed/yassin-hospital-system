@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+<rect width="600" height="400" fill="#eef7fc"/>
+<rect width="600" height="12" y="0" fill="#3bb8a8"/>
+<circle cx="300" cy="160" r="80" fill="#7ab0d4" opacity="0.18"/>
+<circle cx="300" cy="160" r="62" fill="#1e3a52"/>
+<g transform="translate(300,160)"><path d="M30,-30 a20,20 0 0,0 -28,24 L-30,26 a10,10 0 1,0 14,14 L16,8 a20,20 0 0,0 24,-28 l-14,14 -12,-12 Z" fill="#ffffff"/></g>
+<text x="300" y="315" text-anchor="middle" fill="#1e3a52" font-size="28" font-weight="700" font-family="'Cairo','Segoe UI',sans-serif" direction="rtl">صيانة شاملة لقاعات الانتظار</text>
+<text x="300" y="355" text-anchor="middle" fill="#5a8eb0" font-size="18" font-family="'Cairo','Segoe UI',sans-serif">مستشفى الياسين الطبي</text>
+</svg>

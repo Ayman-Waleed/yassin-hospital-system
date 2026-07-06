@@ -137,12 +137,14 @@ async function loadDoctorsGrid() {
     grid.innerHTML = doctors.map(d => {
       const days = [...(daysByDoctor[d.id] || [])].sort((a, b) => a - b)
         .map(i => dayNames[i]).join(' - ') || 'حسب الحجز';
-      // الصورة من القاعدة إن وُجدت، وإلا نتوقع ملفاً باسم الطبيب في مجلد الصور
-      const img = d.image_url || `pictures/${d.name.replace('د. ', '')}.jpg`;
+      // أولوية الصورة: المرفوعة من الإدارة ← البديلة باسم الطبيب ← الافتراضية
+      const namePic = `pictures/${d.name.replace('د. ', '')}.jpg`;
+      const img = d.image_url || namePic;
       return `
       <div class="doctor-card">
         <div class="doctor-card-top">
-          <img class="doctor-photo" src="${img}" alt="${d.name}">
+          <img class="doctor-photo" src="${img}" alt="${d.name}"
+               data-fallback="${namePic}|pictures/default-doctor.svg" onerror="imgStep(this)">
           <div class="doctor-details">
             <h3>${d.name}</h3>
             <div class="specialty">${d.specialization}</div>

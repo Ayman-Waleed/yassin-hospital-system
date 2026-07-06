@@ -27,7 +27,9 @@ exports.addClinic = async (req, res) => {
         if (!name) {
             return res.status(400).json({ success: false, message: 'اسم العيادة مطلوب' });
         }
-        await Clinic.create(name, code || null, floor || null, head_name || null);
+        // صورة العيادة المرفوعة عبر multer (اختيارية)
+        const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+        await Clinic.create(name, code || null, floor || null, head_name || null, imageUrl);
         res.json({ success: true, message: 'تمت إضافة العيادة بنجاح' });
     } catch (err) {
         // كود العيادة UNIQUE في القاعدة
@@ -44,7 +46,9 @@ exports.updateClinic = async (req, res) => {
         if (!id || !name) {
             return res.status(400).json({ success: false, message: 'المعرف واسم العيادة مطلوبان' });
         }
-        await Clinic.update(id, name, code || null, floor || null, head_name || null, status || 'active');
+        // صورة جديدة إن رُفعت، وإلا null فتبقى القديمة (COALESCE في الموديل)
+        const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+        await Clinic.update(id, name, code || null, floor || null, head_name || null, status || 'active', imageUrl);
         res.json({ success: true, message: 'تم تحديث بيانات العيادة بنجاح' });
     } catch (err) {
         if (err.code === 'ER_DUP_ENTRY') {

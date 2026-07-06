@@ -266,7 +266,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       return `
       <div class="ann-card">
         <div class="ann-card-img">
-          <img src="${img}" alt="${title}">
+          <img src="${img}" alt="${title}"
+               data-fallback="pictures/default.svg" onerror="imgStep(this)">
         </div>
         <div class="ann-card-body">
           <span class="ann-badge">جديد</span>
@@ -288,7 +289,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 function openPopup(id) {
   const d = annData[id];
   if (!d) return;
-  document.getElementById('popupImg').src   = d.img;
+  // أُضيف لنظام الصور: لو صورة الإعلان مفقودة تظهر الافتراضية
+  const popupImg = document.getElementById('popupImg');
+  popupImg.dataset.fallback = 'pictures/default.svg';
+  popupImg.onerror = () => imgStep(popupImg);
+  popupImg.src = d.img;
   document.getElementById('popupImg').alt   = d.title;
   document.getElementById('popupTitle').textContent = d.title;
   document.getElementById('popupFull').textContent  = d.full;

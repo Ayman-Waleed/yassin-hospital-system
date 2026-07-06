@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#1e3a52"/><stop offset="1" stop-color="#5a8eb0"/>
+</linearGradient></defs>
+<rect width="600" height="400" fill="url(#bg)"/>
+<circle cx="300" cy="165" r="92" fill="#ffffff" opacity="0.12"/>
+<circle cx="300" cy="165" r="74" fill="#ffffff" opacity="0.92"/>
+<g transform="translate(300,165)"><path d="M-6,-40 h12 v26 h-12 Z" fill="#1e3a52"/><path d="M-10,-8 Q-42,4 -40,34 Q-39,46 -26,44 Q-8,40 -8,16 V-6 Z" fill="#1e3a52"/><path d="M10,-8 Q42,4 40,34 Q39,46 26,44 Q8,40 8,16 V-6 Z" fill="#1e3a52"/></g>
+<text x="300" y="330" text-anchor="middle" fill="#ffffff" font-size="34" font-weight="700" font-family="'Cairo','Segoe UI',sans-serif" direction="rtl">عيادة الصدرية</text>
+</svg>

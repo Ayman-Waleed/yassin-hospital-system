@@ -13,6 +13,16 @@
     window.location.replace('http://localhost:5000' + path + search + hash);
 })();
 
+// ===== أُضيف لنظام الصور: التدرّج التلقائي عند فشل تحميل صورة =====
+// يوضع على الصورة: data-fallback="مسار1|مسار2" مع onerror="imgStep(this)"
+// فتجرب المسارات بالترتيب وتنتهي بالصورة الافتراضية بدل أيقونة الكسر
+function imgStep(img) {
+    const list = (img.dataset.fallback || '').split('|').filter(Boolean);
+    if (list.length === 0) { img.onerror = null; return; }
+    img.dataset.fallback = list.slice(1).join('|');
+    img.src = list[0];
+}
+
 // ===== SHARED NAVBAR =====
 // يحدد الصفحة النشطة تلقائياً حسب اسم الملف الحالي
 

@@ -24,6 +24,7 @@ CREATE TABLE clinics (
     name      VARCHAR(150) NOT NULL,
     floor     VARCHAR(50)  NULL,             -- الطابق، مثال: الأول
     head_name VARCHAR(150) NULL,             -- رئيس القسم
+    image_url VARCHAR(255) NULL,             -- صورة العيادة المرفوعة من لوحة الإدارة
     status    VARCHAR(20)  NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

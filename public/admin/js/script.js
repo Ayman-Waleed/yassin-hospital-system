@@ -337,12 +337,14 @@ function closeModal(modalId) {
 // ===== دوال الحفظ — أُعيد ربطها بالكامل مع الباك اند (كانت محاكاة DOM فقط) =====
 async function saveDoctor(event) {
     event.preventDefault();
-    const payload = {
-        name: document.getElementById('doc-name').value.trim(),
-        specialization: document.getElementById('doc-specialty').value.trim(),
-        phone: document.getElementById('doc-phone').value.trim(),
-        clinic_id: document.getElementById('doc-clinic').value || null
-    };
+    // FormData بدل JSON حتى نستطيع إرفاق صورة الطبيب (multer على السيرفر)
+    const formData = new FormData();
+    formData.append('name', document.getElementById('doc-name').value.trim());
+    formData.append('specialization', document.getElementById('doc-specialty').value.trim());
+    formData.append('phone', document.getElementById('doc-phone').value.trim());
+    formData.append('clinic_id', document.getElementById('doc-clinic').value || '');
+    const imageFile = document.getElementById('doc-image').files[0];
+    if (imageFile) formData.append('image', imageFile);
 
     try {
         let res;
@@ -350,15 +352,13 @@ async function saveDoctor(event) {
             // تعديل: PUT /api/doctors/:id
             res = await fetch(`/api/doctors/${currentEditRow.dataset.id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: formData
             });
         } else {
             // إضافة: POST /api/doctors/add
             res = await fetch('/api/doctors/add', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: formData
             });
         }
         const result = await res.json();
@@ -377,27 +377,27 @@ async function saveDoctor(event) {
 
 async function saveClinic(event) {
     event.preventDefault();
-    const payload = {
-        code: document.getElementById('clinic-code').value.trim(),
-        name: document.getElementById('clinic-name').value.trim(),
-        floor: document.getElementById('clinic-floor').value.trim(),
-        head_name: document.getElementById('clinic-head').value.trim()
-    };
+    // FormData بدل JSON حتى نستطيع إرفاق صورة العيادة (multer على السيرفر)
+    const formData = new FormData();
+    formData.append('code', document.getElementById('clinic-code').value.trim());
+    formData.append('name', document.getElementById('clinic-name').value.trim());
+    formData.append('floor', document.getElementById('clinic-floor').value.trim());
+    formData.append('head_name', document.getElementById('clinic-head').value.trim());
+    const imageFile = document.getElementById('clinic-image').files[0];
+    if (imageFile) formData.append('image', imageFile);
 
     try {
         let res;
         if (currentEditRow) {
-            payload.id = currentEditRow.dataset.id;
+            formData.append('id', currentEditRow.dataset.id);
             res = await fetch('/api/clinics/update', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: formData
             });
         } else {
             res = await fetch('/api/clinics/add', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: formData
             });
         }
         const result = await res.json();

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+<rect width="600" height="400" fill="#eef7fc"/>
+<rect width="600" height="12" y="0" fill="#3bb8a8"/>
+<circle cx="300" cy="160" r="80" fill="#7ab0d4" opacity="0.18"/>
+<circle cx="300" cy="160" r="62" fill="#1e3a52"/>
+<g transform="translate(300,160)"><rect x="-36" y="-22" width="72" height="48" rx="8" fill="#ffffff"/><circle cx="0" cy="2" r="15" fill="none" stroke="#1e3a52" stroke-width="7"/><rect x="-14" y="-32" width="28" height="12" rx="4" fill="#ffffff"/><circle cx="24" cy="-10" r="4" fill="#3bb8a8"/></g>
+<text x="300" y="315" text-anchor="middle" fill="#1e3a52" font-size="28" font-weight="700" font-family="'Cairo','Segoe UI',sans-serif" direction="rtl">إضافة جهاز تصوير طبي حديث</text>
+<text x="300" y="355" text-anchor="middle" fill="#5a8eb0" font-size="18" font-family="'Cairo','Segoe UI',sans-serif">مستشفى الياسين الطبي</text>
+</svg>

@@ -126,7 +126,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     grid.innerHTML = clinics.map(c => `
       <div class="clinic-card">
-        <div class="clinic-img"><img src="pictures/${c.name}.jpg" alt="${c.name}"></div>
+        <!-- أولوية الصورة: المرفوعة من الإدارة ← البديلة باسم العيادة ← الافتراضية -->
+        <div class="clinic-img"><img src="${c.image_url || `pictures/${c.name}.jpg`}" alt="${c.name}"
+             data-fallback="pictures/${c.name}.jpg|pictures/default-clinic.svg" onerror="imgStep(this)"></div>
         <div class="clinic-info">
           <div class="clinic-name"><i class="fa fa-hospital-user"></i> ${c.name}</div>
           <a href="booking.html" class="btn-book"><i class="fa fa-calendar-check"></i> احجز موعدك</a>

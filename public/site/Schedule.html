@@ -153,7 +153,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       <tr>
         <td>
           <div class="clinic-cell">
-            <img src="pictures/${g.clinic}.jpg" alt="${g.clinic}">
+            <img src="pictures/${g.clinic}.jpg" alt="${g.clinic}"
+                 data-fallback="pictures/default-clinic.svg" onerror="imgStep(this)">
             <span>${g.clinic}</span>
           </div>
         </td>
