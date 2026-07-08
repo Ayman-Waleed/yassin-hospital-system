@@ -23,20 +23,28 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// ===== نظام الصور البديلة =====
-// الصفحات تطلب صوراً مثل pictures/عيادة القلب.jpg — إن وُجد الملف الحقيقي
-// يقدّمه express.static أعلاه (الأولوية له)، وإن لم يوجد نقدّم النسخة
-// البديلة SVG بنفس الاسم. وإن لم توجد بديلة نمرّر للـ 404 حتى يعمل
-// onerror في الواجهة ويعرض الصورة الافتراضية المناسبة.
+// ===== نظام الصور البديلة (متعدد الصيغ) =====
+// الصفحات تطلب صوراً مثل pictures/عيادة القلب.jpg — إن وُجد الملف بنفس
+// الاسم والصيغة يقدّمه express.static أعلاه (الأولوية له). وإن لم يوجد،
+// نجرب هنا نفس الاسم بالصيغ الشائعة بالترتيب: jpg ← jpeg ← png ← webp
+// ← وأخيراً البديل الاحترافي svg. بهذا يكفي وضع الصورة الحقيقية بأي
+// صيغة شائعة وبنفس الاسم لتظهر فوراً دون تعديل أي كود.
+// وإن لم يوجد أي ملف نمرّر للـ 404 حتى يعمل onerror ويعرض الافتراضية.
 const fs = require('fs');
+const PICTURE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
 app.use((req, res, next) => {
-    const match = req.path.match(/^\/site\/pictures\/(.+)\.(jpg|jpeg|png|webp)$/i);
+    const match = req.path.match(/^\/site\/pictures\/(.+)\.(jpg|jpeg|png|webp|svg)$/i);
     if (!match) return next();
     let base;
     try { base = decodeURIComponent(match[1]); } catch { return next(); }
-    const svgPath = path.join(__dirname, 'public', 'site', 'pictures', base + '.svg');
-    if (fs.existsSync(svgPath)) {
-        return res.type('image/svg+xml').sendFile(svgPath);
+
+    const dir = path.join(__dirname, 'public', 'site', 'pictures');
+    for (const ext of PICTURE_EXTENSIONS) {
+        if (ext === match[2].toLowerCase()) continue; // الصيغة المطلوبة فحصها static وهي مفقودة
+        const candidate = path.join(dir, `${base}.${ext}`);
+        if (fs.existsSync(candidate)) {
+            return res.sendFile(candidate); // sendFile يضبط Content-Type حسب الامتداد
+        }
     }
     next();
 });
