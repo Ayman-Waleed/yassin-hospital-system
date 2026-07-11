@@ -1,26 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const appointmentController = require('../controllers/appointmentController');
+const requireAdmin = require('../middleware/authMiddleware');
 
-// مسار جلب جميع المواعيد للجدول
-router.get('/', appointmentController.getAppointments);
-
-// مسار حجز موعد جديد من قبل المريض
+// ===== مسارات عامة (للزوار) =====
+// حجز موعد جديد من قبل المريض
 router.post('/book', appointmentController.bookAppointment);
-
-// مسار جلب مواعيد مريض معيّن بهاتفه
+// جلب مواعيد مريض معيّن بهاتفه
 router.get('/patient/:phone', appointmentController.getPatientAppointments);
 
-// مسار تحديث حالة الموعد (انتظار / مؤكد / ملغى / تم الفحص)
-router.post('/update-status', appointmentController.updateStatus);
-
-// مسار تعديل موعد كامل من لوحة الإدارة
-router.post('/update', appointmentController.updateAppointment);
-
-// مسار حذف موعد نهائياً
-router.post('/delete', appointmentController.deleteAppointment);
-
-// مسار جلب الأرقام الحية لكروت الإحصائيات في لوحة التحكم
-router.get('/stats', appointmentController.getDashboardStats);
+// ===== مسارات إدارية (تتطلب جلسة دخول) =====
+// جلب جميع المواعيد — بيانات شخصية، للإدارة فقط
+router.get('/', requireAdmin, appointmentController.getAppointments);
+// تحديث حالة الموعد (انتظار / مؤكد / ملغى / تم الفحص)
+router.post('/update-status', requireAdmin, appointmentController.updateStatus);
+// تعديل موعد كامل من لوحة الإدارة
+router.post('/update', requireAdmin, appointmentController.updateAppointment);
+// حذف موعد نهائياً
+router.post('/delete', requireAdmin, appointmentController.deleteAppointment);
+// الأرقام الحية لكروت الإحصائيات في لوحة التحكم
+router.get('/stats', requireAdmin, appointmentController.getDashboardStats);
 
 module.exports = router;

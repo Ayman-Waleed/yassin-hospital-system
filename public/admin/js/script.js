@@ -574,34 +574,65 @@ function showTemporaryNotification(message) {
 }
 
 // Login & Logout
-// ملاحظة للمناقشة: التحقق ما زال على جهة الواجهة (admin/123) — تحسين مستقبلي:
-// نقله للسيرفر مع تشفير bcrypt وجلسات حقيقية
-function handleLogin(event) {
+// أصبح الدخول حقيقياً: تحقق على السيرفر من جدول users بكلمات مرور مشفرة bcrypt،
+// وجلسة HttpOnly هي الحماية الفعلية — علامة localStorage للتوجيه السريع فقط
+async function handleLogin(event) {
     if(event) event.preventDefault();
     const user = document.getElementById('username').value.trim();
     const pass = document.getElementById('password').value.trim();
 
-    if (user === "admin" && pass === "123") {
-        // علامة الجلسة التي يفحصها حارس الدخول في كل صفحات الإدارة
-        localStorage.setItem("alyaseen_admin", "1");
-        window.location.href = "dashboard.html";
-    } else {
-        alert("خطأ في اسم المستخدم أو كلمة المرور");
+    try {
+        const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: user, password: pass })
+        });
+        const result = await res.json();
+        if (result.success) {
+            localStorage.setItem("alyaseen_admin", "1");
+            window.location.href = "dashboard.html";
+        } else {
+            alert(result.message || "خطأ في اسم المستخدم أو كلمة المرور");
+        }
+    } catch (err) {
+        console.error('فشل الاتصال بالسيرفر أثناء الدخول:', err);
+        alert("تعذر الاتصال بالسيرفر، تأكد أنه يعمل");
     }
 }
 
 function logout() {
     if (confirm("هل تريد تسجيل الخروج؟")) {
-        localStorage.removeItem("alyaseen_admin"); // مسح علامة الجلسة
-        window.location.href = "index.html";
+        // إتلاف الجلسة على السيرفر ثم مسح علامة التوجيه المحلية
+        fetch('/api/auth/logout', { method: 'POST' }).finally(() => {
+            localStorage.removeItem("alyaseen_admin");
+            window.location.href = "index.html";
+        });
     }
+}
+
+// جلب بيانات المسارات الإدارية: إن انتهت الجلسة (401) نعود لصفحة الدخول
+async function fetchAdmin(url) {
+    const res = await fetch(url);
+    if (res.status === 401) {
+        localStorage.removeItem("alyaseen_admin");
+        window.location.replace("index.html");
+        throw new Error('unauthorized');
+    }
+    return res.json();
+}
+
+// تعقيم النصوص القادمة من المستخدمين قبل حقنها في HTML
+// (أسماء الحاجزين ونصوص الشكاوى تأتي من الزوار — حماية من XSS المخزن)
+function escapeHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, c =>
+        ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
 // ===== أُضيف للربط مع الباك اند: تحميل بيانات لوحة التحكم =====
 async function loadDashboardData() {
     // 1) كروت الإحصائيات
     try {
-        const stats = await (await fetch('/api/appointments/stats')).json();
+        const stats = await fetchAdmin('/api/appointments/stats');
         document.getElementById('stat-doctors').textContent = stats.doctors;
         document.getElementById('stat-clinics').textContent = stats.clinics;
         document.getElementById('stat-appointments').textContent = stats.appointments;
@@ -613,7 +644,7 @@ async function loadDashboardData() {
 
     // 2) جدول آخر المواعيد المحجوزة (أحدث 5 حسب وقت الحجز)
     try {
-        const appointments = await (await fetch('/api/appointments')).json();
+        const appointments = await fetchAdmin('/api/appointments');
         const latest = [...appointments]
             .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)))
             .slice(0, 5);
@@ -625,9 +656,9 @@ async function loadDashboardData() {
         }
         tbody.innerHTML = latest.map(a => `
             <tr>
-                <td>${a.patient_name}</td>
-                <td>${a.doctor_name || '-'}</td>
-                <td>${a.clinic_name || '-'}</td>
+                <td>${escapeHtml(a.patient_name)}</td>
+                <td>${escapeHtml(a.doctor_name || '-')}</td>
+                <td>${escapeHtml(a.clinic_name || '-')}</td>
                 <td>${formatDateTime(a.appointment_date)}</td>
                 <td><span class="status-tag ${STATUS_CLASS[a.status] || 'status-pending'}">${STATUS_ARABIC[a.status] || a.status}</span></td>
             </tr>`).join('');
@@ -658,9 +689,9 @@ async function loadDoctorsPage() {
         tbody.innerHTML = doctors.map((d, i) => `
             <tr data-id="${d.id}" data-clinic-id="${d.clinic_id || ''}">
                 <td>${i + 1}</td>
-                <td>${d.name}</td>
-                <td>${d.specialization}</td>
-                <td>${d.phone || '-'}</td>
+                <td>${escapeHtml(d.name)}</td>
+                <td>${escapeHtml(d.specialization)}</td>
+                <td>${escapeHtml(d.phone || '-')}</td>
                 <td>
                     <button class="btn btn-edit">تعديل</button>
                     <button class="btn btn-delete">حذف</button>
@@ -683,10 +714,10 @@ async function loadClinicsPage() {
         }
         tbody.innerHTML = clinics.map(c => `
             <tr data-id="${c.id}">
-                <td>${c.code || '-'}</td>
-                <td>${c.name}</td>
-                <td>${c.floor || '-'}</td>
-                <td>${c.head_name || '-'}</td>
+                <td>${escapeHtml(c.code || '-')}</td>
+                <td>${escapeHtml(c.name)}</td>
+                <td>${escapeHtml(c.floor || '-')}</td>
+                <td>${escapeHtml(c.head_name || '-')}</td>
                 <td>
                     <button class="btn btn-edit">تعديل</button>
                     <button class="btn btn-delete">حذف</button>
@@ -708,7 +739,7 @@ async function loadAppointmentsPage() {
             doctors.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
 
         // تعبئة جدول المواعيد
-        const appointments = await (await fetch('/api/appointments')).json();
+        const appointments = await fetchAdmin('/api/appointments');
         const tbody = document.getElementById('appointments-table-body');
         if (appointments.length === 0) {
             tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">لا توجد مواعيد بعد</td></tr>';
@@ -716,8 +747,8 @@ async function loadAppointmentsPage() {
         }
         tbody.innerHTML = appointments.map(a => `
             <tr data-id="${a.id}" data-doctor-id="${a.doctor_id}" data-datetime="${a.appointment_date}">
-                <td>${a.patient_name}</td>
-                <td>${a.doctor_name || '-'}</td>
+                <td>${escapeHtml(a.patient_name)}</td>
+                <td>${escapeHtml(a.doctor_name || '-')}</td>
                 <td>${formatDateTime(a.appointment_date)}</td>
                 <td><span class="status-tag ${STATUS_CLASS[a.status] || 'status-pending'}">${STATUS_ARABIC[a.status] || a.status}</span></td>
                 <td>
@@ -734,7 +765,7 @@ async function loadAppointmentsPage() {
 // صفحة الشكاوى: الجدول + تخزين النصوص والردود للمودال
 async function loadComplaintsPage() {
     try {
-        const complaints = await (await fetch('/api/complaints')).json();
+        const complaints = await fetchAdmin('/api/complaints');
         const tbody = document.getElementById('complaints-table-body');
         if (complaints.length === 0) {
             tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">لا توجد شكاوى بعد</td></tr>';
@@ -751,8 +782,8 @@ async function loadComplaintsPage() {
             const replied = c.status === 'replied';
             return `
             <tr data-id="${c.id}">
-                <td>${c.patient_name}</td>
-                <td>${c.subject || 'بدون موضوع'}</td>
+                <td>${escapeHtml(c.patient_name)}</td>
+                <td>${escapeHtml(c.subject || 'بدون موضوع')}</td>
                 <td>${formatDateTime(c.created_at)}</td>
                 <td><span class="status-tag ${replied ? 'status-success' : 'status-pending'}">${replied ? 'تم الرد' : 'جديدة'}</span></td>
                 <td><button class="btn btn-edit ${replied ? 'btn-view-complaint' : 'btn-reply-complaint'}">${replied ? 'عرض' : 'رد'}</button></td>
@@ -767,7 +798,7 @@ async function loadComplaintsPage() {
 // صفحة المستخدمين
 async function loadUsersPage() {
     try {
-        const result = await (await fetch('/api/users')).json();
+        const result = await fetchAdmin('/api/users');
         const users = result.data || [];
         const tbody = document.getElementById('users-table-body');
         if (users.length === 0) {
@@ -776,8 +807,8 @@ async function loadUsersPage() {
         }
         tbody.innerHTML = users.map(u => `
             <tr data-id="${u.id}">
-                <td>${u.username}</td>
-                <td>${u.role}</td>
+                <td>${escapeHtml(u.username)}</td>
+                <td>${escapeHtml(u.role)}</td>
                 <td>${formatDateTime(u.last_login)}</td>
                 <td>${u.status}</td>
                 <td>

@@ -1,7 +1,8 @@
+const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
 
 // إدارة مستخدمي النظام — CRUD لصفحة users.html في لوحة الإدارة
-// ملاحظة: تسجيل الدخول نفسه ما زال مبسطاً على جهة الواجهة (تحسين مستقبلي)
+// كلمات المرور تُشفَّر bcrypt قبل التخزين، وتسجيل الدخول حقيقي عبر /api/auth
 
 exports.getUsers = async (req, res) => {
     try {
@@ -18,7 +19,8 @@ exports.addUser = async (req, res) => {
         if (!username || !password || !role) {
             return res.status(400).json({ success: false, message: 'اسم المستخدم وكلمة المرور والصلاحية مطلوبة', data: null });
         }
-        await User.create(username, password, role);
+        const hashed = await bcrypt.hash(password, 10);
+        await User.create(username, hashed, role);
         res.json({ success: true, message: 'تمت إضافة المستخدم بنجاح', data: null });
     } catch (err) {
         // اسم المستخدم UNIQUE في القاعدة
@@ -35,7 +37,9 @@ exports.updateUser = async (req, res) => {
         if (!id || !role) {
             return res.status(400).json({ success: false, message: 'المعرف والصلاحية مطلوبان', data: null });
         }
-        const result = await User.update(id, role, password || null);
+        // كلمة المرور تُحدَّث فقط إذا أُرسلت قيمة جديدة — وتُشفَّر قبل التخزين
+        const hashed = password ? await bcrypt.hash(password, 10) : null;
+        const result = await User.update(id, role, hashed);
         if (result.affectedRows === 0) {
             return res.status(404).json({ success: false, message: 'المستخدم غير موجود', data: null });
         }

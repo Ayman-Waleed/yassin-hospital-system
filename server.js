@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const session = require('express-session');
+const rateLimit = require('express-rate-limit');
 const database = require('./src/config/database');
 
 // استدعاء ملفات الـ Routes
@@ -13,10 +15,50 @@ const announcementRoutes = require('./src/routes/announcementRoutes');
 const complaintRoutes = require('./src/routes/complaintRoutes');
 const scheduleRoutes = require('./src/routes/scheduleRoutes');
 const userRoutes = require('./src/routes/userRoutes');
+const authRoutes = require('./src/routes/authRoutes');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// ===== الحماية للنشر العام =====
+// خلف بروكسي الاستضافة (مثل Render) حتى تعمل الكوكيز الآمنة بشكل صحيح
+app.set('trust proxy', 1);
+
+// جلسات دخول الإدارة — الكوكي HttpOnly ولا يُرسل إلا لنفس الموقع
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'dev-secret-change-me',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        sameSite: 'lax',
+        // على الاستضافة (HTTPS) اضبط NODE_ENV=production ليصبح الكوكي آمناً
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 8 * 60 * 60 * 1000 // 8 ساعات
+    }
+}));
+
+// حد محاولات تسجيل الدخول: 10 محاولات كل ربع ساعة لكل IP (ضد التخمين)
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 10,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { success: false, message: 'محاولات دخول كثيرة، حاول مجدداً بعد ربع ساعة', data: null }
+});
+app.use('/api/auth/login', loginLimiter);
+
+// حد الكتابة العامة (حجز/شكوى): 30 طلباً في الساعة لكل IP (ضد السبام)
+const publicWriteLimiter = rateLimit({
+    windowMs: 60 * 60 * 1000,
+    max: 30,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { success: false, message: 'طلبات كثيرة من جهازك، حاول لاحقاً', data: null }
+});
+app.use('/api/appointments/book', publicWriteLimiter);
+app.use('/api/complaints/add', publicWriteLimiter);
 
 // تقديم ملفات الواجهة الأمامية:
 //   /site  → موقع الزوار          /admin → لوحة الإدارة
@@ -72,6 +114,7 @@ app.use('/api/announcements', announcementRoutes);
 app.use('/api/complaints', complaintRoutes);
 app.use('/api/schedules', scheduleRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

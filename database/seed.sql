@@ -104,8 +104,10 @@ INSERT INTO complaints (patient_name, patient_phone, subject, complaint_text, ad
 
 -- ---------------------------------------------------------------------
 -- مستخدمو النظام (كما تعرضهم صفحة users.html)
---   ملاحظة: كلمات المرور غير مشفرة حالياً — تحسين مستقبلي (bcrypt)
+--   كلمات المرور مشفرة bcrypt:
+--     admin       → 123
+--     reception_1 → 123456
 -- ---------------------------------------------------------------------
 INSERT INTO users (username, password, role, status, last_login) VALUES
-    ('admin',       '123',    'مدير نظام',     'نشط', NOW()),
-    ('reception_1', '123456', 'موظف استقبال',  'نشط', NOW());
+    ('admin',       '$2b$10$nPrPwoYY8oDJFFmT1DPDCeF2HBcPDU2cBN7vt5Q./.SvNWLoYK3pC', 'مدير نظام',    'نشط', NOW()),
+    ('reception_1', '$2b$10$TFG6Iz.ZonsvJl3jUzewpuuZqZilfpHJGBYkLJ7SEL0EK5q1Va6t.', 'موظف استقبال', 'نشط', NOW());

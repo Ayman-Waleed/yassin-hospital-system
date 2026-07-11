@@ -218,6 +218,12 @@
 </footer>
 
 <script>
+// تعقيم النصوص قبل حقنها في HTML (حماية من XSS)
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
 // أُضيف للربط مع الباك اند: متابعة رسائل المريض وردود الإدارة عليها بهاتفه
 async function trackComplaints() {
   const phone = document.getElementById('trackPhone').value.trim();
@@ -237,16 +243,16 @@ async function trackComplaints() {
     box.innerHTML = list.map(c => `
       <div style="border:1px solid rgba(122,176,212,0.4); border-radius:14px; padding:1.2rem 1.4rem; margin-bottom:1rem; background:rgba(255,255,255,0.7); text-align:right;">
         <div style="font-weight:900; color:#1e3a52; margin-bottom:0.4rem;">
-          <i class="fa fa-tag" style="color:#5a8eb0;"></i> ${c.subject || 'رسالة'}
+          <i class="fa fa-tag" style="color:#5a8eb0;"></i> ${escapeHtml(c.subject || 'رسالة')}
           <span style="font-weight:700; font-size:0.85rem; color:${c.status === 'replied' ? '#2e8b57' : '#b8860b'}; margin-inline-start:10px;">
             ${c.status === 'replied' ? '✓ تم الرد' : '⏳ قيد المراجعة'}
           </span>
         </div>
-        <p style="color:#3a4a5a; margin:0 0 0.6rem; line-height:1.7;">${c.complaint_text}</p>
+        <p style="color:#3a4a5a; margin:0 0 0.6rem; line-height:1.7;">${escapeHtml(c.complaint_text)}</p>
         ${c.admin_reply ? `
         <div style="background:rgba(59,184,168,0.12); border-right:4px solid #3bb8a8; border-radius:8px; padding:0.8rem 1rem;">
           <strong style="color:#1e3a52;"><i class="fa fa-reply" style="color:#3bb8a8;"></i> رد الإدارة:</strong>
-          <p style="color:#3a4a5a; margin:0.4rem 0 0; line-height:1.7;">${c.admin_reply}</p>
+          <p style="color:#3a4a5a; margin:0.4rem 0 0; line-height:1.7;">${escapeHtml(c.admin_reply)}</p>
         </div>` : ''}
       </div>`).join('');
   } catch (err) {
