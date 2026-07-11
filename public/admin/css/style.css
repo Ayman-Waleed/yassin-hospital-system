@@ -34,7 +34,7 @@
 .login-form-side { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; }
 
 .login-card { width: 100%; max-width: 350px; text-align: center; }
-.login-logo { width: 120px; margin-bottom: 20px; }
+.login-logo { width: 160px; margin-bottom: 20px; object-fit: contain; }
 .login-card h2 { color: #333; margin-bottom: 10px; }
 .login-card p { color: #888; margin-bottom: 25px; }
 
@@ -618,9 +618,13 @@ body.login-page {
 }
 
 .login-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* تجعل الصورة تملأ المساحة بالكامل دون تشويه */
+    /* contain بدل cover: اللوجو بطاقة مائلة بهوامش بيضاء،
+       والقص كان يكبّرها ويقتطع أطرافها — الآن يظهر كاملاً ومتمركزاً
+       بعرض ثابت نسبي من اللوحة مهما كان مقاس الملف الأصلي */
+    width: 78%;
+    height: auto;
+    max-height: 85%;
+    object-fit: contain;
 }
 
 /* قسم نموذج الدخول (يأخذ 50% من العرض) */

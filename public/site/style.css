@@ -597,6 +597,8 @@ footer {
 
 .footer-brand .logo-row img {
   height: 50px;
+  width: auto;
+  object-fit: contain;
 }
 
 .footer-brand .logo-row span {
@@ -753,12 +755,13 @@ footer {
   .quick-links { grid-template-columns: repeat(2, 1fr); }
   .footer-inner { grid-template-columns: 1fr; }
 }
-/* التحكم في عرض اللوجو فقط ليناسب الهيدر دون زيادة في الارتفاع */
+/* لوجو الهيدر: نضبطه بالارتفاع (وليس العرض) حتى لا يفيض عن شريط
+   التنقل الذي ارتفاعه 55px — العرض يتناسب تلقائياً */
 .navbar img {
-    width: 150px;        /* عدل هذا الرقم حسب العرض الذي تراه مناسباً */
-    height: auto;        /* هذه هي النقطة الأهم: تجعل الارتفاع يتناسب تلقائياً مع العرض */
-    max-height: 60px;    /* لضمان أنه حتى لو زاد العرض، لا يتجاوز اللوجو ارتفاع الهيدر */
-    object-fit: contain; /* لضمان احتواء الصورة بالكامل داخل الأبعاد المحددة */
+    height: 48px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
 }
 /* ضبط الخط والحجم الأساسي لكل الموقع */
 body {
