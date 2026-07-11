@@ -6,6 +6,7 @@ const path = require('path');
 const session = require('express-session');
 const rateLimit = require('express-rate-limit');
 const database = require('./src/config/database');
+const fs = require('fs');
 
 // استدعاء ملفات الـ Routes
 const clinicRoutes = require('./src/routes/clinicRoutes');
@@ -60,6 +61,56 @@ const publicWriteLimiter = rateLimit({
 app.use('/api/appointments/book', publicWriteLimiter);
 app.use('/api/complaints/add', publicWriteLimiter);
 
+// ===== مطابقة أسماء الملفات بغض النظر عن حالة الأحرف (Linux vs Windows) =====
+// محلياً (Windows) لا يفرّق النظام بين about.html وAbout.html، لكن على
+// Render (Linux) يفرّق. هذا الـ middleware يفحص كل جزء من المسار المطلوب
+// ويطابقه مع الاسم الفعلي للملف/المجلد على القرص بغض النظر عن حالة الأحرف،
+// ويحوّل الطلب (rewrite) للمسار الصحيح قبل أن يصل إلى express.static.
+function resolveCaseInsensitivePath(rootDir, requestPath) {
+    const parts = requestPath.split('/').filter(Boolean);
+    let currentDir = rootDir;
+    const resolvedParts = [];
+
+    for (let i = 0; i < parts.length; i++) {
+        const wanted = parts[i];
+        let entries;
+        try {
+            entries = fs.readdirSync(currentDir);
+        } catch {
+            return null; // المجلد الحالي غير موجود
+        }
+
+        // تطابق تام أولاً (أسرع وأدق)، وإلا تطابق بغض النظر عن حالة الأحرف
+        let match = entries.find(e => e === wanted);
+        if (!match) {
+            match = entries.find(e => e.toLowerCase() === wanted.toLowerCase());
+        }
+        if (!match) return null; // ما في تطابق حتى بتجاهل حالة الأحرف
+
+        resolvedParts.push(match);
+        currentDir = path.join(currentDir, match);
+    }
+
+    return '/' + resolvedParts.join('/');
+}
+
+app.use((req, res, next) => {
+    // نتجاهل مسارات الـ API لأنها تُعالج بكود منفصل وليست ملفات ثابتة
+    if (req.path.startsWith('/api/')) return next();
+
+    const publicDir = path.join(__dirname, 'public');
+    const fullDiskPath = path.join(publicDir, decodeURIComponent(req.path));
+
+    // إن كان المسار المطلوب موجوداً تماماً كما هو، لا داعي لأي معالجة
+    if (fs.existsSync(fullDiskPath)) return next();
+
+    const corrected = resolveCaseInsensitivePath(publicDir, decodeURIComponent(req.path));
+    if (corrected && corrected !== req.path) {
+        req.url = corrected + (req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '');
+    }
+    next();
+});
+
 // تقديم ملفات الواجهة الأمامية:
 //   /site  → موقع الزوار          /admin → لوحة الإدارة
 app.use(express.static(path.join(__dirname, 'public')));
@@ -72,7 +123,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // ← وأخيراً البديل الاحترافي svg. بهذا يكفي وضع الصورة الحقيقية بأي
 // صيغة شائعة وبنفس الاسم لتظهر فوراً دون تعديل أي كود.
 // وإن لم يوجد أي ملف نمرّر للـ 404 حتى يعمل onerror ويعرض الافتراضية.
-const fs = require('fs');
 const PICTURE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'svg'];
 app.use((req, res, next) => {
     const match = req.path.match(/^\/site\/pictures\/(.+)\.(jpg|jpeg|png|webp|svg)$/i);
