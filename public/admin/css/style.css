@@ -160,6 +160,18 @@ body {
 }
 
 /* Sidebar */
+/* لوجو أعلى السايدبار في كل صفحات الإدارة */
+.sidebar-logo {
+    text-align: center;
+    padding: 16px 10px 0;
+}
+.sidebar-logo img {
+    height: 56px;
+    width: auto;
+    max-width: 88%;
+    object-fit: contain;
+}
+
 .sidebar {
     width: 260px;
     background: linear-gradient(180deg, var(--primary-blue) 0%, #1e293b 100%);

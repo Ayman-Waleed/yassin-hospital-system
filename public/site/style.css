@@ -165,11 +165,14 @@ body {
 
 .yaseen-doctor-img {
   width: auto;
-  max-width: 420px;            
-  height: 340px;              
+  max-width: 420px;
+  /* أُصلح: الارتفاع الثابت 340px كان يترك شرائط فارغة فوق الصورة وتحتها
+     (letterbox) فيبتعد زر "من نحن" عنها — الآن الارتفاع يتبع الصورة نفسها */
+  height: auto;
+  max-height: 340px;
   object-fit: contain;
   display: block;
-  margin: 0 auto;             
+  margin: 0 auto;
   padding: 0;
   z-index: 2;
 }

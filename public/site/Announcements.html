@@ -151,11 +151,8 @@
   </div>
 </section>
 
-<!-- ترقيم الصفحات -->
-<div class="pagination">
-  <a href="announcements.html" class="page-btn active">1</a>
-  <!-- أُزيلت روابط announcements2 الثابتة: كل الإعلانات تُعرض ديناميكياً في هذه الصفحة -->
-</div>
+<!-- ترقيم الصفحات: الأزرار تُبنى ديناميكياً حسب عدد الإعلانات (2 لكل صفحة) بنفس ستايل التصميم الأصلي -->
+<div class="pagination" id="annPagination"></div>
 
 <!-- FOOTER -->
 <footer>
@@ -240,6 +237,12 @@
 // البطاقات وبيانات النافذة المنبثقة معاً (بدل الكائن الثابت القديم)
 let annData = {};
 
+// ===== ترقيم صفحات ديناميكي: إعلانان لكل صفحة =====
+// عدد الصفحات يُحسب تلقائياً من عدد الإعلانات في القاعدة
+const ANNS_PER_PAGE = 2;
+let annCards = [];      // بطاقات الإعلانات الجاهزة (HTML)
+let currentAnnPage = 1;
+
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('annContainer');
   try {
@@ -251,7 +254,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
-    container.innerHTML = announcements.map(a => {
+    annCards = announcements.map(a => {
       const title = a.title || 'إعلان';
       // التاريخ يصل كنص "YYYY-MM-DD HH:MM:SS" — نحوله لصيغة يفهمها كل المتصفحات
       const d = new Date(String(a.created_at).replace(' ', 'T'));
@@ -279,12 +282,39 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
         </div>
       </div>`;
-    }).join('');
+    });
+
+    renderAnnPage(1);
   } catch (err) {
     console.error('فشل تحميل الإعلانات:', err);
     container.innerHTML = '<p style="text-align:center; width:100%;">تعذر تحميل الإعلانات، تأكد من تشغيل السيرفر</p>';
   }
 });
+
+// عرض صفحة معينة + بناء أزرار الترقيم بنفس كلاسات التصميم الأصلي
+function renderAnnPage(page) {
+  const container = document.getElementById('annContainer');
+  const totalPages = Math.max(1, Math.ceil(annCards.length / ANNS_PER_PAGE));
+  currentAnnPage = Math.min(Math.max(1, page), totalPages);
+
+  const start = (currentAnnPage - 1) * ANNS_PER_PAGE;
+  container.innerHTML = annCards.slice(start, start + ANNS_PER_PAGE).join('');
+
+  let btns = '';
+  for (let i = 1; i <= totalPages; i++) {
+    btns += `<a href="#" class="page-btn ${i === currentAnnPage ? 'active' : ''}" onclick="goAnnPage(${i});return false;">${i}</a>`;
+  }
+  if (currentAnnPage < totalPages) {
+    btns += `<a href="#" class="page-btn arrow" onclick="goAnnPage(${currentAnnPage + 1});return false;"><i class="fa fa-chevron-left"></i></a>`;
+  }
+  document.getElementById('annPagination').innerHTML = btns;
+}
+
+// تغيير الصفحة بدون إعادة تحميل + صعود لأعلى القائمة
+function goAnnPage(page) {
+  renderAnnPage(page);
+  document.querySelector('.ann-list-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 
 function openPopup(id) {
   const d = annData[id];

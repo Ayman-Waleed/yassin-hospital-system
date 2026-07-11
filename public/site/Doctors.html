@@ -48,10 +48,8 @@
   </div>
 </section>
 
-<div class="pagination">
-  <a href="Doctors.html" class="page-btn active">1</a>
-  <!-- أُزيلت روابط Doctors2/Doctors3 الثابتة: كل الأطباء يُعرضون ديناميكياً في هذه الصفحة -->
-</div>
+<!-- أزرار الترقيم تُبنى ديناميكياً حسب عدد الأطباء (6 لكل صفحة) بنفس ستايل التصميم الأصلي -->
+<div class="pagination" id="doctorsPagination"></div>
 
 <footer>
   <div class="footer-inner">
@@ -117,6 +115,14 @@ const dayNames = ['الأحد','الاثنين','الثلاثاء','الأربع
 
 document.addEventListener('DOMContentLoaded', loadDoctorsGrid);
 
+// ===== ترقيم صفحات ديناميكي: 6 أطباء لكل صفحة =====
+// عدد الصفحات يُحسب تلقائياً من عدد الأطباء في القاعدة،
+// والبحث يعيد حساب الترقيم على النتائج فقط
+const DOCTORS_PER_PAGE = 6;
+let doctorItems = [];     // كل الأطباء: { html: بطاقة جاهزة, search: نص للبحث }
+let filteredItems = [];   // النتائج الحالية (كلهم أو نتائج البحث)
+let currentDocPage = 1;
+
 async function loadDoctorsGrid() {
   const grid = document.getElementById('doctorsGrid');
   try {
@@ -134,13 +140,15 @@ async function loadDoctorsGrid() {
       (daysByDoctor[s.doctor_id] = daysByDoctor[s.doctor_id] || new Set()).add(s.day_of_week);
     });
 
-    grid.innerHTML = doctors.map(d => {
+    doctorItems = doctors.map(d => {
       const days = [...(daysByDoctor[d.id] || [])].sort((a, b) => a - b)
         .map(i => dayNames[i]).join(' - ') || 'حسب الحجز';
       // أولوية الصورة: المرفوعة من الإدارة ← البديلة باسم الطبيب ← الافتراضية
       const namePic = `pictures/${d.name.replace('د. ', '')}.jpg`;
       const img = d.image_url || namePic;
-      return `
+      return {
+        search: `${d.name} ${d.specialization}`.toLowerCase(),
+        html: `
       <div class="doctor-card">
         <div class="doctor-card-top">
           <img class="doctor-photo" src="${img}" alt="${d.name}"
@@ -154,21 +162,54 @@ async function loadDoctorsGrid() {
           </div>
         </div>
         <a href="booking.html" class="btn-book-doc">احجز موعد</a>
-      </div>`;
-    }).join('');
+      </div>`
+      };
+    });
+
+    filteredItems = doctorItems;
+    renderDoctorsPage(1);
   } catch (err) {
     console.error('فشل تحميل قائمة الأطباء:', err);
     grid.innerHTML = '<p style="text-align:center; width:100%;">تعذر تحميل قائمة الأطباء، تأكد من تشغيل السيرفر</p>';
   }
 }
 
+// عرض صفحة معينة + بناء أزرار الترقيم بنفس كلاسات التصميم الأصلي
+function renderDoctorsPage(page) {
+  const grid = document.getElementById('doctorsGrid');
+  const totalPages = Math.max(1, Math.ceil(filteredItems.length / DOCTORS_PER_PAGE));
+  currentDocPage = Math.min(Math.max(1, page), totalPages);
+
+  const start = (currentDocPage - 1) * DOCTORS_PER_PAGE;
+  const slice = filteredItems.slice(start, start + DOCTORS_PER_PAGE);
+  grid.innerHTML = slice.length
+    ? slice.map(it => it.html).join('')
+    : '<p style="text-align:center; width:100%;">لا توجد نتائج مطابقة لبحثك</p>';
+
+  // أزرار الأرقام + سهم "التالي" (نفس شكل الترقيم الأصلي للتصميم)
+  let btns = '';
+  for (let i = 1; i <= totalPages; i++) {
+    btns += `<a href="#" class="page-btn ${i === currentDocPage ? 'active' : ''}" onclick="goDocPage(${i});return false;">${i}</a>`;
+  }
+  if (currentDocPage < totalPages) {
+    btns += `<a href="#" class="page-btn arrow" onclick="goDocPage(${currentDocPage + 1});return false;"><i class="fa fa-chevron-left"></i></a>`;
+  }
+  document.getElementById('doctorsPagination').innerHTML = btns;
+}
+
+// تغيير الصفحة بدون إعادة تحميل + صعود لأعلى القائمة
+function goDocPage(page) {
+  renderDoctorsPage(page);
+  document.querySelector('.doctors-grid-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// البحث يصفي كل الأطباء (وليس الصفحة الظاهرة فقط) ويعيد الترقيم من الصفحة الأولى
 function filterDoctors() {
   const query = document.getElementById('searchInput').value.trim().toLowerCase();
-  document.querySelectorAll('.doctor-card').forEach(card => {
-    const name = card.querySelector('h3').textContent.toLowerCase();
-    const spec = card.querySelector('.specialty').textContent.toLowerCase();
-    card.style.display = (name.includes(query) || spec.includes(query)) ? '' : 'none';
-  });
+  filteredItems = query
+    ? doctorItems.filter(it => it.search.includes(query))
+    : doctorItems;
+  renderDoctorsPage(1);
 }
 </script>
 </body>

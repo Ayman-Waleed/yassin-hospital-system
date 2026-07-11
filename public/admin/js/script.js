@@ -90,7 +90,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Sidebar rendering
     const navElement = document.getElementById("sidebar-nav");
     if (navElement) {
-        let html = `<h3>الياسين الطبي</h3><ul>`;
+        // اللوجو أعلى السايدبار في كل صفحات الإدارة (نصه أبيض على شريط أخضر فيظهر على الخلفية الداكنة)
+        let html = `<div class="sidebar-logo"><img src="/site/pictures/لوجو الموقع.png" alt="لوجو الياسين الطبي"></div><h3>الياسين الطبي</h3><ul>`;
         menuItems.forEach(item => {
             const currentPath = window.location.pathname.split("/").pop();
             const isActive = currentPath === item.link ? 'class="active"' : '';
