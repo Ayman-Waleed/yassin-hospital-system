@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
-<rect width="600" height="400" fill="#eef7fc"/>
-<rect width="600" height="12" y="0" fill="#3bb8a8"/>
-<circle cx="300" cy="160" r="80" fill="#7ab0d4" opacity="0.18"/>
-<circle cx="300" cy="160" r="62" fill="#1e3a52"/>
-<g transform="translate(300,160)"><path d="M-36,-6 h14 l26,-20 v52 l-26,-20 h-14 Z" fill="#ffffff"/><path d="M14,-14 q12,14 0,28 M24,-24 q22,24 0,48" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M-30,28 h12 v14 h-12 Z" fill="#ffffff"/></g>
-<text x="300" y="315" text-anchor="middle" fill="#1e3a52" font-size="28" font-weight="700" font-family="'Cairo','Segoe UI',sans-serif" direction="rtl">إعلان</text>
-<text x="300" y="355" text-anchor="middle" fill="#5a8eb0" font-size="18" font-family="'Cairo','Segoe UI',sans-serif">مستشفى الياسين الطبي</text>
-</svg>
