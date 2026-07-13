@@ -91,7 +91,9 @@ body {
 }
 
 .navbar-logo img {
-  height: 38px;
+  /* الشعار الحالي مربع (1:1) — نملأ معظم ارتفاع الهيدر (55px) دون زيادته */
+  max-height: 50px;
+  width: auto;
 }
 
 /* ===== HERO SECTION ===== */
@@ -599,7 +601,8 @@ footer {
 }
 
 .footer-brand .logo-row img {
-  height: 50px;
+  /* شعار مربع أكبر ليتناسق مع نص "موقع الياسين" بجانبه */
+  height: 72px;
   width: auto;
   object-fit: contain;
 }
@@ -761,10 +764,18 @@ footer {
 /* لوجو الهيدر: نضبطه بالارتفاع (وليس العرض) حتى لا يفيض عن شريط
    التنقل الذي ارتفاعه 55px — العرض يتناسب تلقائياً */
 .navbar img {
-    height: 48px;
+    /* max-height بدل height الثابت + إلغاء سقف العرض الضيق (كان 140px
+       لشعار عريض قديم) — الشعار المربع يملأ الآن معظم ارتفاع الهيدر */
+    max-height: 50px;
     width: auto;
-    max-width: 140px;
+    max-width: 200px;
     object-fit: contain;
+}
+
+/* الشاشات الصغيرة: الشعار لا يفيض عن الهيدر المتعدد الأسطر */
+@media (max-width: 768px) {
+  .navbar img,
+  .navbar-logo img { max-height: 42px; }
 }
 /* ضبط الخط والحجم الأساسي لكل الموقع */
 body {

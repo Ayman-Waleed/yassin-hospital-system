@@ -166,7 +166,8 @@ body {
     padding: 16px 10px 0;
 }
 .sidebar-logo img {
-    height: 56px;
+    /* الشعار الحالي مربع — حجم أوضح أعلى السايدبار */
+    height: 72px;
     width: auto;
     max-width: 88%;
     object-fit: contain;
@@ -684,9 +685,9 @@ body.login-page {
 }
 
 /* 4. تكبير اللوجو ليتناسب مع العرض الجديد */
-.login-logo { 
-    width: 150px;      /* تكبير اللوجو ليملأ المساحة العريضة */
-    margin-bottom: 30px; 
+.login-logo {
+    width: 170px;      /* تكبير اللوجو المربع ليكون واضحاً فوق الفورم */
+    margin-bottom: 30px;
 }
 
 /* 5. تكبير زر الدخول */
